@@ -1,11 +1,8 @@
 # gewebe
 
-a collection of tools and methods to work with meshes
+a collection of tools and methods to work with meshes.
 
-## know limitations
-
-- CGAL binding is broken ATM
-- Cycles renderer is only compiled for macOS ( 10.15 )
+see [issues](https://github.com/dennisppaul/gewebe/issues) for known limitations.
 
 ## dependencies
 

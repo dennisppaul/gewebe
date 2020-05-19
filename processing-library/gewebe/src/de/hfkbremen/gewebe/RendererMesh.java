@@ -16,11 +16,12 @@ public abstract class RendererMesh extends PGraphics3D {
     protected static final String STREAM_NAME_ERR = "ERR";
     protected static final String STREAM_NAME_OUT = "OUT";
     public static boolean DEBUG_PRINT_RENDER_PROGRESS = false;
-    public static boolean RENDERING_PROCESS_BLOCKING = false;
+    public static boolean RENDERING_PROCESS_BLOCKING = true;
     public static boolean LINE_EXPAND_WITH_CLOSED_CAPS = true;
     private final ArrayList<ShaderTriangleBucket> mShaderTriangleBuckets = new ArrayList<>();
     private final Color mColorFill = new Color();
     private ShaderTriangleBucket mBucket = null;
+    private int mMaterialID;
 
     public void beginDraw() {
         prepareFrame();
@@ -73,14 +74,17 @@ public abstract class RendererMesh extends PGraphics3D {
             vertex[G] = fillG;
             vertex[B] = fillB;
             vertex[A] = fillA;
-        }
-
-        if (stroke) {
+            mMaterialID = fillColor;
+        } else if (stroke) {
             vertex[SR] = strokeR;
             vertex[SG] = strokeG;
             vertex[SB] = strokeB;
             vertex[SA] = strokeA;
             vertex[SW] = strokeWeight;
+            mMaterialID = strokeColor;
+        } else {
+            error("neither `stroke` nor `fill` defined");
+            mMaterialID = -1;
         }
 
         if (textureImage != null) {  // for the future?
@@ -128,7 +132,7 @@ public abstract class RendererMesh extends PGraphics3D {
         if (fill) {
             // @TODO individual vertex coloring is ignored. last vertex color is used to color triangle
             float[] vertex = vertices[2];
-            RendererCycles.Color c = new RendererCycles.Color(vertex[R], vertex[G], vertex[B], vertex[A]);
+            Color c = new Color(vertex[R], vertex[G], vertex[B], vertex[A]);
             selectBucket(c);
             for (int i = 0; i < 3; i++) {
                 addTriangleVertex(
@@ -143,7 +147,7 @@ public abstract class RendererMesh extends PGraphics3D {
     protected void writeLine(int v0, int v1) {
         if (stroke) {
             float[] vertex = vertices[v0];
-            RendererCycles.Color c = new RendererCycles.Color(vertex[SR], vertex[SG], vertex[SB], vertex[SA]);
+            Color c = new Color(vertex[SR], vertex[SG], vertex[SB], vertex[SA]);
             selectBucket(c);
 
             PVector p0 = new PVector(vertices[v0][X], vertices[v0][Y], vertices[v0][Z]);
@@ -161,8 +165,8 @@ public abstract class RendererMesh extends PGraphics3D {
         System.err.println("### @" + getClass().getSimpleName() + " / " + pErrorMessage);
     }
 
-    protected void console(String pErrorMessage) {
-        System.out.println("+++ @" + getClass().getSimpleName() + " / " + pErrorMessage);
+    protected void console(String pMessage) {
+        System.out.println("+++ @" + getClass().getSimpleName() + " / " + pMessage);
     }
 
     protected static float[] toArray(List<Float> pFloatList) {
@@ -226,19 +230,19 @@ public abstract class RendererMesh extends PGraphics3D {
         }
     }
 
-    private void selectBucket(RendererCycles.Color c) {
+    private void selectBucket(Color c) {
         if (detectShaderChange(c)) {
             mBucket = findBucket(c);
         }
     }
 
-    private RendererCycles.ShaderTriangleBucket findBucket(RendererCycles.Color c) {
-        for (RendererCycles.ShaderTriangleBucket s : mShaderTriangleBuckets) {
+    private ShaderTriangleBucket findBucket(Color c) {
+        for (ShaderTriangleBucket s : mShaderTriangleBuckets) {
             if (s.color.isEqual(c)) {
                 return s;
             }
         }
-        RendererCycles.ShaderTriangleBucket s = new RendererCycles.ShaderTriangleBucket(c);
+        ShaderTriangleBucket s = new ShaderTriangleBucket(c, mMaterialID);
         mShaderTriangleBuckets.add(s);
         return s;
     }
@@ -355,12 +359,12 @@ public abstract class RendererMesh extends PGraphics3D {
         final Color color;
         final ArrayList<Float> vertices = new ArrayList<>();
         final ArrayList<Float> normals = new ArrayList<>();
+        final int shaderID;
         // @TODO maybe add normals and UV coords
 
-        ShaderTriangleBucket(Color pColor) {
+        ShaderTriangleBucket(Color pColor, int pMaterialID) {
             color = new Color(pColor);
+            shaderID = pMaterialID;
         }
-
     }
-
 }

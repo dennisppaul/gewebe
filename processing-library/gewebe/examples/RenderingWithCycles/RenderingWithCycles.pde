@@ -76,8 +76,8 @@ void drawScene() {
         sphere(random(10, 30));
         popMatrix();
     }
-    noStroke();
-    fill(255);
+    noFill();
+    stroke(255);
     sphere(100);
     translate(-50, 0);
     sphere(80);

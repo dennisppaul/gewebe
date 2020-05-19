@@ -2,9 +2,9 @@
 
 a collection of tools and methods to work with meshes in [Processing](https://processing.org/).
 
-## know limitations
+## know limitations and bugs
 
-- CGAL binding is broken ATM
+- CGAL binding is broken
 - Cycles renderer is only compiled for macOS ( 10.15 )
 
 ## dependencies + libraries

@@ -91,8 +91,8 @@ public class SketchRenderingWithCycles extends PApplet {
             popMatrix();
         }
 
-        noStroke();
-        fill(255);
+        noFill();
+        stroke(255);
 
         sphere(100);
 

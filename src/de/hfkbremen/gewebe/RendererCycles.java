@@ -1,9 +1,13 @@
 package de.hfkbremen.gewebe;
 
+import org.xml.sax.SAXException;
 import processing.core.PApplet;
 import processing.data.XML;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import static de.hfkbremen.gewebe.Location.exists;
 
@@ -62,6 +66,8 @@ public class RendererCycles extends RendererMesh {
     public static Color BACKGROUND_COLOR = new Color(0.0f);
     public static boolean KEEP_XML_SCENE_FILE = true;
     public static boolean RENDER_IMAGE = true;
+    public static boolean PARSE_COLORS_AS_CUSTOM_CYCLES_SHADERS = false;
+    private final ArrayList<CyclesShader> mShaders = new ArrayList<CyclesShader>();
     private XML mXML;
     private String mExecPath;
     private int mShaderNameID = 0;
@@ -86,12 +92,62 @@ public class RendererCycles extends RendererMesh {
         }
     }
 
-    public static RendererCycles create(PApplet pApplet, int pWidth, int pHeight, String pOutputFile) {
-        return (RendererCycles) pApplet.createGraphics(pWidth, pHeight, name(), pOutputFile);
+    public static String DEBUG_output_path() {
+        return System.getProperty("user.home") + "/Desktop/cycles/";
+    }
+
+    public static RendererCycles create(PApplet pApplet, String pOutputFile) {
+        return (RendererCycles) pApplet.createGraphics(pApplet.width, pApplet.height, name(), pOutputFile);
     }
 
     public static String name() {
         return RendererCycles.class.getName();
+    }
+
+    public static String getColorAttr(float r, float g, float b) {
+        final String D = ", ";
+        return r + D + g + D + b;
+    }
+
+    public static XML createShaderDiffuse(String pShaderName, float r, float g, float b) {
+        final float mRoughness = 0.0f;
+        XML mShaderNode = new XML(XML_UNI_SHADER);
+        mShaderNode.setString(XML_ATTR_NAME, pShaderName);
+
+        XML mDiffuseNode = new XML(XML_NODE_DIFFUSE);
+        mDiffuseNode.setString(XML_ATTR_NAME, SHADER_TYPE_DIFFUSE);
+        mDiffuseNode.setFloat("roughness", mRoughness);
+        mDiffuseNode.setString(XML_ATTR_COLOR, getColorAttr(r, g, b));
+        mShaderNode.addChild(mDiffuseNode);
+
+        XML mConnectNode = new XML(XML_NODE_CONNECT);
+        mConnectNode.setString(XML_ATTR_FROM, VALUE_FROM_DIFFUSE);
+        mConnectNode.setString(XML_ATTR_TO, VALUE_OUTPUT_SURFACE);
+        mShaderNode.addChild(mConnectNode);
+
+        return mShaderNode;
+    }
+
+    public static XML getXML(String pXMLString) {
+        XML mXML = null;
+        try {
+            mXML = XML.parse(pXMLString);
+        } catch (IOException | ParserConfigurationException | SAXException e) {
+            e.printStackTrace();
+        }
+        return mXML;
+    }
+
+    public void registerShader(int pColorID, XML pPayload) {
+        CyclesShader m = new CyclesShader(pColorID, pPayload);
+        CyclesShader mQuery = findShader(m);
+        if (mQuery == null) {
+            mShaders.add(m);
+        } else {
+            console("@registerShader warning, shader ID already registered: " + pColorID);
+            console("new shader ........ : " + m);
+            console("existing shader ... : " + mQuery);
+        }
     }
 
     protected void beginFrame() {
@@ -123,8 +179,16 @@ public class RendererCycles extends RendererMesh {
         buildBackground(mXML);
 
         for (ShaderTriangleBucket s : bucket()) {
-            final String mCurrentShaderName = SHADER_NAME + PApplet.nf(mShaderNameID++, 4);
-            buildShader(mXML, mCurrentShaderName, s.color.r, s.color.g, s.color.b); // @TODO fillA?
+            String mCurrentShaderName = SHADER_NAME + PApplet.nf(mShaderNameID++, 4);
+            if (PARSE_COLORS_AS_CUSTOM_CYCLES_SHADERS) {
+                if (findShader(s.shaderID) != null) {
+                    mCurrentShaderName = buildShaderFromXML(mXML, s);
+                } else {
+                    buildShaderFromRGBColor(mXML, mCurrentShaderName, s.color.r, s.color.g, s.color.b);
+                }
+            } else {
+                buildShaderFromRGBColor(mXML, mCurrentShaderName, s.color.r, s.color.g, s.color.b);
+            }
             buildObject(mXML, mCurrentShaderName, toArray(s.vertices));
         }
 
@@ -138,6 +202,24 @@ public class RendererCycles extends RendererMesh {
                 if (!mXMLOutputFile.delete()) { error("could not remove XML file at " + mXMLOutputFile.getPath()); }
             }
         }
+    }
+
+    private CyclesShader findShader(CyclesShader pShader) {
+        for (CyclesShader n : mShaders) {
+            if (n.ID == pShader.ID) {
+                return n;
+            }
+        }
+        return null;
+    }
+
+    private CyclesShader findShader(int pID) {
+        for (CyclesShader n : mShaders) {
+            if (n.ID == pID) {
+                return n;
+            }
+        }
+        return null;
     }
 
     private void buildCamera(XML pXML) {
@@ -215,28 +297,27 @@ public class RendererCycles extends RendererMesh {
         //      </background>
     }
 
-    private void buildShader(XML pXML, String pShaderName, float r, float g, float b) {
-        final float mRoughness = 0.0f;
-        XML mShaderNode = new XML(XML_UNI_SHADER);
-        mShaderNode.setString(XML_ATTR_NAME, pShaderName);
-        {
-            XML mDiffuseNode = new XML(XML_NODE_DIFFUSE);
-            mDiffuseNode.setString(XML_ATTR_NAME, SHADER_TYPE_DIFFUSE);
-            mDiffuseNode.setFloat("roughness", mRoughness);
-            mDiffuseNode.setString(XML_ATTR_COLOR, getColorAttr(r, g, b));
-            mShaderNode.addChild(mDiffuseNode);
-        }
-        {
-            XML mConnectNode = new XML(XML_NODE_CONNECT);
-            mConnectNode.setString(XML_ATTR_FROM, VALUE_FROM_DIFFUSE);
-            mConnectNode.setString(XML_ATTR_TO, VALUE_OUTPUT_SURFACE);
-            mShaderNode.addChild(mConnectNode);
-        }
-        pXML.addChild(mShaderNode);
+    private void buildShaderFromRGBColor(XML pXML, String pShaderName, float r, float g, float b) {
+        pXML.addChild(createShaderDiffuse(pShaderName, r, g, b));
         //      <shader name="floor">
         //	        <diffuse_bsdf name="diffuse" roughness="0.0" color="1.0, 0.5, 0.0" />
         //	        <connect from="diffuse bsdf" to="output surface" />
         //      </shader>
+    }
+
+    private String buildShaderFromXML(XML pXML, ShaderTriangleBucket pBucket) {
+        final String DEFAULT_SHADER_NAME = "default_shader";
+        CyclesShader mShader = findShader(pBucket.shaderID);
+        if (mShader != null) {
+            pXML.addChild(mShader.payload);
+            final String mShaderName = mShader.payload.getString(XML_ATTR_NAME);
+            return mShaderName == null ? "" : mShaderName;
+        } else {
+            console("@buildShaderFromXML could not find shader. using default shader instead.");
+            Color c = pBucket.color;
+            buildShaderFromRGBColor(mXML, DEFAULT_SHADER_NAME, c.r, c.g, c.b);
+            return DEFAULT_SHADER_NAME;
+        }
     }
 
     private void buildObject(XML pXML, String pShaderName, float[] pTriangleList) {
@@ -276,11 +357,6 @@ public class RendererCycles extends RendererMesh {
         //	        <mesh P="-3 3 0  3 3 0  3 -3 0" nverts="3" verts="0 1 2 " />
     }
 
-    private String getColorAttr(float r, float g, float b) {
-        final String D = ", ";
-        return r + D + g + D + b;
-    }
-
     private void setMatrix4x4(XML pNode, float[] pMatrix4x4) {
         StringBuilder s = new StringBuilder();
         for (float aPMatrix4x4 : pMatrix4x4) {
@@ -305,5 +381,25 @@ public class RendererCycles extends RendererMesh {
                                                      mOptionOutputValue,
                                                      pXMLPath};
         launchRenderProcess(mCommandString);
+    }
+
+    public static class CyclesShader {
+
+        public final int ID;
+        public final XML payload;
+
+        CyclesShader(int pID, XML pPayload) {
+            ID = pID;
+            payload = pPayload;
+        }
+
+        @Override
+        public String toString() {
+            return getClass().getSimpleName() +
+                   "{" +
+                   "ID=" + ID +
+                   ", payload=" + payload +
+                   '}';
+        }
     }
 }

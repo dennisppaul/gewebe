@@ -13,18 +13,18 @@ import java.lang.reflect.Field;
 public class CGALAlphaShape3 {
 
     static {
-        // append path to `java.library.path`
-        System.setProperty("java.library.path", System.getProperty("java.library.path") + ":" + "/path/to/libs");
-        try {
-            Field fieldSysPath = null;
-            fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
-            fieldSysPath.setAccessible(true);
-            fieldSysPath.set(null, null);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(System.getProperty("java.library.path"));
+        /* append path to `java.library.path` */
+//         System.setProperty("java.library.path", System.getProperty("java.library.path") + ":" + "/path/to/libs");
+//         try {
+//             Field fieldSysPath = null;
+//             fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
+//             fieldSysPath.setAccessible(true);
+//             fieldSysPath.set(null, null);
+//         } catch (NoSuchFieldException | IllegalAccessException e) {
+//             e.printStackTrace();
+//         }
+// 
+//         System.out.println(System.getProperty("java.library.path"));
         System.out.print("### loading native lib `" + CGALAlphaShape3.class.getName() + "` ...");
         System.loadLibrary(CGALAlphaShape3.class.getSimpleName());
         System.out.println(" ok");

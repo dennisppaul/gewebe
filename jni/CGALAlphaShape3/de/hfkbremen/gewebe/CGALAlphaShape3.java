@@ -87,6 +87,7 @@ public class CGALAlphaShape3 {
         CGALAlphaShape3 cgal = new CGALAlphaShape3();
         int mResult = cgal.version();
         long mPtr = cgal.init_alpha_shape(new float[]{1,2,3,4,5,6,7,8,9});
+        cgal.get_alpha_shape_mesh("REGULAR", 0.5f, mPtr);
         System.out.println(mPtr);
         System.out.println(cgal.get_alpha(mPtr));
     }

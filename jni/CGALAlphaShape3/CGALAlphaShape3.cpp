@@ -13,8 +13,10 @@
 
 #include <CGAL/basic.h>
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/Delaunay_triangulation_3.h>
 #include <CGAL/Alpha_shape_3.h>
+#include <CGAL/Alpha_shape_cell_base_3.h>
+#include <CGAL/Alpha_shape_vertex_base_3.h>
+#include <CGAL/Delaunay_triangulation_3.h>
 #include <CGAL/Inverse_index.h>
 #include <CGAL/Linear_cell_complex.h>
 
@@ -45,8 +47,8 @@ typedef CGAL::Inverse_index<Vertex_iterator>        Index;
 JNIEXPORT jint JNICALL Java_de_hfkbremen_gewebe_CGALAlphaShape3_version
 (JNIEnv * env, jobject)
 {
-    int mVersion = 20160625;
-    int mTime = 115125;
+    int mVersion = 20200522;
+    int mTime = 195148;
     cout << "--- version " << mVersion << " time " << mTime << "\n";
     return mVersion;
 }
@@ -285,7 +287,6 @@ JNIEXPORT jfloatArray JNICALL Java_de_hfkbremen_gewebe_CGALAlphaShape3_get_1alph
     bool M_DEBUG = false;
     
     if (M_DEBUG) cout << "--- get_alpha_shape_mesh" << endl;
-    
     Alpha_shape_3* as = (Alpha_shape_3*) ptr;
     as->set_alpha(alpha);
     

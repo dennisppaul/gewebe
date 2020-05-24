@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.17)
 project(CGALAlphaShape3)
 
 set(CMAKE_MACOSX_RPATH 1)

@@ -80,38 +80,6 @@ public class Mesh {
          */
     }
 
-    private boolean checkDataIntegrity() {
-        if (mVertices == null) {
-            System.err.print("### WARNING @ Mesh / problems with data reference");
-            System.err.println("/ vertex data is 'null'");
-            return false;
-        }
-        if (mNumberOfAtoms * mVertexComponentsCount != mVertices.length) {
-            System.err.print("### WARNING @ Mesh / problems with data integrity ");
-            System.err.println("/ vertex");
-            return false;
-        }
-        if ((mColors != null) && (mColors.length != 0) && (mColors.length / mColorComponentsCount != mNumberOfAtoms)) {
-            System.err.print("### WARNING @ Mesh / problems with data integrity ");
-            System.err.println("/ color");
-            return false;
-        }
-        if ((mTexCoords != null) && (mTexCoords.length != 0) && (mTexCoords.length / mTextureCoordComponentsCount != mNumberOfAtoms)) {
-            System.err.print("### WARNING @ Mesh / problems with data integrity ");
-            System.err.println("/ texture coordinates");
-            return false;
-        }
-
-        if ((mNormals != null) && (mNormals.length != 0) && (mNormals.length / mNormalsComponentsCount != mNumberOfAtoms)) {
-            System.err.print("### WARNING @ Mesh / problems with data integrity ");
-            System.err.println("/ vertex_normals");
-            return false;
-        }
-
-        /** @todo also test primitive type VS number of components */
-        return true;
-    }
-
     public float[] vertices() {
         return mVertices;
     }
@@ -254,23 +222,71 @@ public class Mesh {
 
     public void translate(float x, float y, float z) {
         for (int i = 0; i < mVertices.length; i += 3) {
-            mVertices[i + 0] = mVertices[i + 0] + x;
-            mVertices[i + 1] = mVertices[i + 1] + y;
-            mVertices[i + 2] = mVertices[i + 2] + z;
+            mVertices[i + 0] += x;
+            mVertices[i + 1] += y;
+            mVertices[i + 2] += z;
         }
     }
 
-    public PVector calcCenterOfMass() {
+    public void scale(float x, float y, float z) {
+        for (int i = 0; i < mVertices.length; i += 3) {
+            mVertices[i + 0] *= x;
+            mVertices[i + 1] *= y;
+            mVertices[i + 2] *= z;
+        }
+    }
+
+    public PVector center_of_mass() {
         PVector mCenterOfMass = new PVector();
         for (int i = 0; i < mVertices.length; i += 3) {
             PVector v = new PVector().set(mVertices[i + 0], mVertices[i + 1], mVertices[i + 2]);
             mCenterOfMass.add(v);
         }
-        mCenterOfMass.div(mVertices.length / 3);
+        mCenterOfMass.div(mVertices.length / 3.0f);
         return mCenterOfMass;
     }
 
     public void translate(PVector p) {
         translate(p.x, p.y, p.z);
+    }
+
+    public void scale(PVector p) {
+        scale(p.x, p.y, p.z);
+    }
+
+    public void scale(float pScale) {
+        scale(pScale, pScale, pScale);
+    }
+
+    private boolean checkDataIntegrity() {
+        if (mVertices == null) {
+            System.err.print("### WARNING @ Mesh / problems with data reference");
+            System.err.println("/ vertex data is 'null'");
+            return false;
+        }
+        if (mNumberOfAtoms * mVertexComponentsCount != mVertices.length) {
+            System.err.print("### WARNING @ Mesh / problems with data integrity ");
+            System.err.println("/ vertex");
+            return false;
+        }
+        if ((mColors != null) && (mColors.length != 0) && (mColors.length / mColorComponentsCount != mNumberOfAtoms)) {
+            System.err.print("### WARNING @ Mesh / problems with data integrity ");
+            System.err.println("/ color");
+            return false;
+        }
+        if ((mTexCoords != null) && (mTexCoords.length != 0) && (mTexCoords.length / mTextureCoordComponentsCount != mNumberOfAtoms)) {
+            System.err.print("### WARNING @ Mesh / problems with data integrity ");
+            System.err.println("/ texture coordinates");
+            return false;
+        }
+
+        if ((mNormals != null) && (mNormals.length != 0) && (mNormals.length / mNormalsComponentsCount != mNumberOfAtoms)) {
+            System.err.print("### WARNING @ Mesh / problems with data integrity ");
+            System.err.println("/ vertex_normals");
+            return false;
+        }
+
+        /* @todo also test primitive type VS number of components */
+        return true;
     }
 }

@@ -7,7 +7,7 @@ import processing.core.PApplet;
 
 public class SketchOBJModelAccessingModelVertices extends PApplet {
 
-    /**
+    /*
      * this example demonstrates how to manually access and draw the vertices of a 3D model.
      */
 

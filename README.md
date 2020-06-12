@@ -2,8 +2,6 @@
 
 a collection of tools and methods for working with meshes in [Processing](https://processing.org/).
 
-
-
 ## dependencies + libraries
 
 - [Processing](https://processing.org/)

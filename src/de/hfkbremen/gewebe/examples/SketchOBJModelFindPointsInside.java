@@ -30,7 +30,7 @@ public class SketchOBJModelFindPointsInside extends PApplet {
         ModelData mModelData = ModelLoaderOBJ.parseModelData(OBJWeirdObject.DATA);
         Mesh mModelMesh = mModelData.mesh();
         mTriangles = mModelMesh.triangles();
-        mCenterOfMass = mModelMesh.calcCenterOfMass();
+        mCenterOfMass = mModelMesh.center_of_mass();
         mPoints = new ArrayList<>();
     }
 

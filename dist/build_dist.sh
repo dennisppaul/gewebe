@@ -1,8 +1,10 @@
 #!/bin/sh
 
-source config.build
-
 ROOT=$(pwd)
+ROOT=$(dirname "$0")
+
+cd "$ROOT"
+source config.build
 
 if [[ "$TERM" != "dumb" ]]; then
     C0=$(tput sgr0)
@@ -20,21 +22,23 @@ printJob()
 }
 
 printJob "create folder"
-sh $ROOT/create-folder.sh $LIB_NAME
+sh create-folder.sh $LIB_NAME
 printJob "copying jar"
-sh $ROOT/copy_jar.sh $LIB_NAME
+sh copy_jar.sh $LIB_NAME
 printJob "copying additional libs"
 for i in ${ADDITIONAL_LIBS[@]}; do
-	sh $ROOT/copy_additional_libs.sh $LIB_NAME $i
+	sh copy_additional_libs.sh $LIB_NAME $i
 done
 printJob "copying src"
-sh $ROOT/copy_src.sh $LIB_NAME
+sh copy_src.sh $LIB_NAME
 printJob "copying README"
-sh $ROOT/copy_readme.sh $LIB_NAME
+sh copy_readme.sh $LIB_NAME
+printJob "copying reference"
+sh copy_reference.sh $LIB_NAME
 printJob "creating processing sketches"
 for i in ${IO_EXAMPLE_PATHS[@]}; do
-	sh $ROOT/create-processing-sketches.sh $LIB_NAME $i
+	sh create-processing-sketches.sh $LIB_NAME $i
 done
 printJob "packing zip"
-sh $ROOT/pack-zip.sh $LIB_NAME
+sh pack-zip.sh $LIB_NAME
 printJob "done"

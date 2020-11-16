@@ -1,7 +1,5 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
 /**
  * this example demonstrates how to render high-resolution images with the java-based renderer
  * [Sunflow](http://sunflow.sourceforge.net/).
@@ -19,12 +17,16 @@ import org.sunflow.*;
  * - lighting is not working yet ( neither sky nor light )
  * - material not working yet
  */
+
 boolean mRecord = false;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
 }
+
 void draw() {
     String mOutputFile = "";
     if (mRecord) {
@@ -40,11 +42,13 @@ void draw() {
         mRecord = false;
     }
 }
+
 void keyPressed() {
     if (key == ' ') {
         mRecord = true;
     }
 }
+
 void drawScene() {
     background(50);
     camera(height / 2.0f, height, width, 0, 0, 0, 0, 1, 0);

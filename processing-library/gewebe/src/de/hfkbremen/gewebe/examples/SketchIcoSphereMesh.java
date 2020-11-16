@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 public class SketchIcoSphereMesh extends PApplet {
 
-    /**
+    /*
      * this example demonstrates how to create an *ico sphere* as a mesh.
      */
 

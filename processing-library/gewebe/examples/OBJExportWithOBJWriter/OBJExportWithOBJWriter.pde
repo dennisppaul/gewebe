@@ -1,13 +1,15 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
 
-
 boolean mRecord = false;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
 }
+
 void draw() {
     background(255);
     if (mRecord) {
@@ -37,6 +39,7 @@ void draw() {
         mRecord = false;
     }
 }
+
 void keyPressed() {
     if (key == ' ') {
         mRecord = true;

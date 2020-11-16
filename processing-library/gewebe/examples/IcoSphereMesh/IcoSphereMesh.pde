@@ -1,17 +1,19 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
-/**
+/*
  * this example demonstrates how to create an *ico sphere* as a mesh.
  */
+
 Mesh mMesh;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
     mMesh = IcoSphere.mesh(5);
 }
+
 void draw() {
     background(50);
     stroke(255, 63);

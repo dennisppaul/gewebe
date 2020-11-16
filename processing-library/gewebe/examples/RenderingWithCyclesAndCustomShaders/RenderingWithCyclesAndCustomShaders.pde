@@ -1,21 +1,26 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
 /**
  * this example demonstrates how to render high-resolution images with [Cycles](https://www.cycles-renderer.org/)
  * a physically based renderer included in the [Blender](https://www.blender.org/) project.
  *
  * it also demonstrates how to use simple processing colors to assign custom *cycles shaders* to geometry.
  */
+
 RendererCycles mCycles;
+
 boolean mRecord = false;
+
 int mShaderIDSpheres;
+
 int mShaderIDBlue;
+
 int mShaderIDGlass;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
     noStroke();
     sphereDetail(12);
@@ -24,6 +29,7 @@ void setup() {
     mShaderIDBlue = color(200);
     mShaderIDGlass = color(1, 0, 0, 0);
 }
+
 void draw() {
     String mOutputFile = "";
     if (mRecord) {
@@ -50,11 +56,13 @@ void draw() {
         mRecord = false;
     }
 }
+
 void keyPressed() {
     if (key == ' ') {
         mRecord = true;
     }
 }
+
 XML createShaderCubeVolume() {
     return RendererCycles.getXML(
             "<shader name=\"cube\">\n" +
@@ -74,12 +82,14 @@ XML createShaderCubeVolume() {
             "\t<connect from=\"add closure\" to=\"output volume\" />\n" +
             "</shader>");
 }
+
 XML createShaderBlue() {
     return RendererCycles.getXML(
             "<shader name=\"custom_cycles_shader\"><diffuse_bsdf color=\"0.0, 0.5, 1.0\" " +
             "name=\"diffuse\" roughness=\"0.0\"/><connect from=\"diffuse bsdf\" to=\"output " +
             "surface\"/></shader>");
 }
+
 XML createShaderMonkey() {
     return RendererCycles.getXML(
             "<shader name=\"monkey\">\n" +
@@ -89,6 +99,7 @@ XML createShaderMonkey() {
             "\t<connect from=\"monkey_closure bsdf\" to=\"output surface\" />\n" +
             "</shader>");
 }
+
 XML createShaderXML() {
     XML mShaderNode = new XML("shader");
     mShaderNode.setString("name", "custom_cycles_shader");
@@ -103,6 +114,7 @@ XML createShaderXML() {
     mShaderNode.addChild(mConnectNode);
     return mShaderNode;
 }
+
 void drawScene() {
     background(50);
     float mZoom = 6.0f;

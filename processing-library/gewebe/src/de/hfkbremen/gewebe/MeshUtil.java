@@ -7,7 +7,34 @@ import java.util.ArrayList;
 
 public class MeshUtil {
 
-    private static double EPSILON = 0.0000001;
+    private static final double EPSILON = 0.0000001;
+
+    public static PVector mult(PVector v1, PVector v2) {
+        return mult(v1, v2, null);
+    }
+
+    public static PVector mult(PVector v1, PVector v2, PVector target) {
+        if (target == null) {
+            target = new PVector(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+        } else {
+            target.set(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+        }
+        return target;
+    }
+
+    public static float distance(PVector p1, PVector p2) {
+        float dx = p1.x - p2.x;
+        float dy = p1.y - p2.y;
+        float dz = p1.z - p2.z;
+        return (float) Math.sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    public static float distanceSquared(PVector p0, PVector p1) {
+        float dx = p0.x - p1.x;
+        float dy = p0.y - p1.y;
+        float dz = p0.z - p1.z;
+        return (dx * dx + dy * dy + dz * dz);
+    }
 
     public static int isClockWise2D(final ArrayList<PVector> mPoints) {
 
@@ -44,9 +71,10 @@ public class MeshUtil {
 
         int c = 0;
         for (int i = 0, j = thePolygon.size() - 1; i < thePolygon.size(); j = i++) {
-            if ((((thePolygon.get(i).y <= y) && (y < thePolygon.get(j).y)) || ((thePolygon.get(j).y <= y) && (y < thePolygon.get(i).y))) && (x < (thePolygon
-                                                                                                                                                          .get(j).x - thePolygon
-                                                                                                                                                          .get(i).x) * (y - thePolygon
+            if ((((thePolygon.get(i).y <= y) && (y < thePolygon.get(j).y)) || ((thePolygon.get(j).y <= y) && (y < thePolygon
+                    .get(i).y))) && (x < (thePolygon
+                                                  .get(j).x - thePolygon
+                                                  .get(i).x) * (y - thePolygon
                     .get(i).y) / (thePolygon.get(j).y - thePolygon.get(i).y) + thePolygon.get(i).x)) {
                 c = (c + 1) % 2;
             }
@@ -117,7 +145,10 @@ public class MeshUtil {
         }
     }
 
-    public static void calculateNormal(final PVector pointA, final PVector pointB, final PVector pointC, final PVector theResultNormal) {
+    public static void calculateNormal(final PVector pointA,
+                                       final PVector pointB,
+                                       final PVector pointC,
+                                       final PVector theResultNormal) {
         PVector TMP_BA = PVector.sub(pointB, pointA);
         PVector TMP_BC = PVector.sub(pointC, pointB);
 
@@ -131,7 +162,8 @@ public class MeshUtil {
     //                                                    ArrayList<PVector> pIntersectionResults) {
     //        for (Triangle t : pTriangles) {
     //            final PVector mResult = new PVector();
-    //            boolean mSuccess = MeshUtil.findRayTriangleIntersectionPoint(pRayOrigin, pRayDirection, t.a, t.b, t.c, mResult, true);
+    //            boolean mSuccess = MeshUtil.findRayTriangleIntersectionPoint(pRayOrigin, pRayDirection, t.a, t.b, t
+    //            .c, mResult, true);
     //            if (mSuccess) {
     //                pIntersectionResults.add(mResult);
     //            }
@@ -146,7 +178,13 @@ public class MeshUtil {
                                                            PVector pIntersectionPoint,
                                                            boolean pCullingFlag) {
         IntersectionResult pIntersectionResult = new IntersectionResult();
-        boolean mSuccess = intersectRayTriangle(pRayOrigin, pRayDirection, v0, v1, v2, pIntersectionResult, pCullingFlag);
+        boolean mSuccess = intersectRayTriangle(pRayOrigin,
+                                                pRayDirection,
+                                                v0,
+                                                v1,
+                                                v2,
+                                                pIntersectionResult,
+                                                pCullingFlag);
         if (mSuccess) {
             if (pIntersectionResult.t <= 0) {
                 pIntersectionPoint.set(pRayDirection);
@@ -300,16 +338,25 @@ public class MeshUtil {
         }
     }
 
-    public static boolean isPointInsideMesh(ArrayList<de.hfkbremen.gewebe.Triangle> pTriangles, PVector pRayOrigin, PVector pRayDirection) {
+    public static boolean isPointInsideMesh(ArrayList<de.hfkbremen.gewebe.Triangle> pTriangles,
+                                            PVector pRayOrigin,
+                                            PVector pRayDirection) {
         final int mNumberOfIntersections = countRayTrianglesIntersections(pTriangles, pRayOrigin, pRayDirection);
         return isNumberOdd(mNumberOfIntersections);
     }
 
-    public static int countRayTrianglesIntersections(ArrayList<de.hfkbremen.gewebe.Triangle> pTriangles, PVector pRayOrigin, PVector pRayDirection) {
+    public static int countRayTrianglesIntersections(ArrayList<de.hfkbremen.gewebe.Triangle> pTriangles,
+                                                     PVector pRayOrigin,
+                                                     PVector pRayDirection) {
         int mResults = 0;
         for (Triangle t : pTriangles) {
             final PVector mResult = new PVector();
-            boolean mSuccess = MeshUtil.rayIntersectsTriangleMollerTrumbore(pRayOrigin, pRayDirection, t.a, t.b, t.c, mResult);
+            boolean mSuccess = MeshUtil.rayIntersectsTriangleMollerTrumbore(pRayOrigin,
+                                                                            pRayDirection,
+                                                                            t.a,
+                                                                            t.b,
+                                                                            t.c,
+                                                                            mResult);
             if (mSuccess) {
                 mResults++;
             }

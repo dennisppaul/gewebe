@@ -1,17 +1,18 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
 /**
  * this examples demonstrates how to convert a line ( of 2 or more points ) into a single 3D object or a series of
  * unconnected 3D objects.
  */
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
     ArcBall.setupRotateAroundCenter(this, false);
 }
+
 void draw() {
     background(50);
     lights();
@@ -22,6 +23,7 @@ void draw() {
     fill(255, 127, 0);
     drawSpiral();
 }
+
 void drawSpiral() {
     float mRadius = 200;
     final float mLineWidth = 8;
@@ -42,6 +44,7 @@ void drawSpiral() {
     }
     drawTriangles(mTriangles);
 }
+
 void drawTriangles(ArrayList<PVector> pTriangles) {
     beginShape(TRIANGLES);
     for (PVector p : pTriangles) {

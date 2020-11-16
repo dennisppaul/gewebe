@@ -1,19 +1,21 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
 /**
  * this example demonstrates how to create an *ico sphere* as an *indexed triangle list*. an *indexed
  * triangle list* allows to use the same vertex for multiple triangles.
  */
+
 IndexedTriangleList mIndexedTriangleList;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
     hint(ENABLE_DEPTH_SORT);
     mIndexedTriangleList = IcoSphere.indexed_triangle_list(2);
 }
+
 void draw() {
     background(50);
     strokeWeight(1.0f / 100.0f);

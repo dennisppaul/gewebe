@@ -1,20 +1,25 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
 /**
  * this example demonstrates how to use [Boolean Operations](https://en.wikipedia.org/wiki/Boolean_operations_on_polygons)
  * or [Constructive Solid Geometry (CSG)](https://en.wikipedia.org/wiki/Constructive_solid_geometry) using a
  * Java-C/C++-Binding to [CGAL](https://www.cgal.org/).
  */
+
 Mesh mSolidA;
+
 Mesh mSolidB;
+
 Mesh mIntersection;
+
 CGALBooleanOperations3 mBooleanOperation;
+
 float mRotation;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
     mSolidA = ModelLoaderOBJ.parseModelData(OBJWeirdObject.DATA).mesh();
     mSolidA.translate(100, 0, 0);
@@ -28,6 +33,7 @@ void setup() {
         mSolidA.vertices()[i] *= SCALER;
     }
 }
+
 void draw() {
     background(255);
     translate(width / 2.0f, height / 2.0f);
@@ -51,6 +57,7 @@ void draw() {
     }
     mSolidB.draw(g);
 }
+
 void keyPressed() {
     if (key == '1') {
         mIntersection = mBooleanOperation.boolean_operation_mesh(CGALBooleanOperations3.INTERSECTION,

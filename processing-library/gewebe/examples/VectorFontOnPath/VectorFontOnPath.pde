@@ -1,22 +1,25 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
 /**
  * this example demonstrates how to arrange characters along a given path and return the result as a collection of
  * triangles.
  */
+
 VectorFont mPathCreator;
+
 int mNumberOfTriangles = 0;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
     mPathCreator = new VectorFont("Helvetica", 32 * 2);
     mPathCreator.insideFlag(VectorFont.CLOCKWISE);
     mPathCreator.stretch_to_fit(true);
     mPathCreator.repeat(false);
 }
+
 void draw() {
     background(50);
     /* adjust flatness ( ie resolutions of curves ) */

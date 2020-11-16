@@ -1,18 +1,21 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
 /**
  * @TODO(20200518, "Java-C/C++-Binding is currently broken")
  * this example demonstrates how to use [Alpha Shapes](https://en.wikipedia.org/wiki/Alpha_shape) using a
  * Java-C/C++-Binding to [CGAL](https://www.cgal.org/).
  */
+
 CGALAlphaShape3 cgal;
+
 float[] mPoints3;
+
 Mesh mMesh;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
     cgal = new CGALAlphaShape3();
     final int NUMBER_OF_POINTS = 2000;
@@ -29,6 +32,7 @@ void setup() {
     cgal.compute_cgal_alpha_shape(mPoints3);
     computeAlphaShape(0.5f);
 }
+
 void draw() {
     background(255);
     directionalLight(126, 126, 126, 0, 0, -1);
@@ -51,9 +55,11 @@ void draw() {
     }
     endShape();
 }
+
 void mouseMoved() {
     computeAlphaShape(mouseX / (float) width);
 }
+
 void computeAlphaShape(float mAlpha) {
     mMesh = cgal.mesh(mAlpha);
 }

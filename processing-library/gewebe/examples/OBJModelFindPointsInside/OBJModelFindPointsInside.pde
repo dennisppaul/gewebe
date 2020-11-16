@@ -1,17 +1,20 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
 /**
  * this example demonstrates how test if a point is inside of a mesh.
  */
+
 static PVector mCenterOfMass;
 PVector mPoint = new PVector();
+
 ArrayList<Triangle> mTriangles;
+
 ArrayList<PVector> mPoints;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
     ModelData mModelData = ModelLoaderOBJ.parseModelData(OBJWeirdObject.DATA);
     Mesh mModelMesh = mModelData.mesh();
@@ -19,6 +22,7 @@ void setup() {
     mCenterOfMass = mModelMesh.center_of_mass();
     mPoints = new ArrayList();
 }
+
 void draw() {
     background(50);
     prepareView();
@@ -26,6 +30,7 @@ void draw() {
     queryPointPosition();
     drawPointsInside();
 }
+
 void queryPointPosition() {
     /* is random point inside mesh? */
     final float r = 400;
@@ -37,11 +42,13 @@ void queryPointPosition() {
         mPoints.add(new PVector().set(mPoint));
     }
 }
+
 void prepareView() {
     translate(width / 2.0f, height / 2.0f, -200);
     rotateX(sin(frameCount * 0.01f) * TWO_PI);
     rotateY(cos(frameCount * 0.0037f) * TWO_PI);
 }
+
 void drawMesh() {
     stroke(255, 31);
     noFill();
@@ -53,6 +60,7 @@ void drawMesh() {
     }
     endShape();
 }
+
 void drawPointsInside() {
     for (PVector p : mPoints) {
         noStroke();

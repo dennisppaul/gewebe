@@ -73,14 +73,11 @@ public class RendererCycles extends RendererMesh {
     private int mShaderNameID = 0;
 
     public RendererCycles() {
-        final String pPathToCycles =
-                (CYCLES_BINARY_PATH == null ? getLocation() : CYCLES_BINARY_PATH) + "/" + CYCLES_BINARY_NAME;
-        mExecPath = de.hfkbremen.gewebe.Location.get(pPathToCycles);
+        final String pPathToCycles = (CYCLES_BINARY_PATH == null ? getLocation() : CYCLES_BINARY_PATH) + "/" + CYCLES_BINARY_NAME;
+        mExecPath = Location.get(pPathToCycles);
         if (!exists(mExecPath)) {
             /* try default location */
-            error("couldn t find `cycles` at location `" + mExecPath + "` trying default location `" + de.hfkbremen.gewebe.Location
-                    .get(
-                            CYCLES_BINARY_NAME) + "`");
+            error("couldn t find `cycles` at location `" + mExecPath + "` trying default location `" + de.hfkbremen.gewebe.Location.get(CYCLES_BINARY_NAME) + "`");
             mExecPath = Location.get(CYCLES_BINARY_NAME);
             if (!exists(mExecPath)) {
                 error("couldn t find `cycles` at default location. try to set path manually via `RendererCycles" +

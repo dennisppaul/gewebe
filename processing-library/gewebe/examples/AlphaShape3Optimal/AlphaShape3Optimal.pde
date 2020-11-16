@@ -1,19 +1,23 @@
 import de.hfkbremen.gewebe.*; 
 import org.sunflow.*; 
-
-
 /**
  * @TODO(20200518, "Java-C/C++-Binding is currently broken")
  * this example demonstrates how to use [Alpha Shapes](https://en.wikipedia.org/wiki/Alpha_shape) using a
  * Java-C/C++-Binding to [CGAL](https://www.cgal.org/).
  */
+
 CGALAlphaShape3 cgal;
+
 float[] mPoints3;
+
 float[] mOptimalAlphaShape;
+
 int mNumberOfSolidComponents = 1;
+
 void settings() {
     size(1024, 768, P3D);
 }
+
 void setup() {
     cgal = new CGALAlphaShape3();
     final int NUMBER_OF_POINTS = 1000;
@@ -30,6 +34,7 @@ void setup() {
     cgal.compute_cgal_alpha_shape(mPoints3);
     computeAlphaShape(mNumberOfSolidComponents);
 }
+
 void draw() {
     background(255);
     directionalLight(126, 126, 126, 0, 0, -1);
@@ -56,6 +61,7 @@ void draw() {
     }
     endShape();
 }
+
 void keyPressed() {
     if (key == '+') {
         mNumberOfSolidComponents++;
@@ -65,6 +71,7 @@ void keyPressed() {
     }
     computeAlphaShape(mNumberOfSolidComponents);
 }
+
 void computeAlphaShape(int mNumberOfSolidComponents) {
     System.out.println("+++ number of create components: " + mNumberOfSolidComponents);
     System.out.println("+++ optimal alpha             : " + cgal.get_optimal_alpha(mNumberOfSolidComponents));

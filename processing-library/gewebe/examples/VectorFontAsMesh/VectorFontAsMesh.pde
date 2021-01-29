@@ -1,4 +1,4 @@
-import de.hfkbremen.gewebe.*; 
+import gewebe.*; 
 import org.sunflow.*; 
 /**
  * this example demonstrates how to convert characters a collection of triangles.

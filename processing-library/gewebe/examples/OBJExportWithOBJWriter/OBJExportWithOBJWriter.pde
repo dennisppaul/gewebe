@@ -1,4 +1,4 @@
-import de.hfkbremen.gewebe.*; 
+import gewebe.*; 
 import org.sunflow.*; 
 
 boolean mRecord = false;

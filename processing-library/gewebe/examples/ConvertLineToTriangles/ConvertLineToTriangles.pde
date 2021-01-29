@@ -1,4 +1,4 @@
-import de.hfkbremen.gewebe.*; 
+import gewebe.*; 
 import org.sunflow.*; 
 /**
  * this examples demonstrates how to convert a line ( of 2 or more points ) into a single 3D object or a series of

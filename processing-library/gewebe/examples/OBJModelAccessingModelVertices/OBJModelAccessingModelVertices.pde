@@ -1,4 +1,4 @@
-import de.hfkbremen.gewebe.*; 
+import gewebe.*; 
 import org.sunflow.*; 
 /*
  * this example demonstrates how to manually access and draw the vertices of a 3D model.

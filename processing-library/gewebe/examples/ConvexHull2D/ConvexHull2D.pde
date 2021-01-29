@@ -1,4 +1,4 @@
-import de.hfkbremen.gewebe.*; 
+import gewebe.*; 
 import org.sunflow.*; 
 /**
  * this example demonstrate how to find the *convex hull* around a set of 2D points.

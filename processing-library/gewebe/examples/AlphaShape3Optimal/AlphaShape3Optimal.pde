@@ -1,4 +1,4 @@
-import de.hfkbremen.gewebe.*; 
+import gewebe.*; 
 import org.sunflow.*; 
 /**
  * @TODO(20200518, "Java-C/C++-Binding is currently broken")

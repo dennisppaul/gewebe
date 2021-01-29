@@ -8,4 +8,4 @@ SRC=$ROOT/../lib/$ADDITIONAL_LIB_NAME
 DST=$ROOT/../processing-library/$LIB_NAME/library/
 
 echo "# lib '"$ADDITIONAL_LIB_NAME"'"
-cp "$SRC" "$DST"
+cp -r "$SRC" "$DST"

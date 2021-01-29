@@ -1,4 +1,4 @@
-import de.hfkbremen.gewebe.*; 
+import gewebe.*; 
 import org.sunflow.*; 
 /**
  * this example demonstrates how to use [Boolean Operations](https://en.wikipedia.org/wiki/Boolean_operations_on_polygons)

@@ -92,9 +92,16 @@ public class CGALAlphaShape3 {
     public native int version();
 
     /**
-     * Initialize the alpha_shape from the array of points coordinates
-     * (coord), return a pointer to the c++ alpha_shape object for
-     * subsequent native method calls.
+     * @param classification_type
+     * @param alpha
+     * @param ptr
+     * @return
+     */
+    public native float[] get_alpha_shape_mesh(String classification_type, float alpha, long ptr);
+
+    /**
+     * Initialize the alpha_shape from the array of points coordinates (coord), return a pointer to the c++ alpha_shape
+     * object for subsequent native method calls.
      *
      * @param pts_coord
      * @return
@@ -102,9 +109,8 @@ public class CGALAlphaShape3 {
     private native long init_alpha_shape(float[] pts_coord);
 
     /**
-     * For a given value of alpha and a given class_type for the facets,
-     * sets the alpha value of the alpha_shape to alpha. Returns the array
-     * of facet indices from the alpha_shape.
+     * For a given value of alpha and a given class_type for the facets, sets the alpha value of the alpha_shape to
+     * alpha. Returns the array of facet indices from the alpha_shape.
      *
      * @param classification_type
      * @param alpha
@@ -114,13 +120,10 @@ public class CGALAlphaShape3 {
     private native int[] get_alpha_shape_facets(String classification_type, float alpha, long ptr);
 
     /**
-     * For a given number of create components and a given class_type for
-     * the facets, sets the alpha value of the alpha_shape A such that A
-     * satisfies the following two properties: (1) all data points are
-     * either on the boundary or in the interior of the regularized
-     * version of A; (2) the number of create component of A is equal to or
-     * smaller than nb_components. Returns the array of facet indices from
-     * the alpha_shape.
+     * For a given number of create components and a given class_type for the facets, sets the alpha value of the
+     * alpha_shape A such that A satisfies the following two properties: (1) all data points are either on the boundary
+     * or in the interior of the regularized version of A; (2) the number of create component of A is equal to or
+     * smaller than nb_components. Returns the array of facet indices from the alpha_shape.
      *
      * @param classification_type
      * @param nb_sc
@@ -138,8 +141,8 @@ public class CGALAlphaShape3 {
     private native float get_alpha(long ptr);
 
     /**
-     * Returns the number of create components of the current alpha_shape,
-     * that is, the number of components of its regularized version.
+     * Returns the number of create components of the current alpha_shape, that is, the number of components of its
+     * regularized version.
      *
      * @param ptr
      * @return
@@ -147,17 +150,15 @@ public class CGALAlphaShape3 {
     private native int number_of_solid_components(long ptr);
 
     /**
-     * @param classification_type
-     * @param alpha
-     * @param ptr
-     * @return
-     */
-    public native float[] get_alpha_shape_mesh(String classification_type, float alpha, long ptr);
-
-    /**
      * @param nb_sc
      * @param ptr
      * @return
      */
     private native float get_optimal_alpha(int nb_sc, long ptr);
+
+    public static void main(String[] args) {
+        CGALAlphaShape3 mCGALAlphaShape3 = new CGALAlphaShape3();
+        System.out.println(
+        CGALAlphaShape3.class.getSimpleName() + " :: version: " + mCGALAlphaShape3.version());
+    }
 }

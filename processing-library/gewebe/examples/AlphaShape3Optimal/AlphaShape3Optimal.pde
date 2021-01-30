@@ -1,9 +1,10 @@
 import gewebe.*; 
 import org.sunflow.*; 
 /**
- * @TODO(20200518, "Java-C/C++-Binding is currently broken")
  * this example demonstrates how to use [Alpha Shapes](https://en.wikipedia.org/wiki/Alpha_shape) using a
  * Java-C/C++-Binding to [CGAL](https://www.cgal.org/).
+ * <p>
+ * note that this sketch currently only runs on macOS.
  */
 
 CGALAlphaShape3 cgal;

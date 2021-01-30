@@ -10,9 +10,10 @@ public class SketchBooleanOperations3 extends PApplet {
 
     /**
      * this example demonstrates how to use [Boolean Operations](https://en.wikipedia
-     * .org/wiki/Boolean_operations_on_polygons)
-     * or [Constructive Solid Geometry (CSG)](https://en.wikipedia.org/wiki/Constructive_solid_geometry) using a
-     * Java-C/C++-Binding to [CGAL](https://www.cgal.org/).
+     * .org/wiki/Boolean_operations_on_polygons) or [Constructive Solid Geometry (CSG)](https://en.wikipedia
+     * .org/wiki/Constructive_solid_geometry) using a Java-C/C++-Binding to [CGAL](https://www.cgal.org/).
+     * <p>
+     * note that this sketch currently only runs on macOS.
      */
 
     private Mesh mSolidA;

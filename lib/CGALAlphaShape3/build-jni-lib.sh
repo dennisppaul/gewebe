@@ -1,12 +1,11 @@
 #!/bin/bash
 
-PROCESSING_APP_PATH='/Applications/Processing.app/'
+PROCESSING_APP_PATH='/Applications/Processing.app/Contents/Java/core/library/'
 PROJECT_NAME="CGALAlphaShape3"
 
-
-PWD=`pwd`
-BUILD_PATH=build
 PACKAGE_NAME='gewebe'
+PWD=`pwd`
+BUILD_PATH='build'
 PACKAGE_JAR=$PACKAGE_NAME'.jar'
 JAVA_SRC_PATH='../../src/'
 NATIVE_ACCESSER_PATH=$PACKAGE_NAME/$PROJECT_NAME'.java'
@@ -14,7 +13,7 @@ NATIVE_ACCESSER_CLASS_NAME=$PACKAGE_NAME'.'$PROJECT_NAME
 NATIVE_HEADER_PATH='../cpp/'
 JAVA_BUILD_PATH=java
 JAVA_JNI_FILE='lib'$PROJECT_NAME
-JAVA_CLASSPATH='.:../../'$PACKAGE_JAR':../'$PACKAGE_JAR':'$PROCESSING_APP_PATH'/Contents/Java/core/library/core.jar'
+JAVA_CLASSPATH='.:../../'$PACKAGE_JAR':../'$PACKAGE_JAR':'$PROCESSING_APP_PATH'/core.jar'
 
 echo
 echo '----- Gewebe $PROJECT_NAME JNI Builder -----'

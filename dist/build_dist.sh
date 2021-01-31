@@ -26,6 +26,8 @@ sh create-folder.sh $LIB_NAME
 printJob "copying jar"
 sh copy_jar.sh $LIB_NAME
 printJob "copying additional libs"
+rm -f ../lib/cycles/cycles.macos/cycles
+rm -f ../lib/cycles/cycles.windows/cycles.exe
 for i in ${ADDITIONAL_LIBS[@]}; do
 	sh copy_additional_libs.sh $LIB_NAME $i
 done

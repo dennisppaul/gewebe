@@ -2,3 +2,6 @@ src/de/hfkbremen/gewebe/sandbox/
 attic/
 lib/CGALBooleanOperations3/build/
 lib/CGALAlphaShape3/build/
+lib/cycles/cycles.windows/cycles.exe
+lib/cycles/cycles.macos/cycles
+processing-library/gewebe/library/cycles/cycles.macos/cycles

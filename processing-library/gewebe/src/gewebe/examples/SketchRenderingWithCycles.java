@@ -1,28 +1,27 @@
 package gewebe.examples;
 
+import gewebe.Gewebe;
 import gewebe.RendererCycles;
 import processing.core.PApplet;
 
 public class SketchRenderingWithCycles extends PApplet {
 
     /**
-     * this example demonstrates how to render high-resolution images with [Cycles](https://www.cycles-renderer.org/)
-     * a physically based renderer included in the [Blender](https://www.blender.org/) project.
-     *
+     * this example demonstrates how to render high-resolution images with [Cycles](https://www.cycles-renderer.org/) a
+     * physically based renderer included in the [Blender](https://www.blender.org/) project.
+     * <p>
      * # NOTES ON USING CYCLES RENDERER
-     *
-     * - `background()` is ignored. background color must be set manually via `RendererCycles.BACKGROUND_COLOR`
-     * - the path to the cycles executable can be changed via `RendererCycles.CYCLES_BINARY_PATH`
-     * - sketch can be forced to wait until renderer is finished via `RendererCycles.RENDERING_PROCESS_BLOCKING`
-     * - image output file type ( jpg, png, tga ) can be selected via `RendererCycles.OUTPUT_IMAGE_FILE_TYPE`
-     * - must only be used with `beginRaw/endRaw`
-     *
+     * <p>
+     * - `background()` is ignored. background color must be set manually via `RendererCycles.BACKGROUND_COLOR` - the
+     * path to the cycles executable can be changed via `RendererCycles.CYCLES_BINARY_PATH` - sketch can be forced to
+     * wait until renderer is finished via `RendererCycles.RENDERING_PROCESS_BLOCKING` - image output file type ( jpg,
+     * png, tga ) can be selected via `RendererCycles.OUTPUT_IMAGE_FILE_TYPE` - must only be used with
+     * `beginRaw/endRaw`
+     * <p>
      * ## KNOWN LIMITATIONS
-     *
-     * - if image size is not equal to sketch size the viewport is not scaled
-     * - `lights()` does not work yet
-     * - Cycles materials can not be used
-     * - binary is currently only compiled for `macOS 10.15`
+     * <p>
+     * - if image size is not equal to sketch size the viewport is not scaled - `lights()` does not work yet - Cycles
+     * materials can not be used - binary is currently only compiled for `macOS 10.15`
      */
 
     private boolean mRecord = false;
@@ -82,11 +81,10 @@ public class SketchRenderingWithCycles extends PApplet {
             noStroke();
             fill(random(255), random(255), random(255));
             final float mRange = 100;
-            translate(
-                    random(-mRange, mRange),
-                    random(-mRange, mRange),
-                    random(-mRange, mRange)
-                     );
+            translate(random(-mRange, mRange),
+                      random(-mRange, mRange),
+                      random(-mRange, mRange)
+            );
             sphere(random(10, 30));
             popMatrix();
         }
@@ -104,6 +102,6 @@ public class SketchRenderingWithCycles extends PApplet {
     }
 
     public static void main(String[] args) {
-        PApplet.main(SketchRenderingWithCycles.class.getName());
+        Gewebe.run_sketch_with_resources(SketchRenderingWithCycles.class);
     }
 }

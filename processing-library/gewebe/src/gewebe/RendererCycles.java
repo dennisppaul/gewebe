@@ -6,11 +6,20 @@ import processing.data.XML;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 import static gewebe.Gewebe.get_os_name;
-import static gewebe.Gewebe.get_resource_path;
 
 public class RendererCycles extends RendererMesh {
 
@@ -51,8 +60,8 @@ public class RendererCycles extends RendererMesh {
     private static final String OPTION_OUTPUT = "--output";
     private static final String OPTION_WIDTH = "--width";
     private static final String OPTION_HEIGHT = "--height";
-    private static final String CYCLES_DEFAULT_EXECUTABLE_PATH = "../../../lib/cycles/cycles.";
-    private static final String CYCLES_DEFAULT_EXECUTABLE_NAME = "cycles";
+    private static final String CYCLES_DEFAULT_LOCATION = "/cycles/cycles." + get_os_name() + "/";
+    private static final String CYCLES_DEFAULT_EXECUTABLE_NAME = "cycles" + getExecSuffix();
     public static float RENDER_VIEWPORT_SCALE = 1.0f;
     public static boolean DEBUG_PRINT_CYCLES_BINARY_LOCATION = true;
     public static boolean DEBUG_PRINT_CAMERA_MATRIX = false;
@@ -76,24 +85,45 @@ public class RendererCycles extends RendererMesh {
 
     public RendererCycles() {
         if (EXECUTABLE_PATH == null) {
-            final String mPathToCyclesFolder =
-            get_resource_path() + CYCLES_DEFAULT_EXECUTABLE_PATH + get_os_name() + "/";
-            final String mExecSuffix = get_os_name().equalsIgnoreCase("windows") ? ".exe" : "";
-            final String _mExecPath = mPathToCyclesFolder + CYCLES_DEFAULT_EXECUTABLE_NAME + mExecSuffix;
-            String __mExecPath;
-            try {
-                __mExecPath = new File(_mExecPath).getCanonicalPath();
-            } catch (IOException ignored) {
-                __mExecPath = _mExecPath;
+            final String _mExecPath = tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME);
+            if (_mExecPath != null) {
+                String __mExecPath;
+                try {
+                    __mExecPath = new File(_mExecPath).getCanonicalPath();
+                } catch (IOException ignored) {
+                    __mExecPath = _mExecPath;
+                }
+                mExecPath = __mExecPath;
+            } else {
+                final String mExecZipPath = tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME + ".zip");
+                if (mExecZipPath != null) {
+                    System.err.println("### could not find cycles executable but found zipped version at:");
+                    System.err.println("### `" + mExecZipPath + "`");
+                    System.err.println("### trying to unzip it now …");
+                    Gewebe.unzip(mExecZipPath, new File(mExecZipPath).getParent());
+
+//                    Set<PosixFilePermission> ownerWritable = PosixFilePermissions.fromString("rwxr-xr-x");
+//                    FileAttribute<?> permissions = PosixFilePermissions.asFileAttribute(ownerWritable);
+                    String mFileName = tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME);
+                    File mFile = new File(mFileName);
+                    mFile.setExecutable(true);
+//                    Files.createFile(path, permissions);
+                } else {
+                    die(null);
+                }
+                mExecPath = tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME);
+                if (!Gewebe.file_exists(mExecPath)) {
+                    System.err.println("### … did not succeed.");
+                    die(null);
+                } else {
+                    System.err.println("### … succeeded.");
+                }
             }
-            mExecPath = __mExecPath;
         } else {
             mExecPath = EXECUTABLE_PATH;
         }
         if (!Gewebe.file_exists(mExecPath)) {
-            System.err.println(
-            "### could not find cycles executable at `" + mExecPath + "`. try setting it manually with " +
-            "`RendererCycles.EXECUTABLE_PATH=`");
+            die(mExecPath);
         } else {
             if (DEBUG_PRINT_CYCLES_BINARY_LOCATION) {
                 System.out.println("+++ found `cycles` at location: " + mExecPath);
@@ -112,6 +142,8 @@ public class RendererCycles extends RendererMesh {
             console("existing shader ... : " + mQuery);
         }
     }
+
+
 
     protected void beginFrame() {
     }
@@ -394,6 +426,32 @@ public class RendererCycles extends RendererMesh {
         return mXML;
     }
 
+
+
+    private static void die(String mExecPath) {
+        System.err.println("### could not find cycles executable at `" + mExecPath + "`.");
+        System.err.println("### try one of the following approaches: ");
+        System.err.println("### - set `RendererCycles.EXECUTABLE_PATH=\"/PATH/TO/CYCLES\"` in application");
+        System.err.println("### - set `System.setProperty(\"java.library.path\", \"/PATH/TO/CYCLES\"`) in application");
+        System.err.println("### - set `-Djava.library.path=/PATH/TO/CYCLES`) in command line interface");
+    }
+
+    private static String getExecSuffix() {
+        return get_os_name().equalsIgnoreCase("windows") ? ".exe" : "";
+    }
+
+    private static String tryToFindFileInJavaLibraryPath(String mExecName) {
+        final String mDelimiter = get_os_name().equalsIgnoreCase("windows") ? ";" : ":";
+        String[] mJavaLibraryPath = System.getProperty("java.library.path").split(mDelimiter);
+        for (String mPath : mJavaLibraryPath) {
+            final String mExecAbsolutePath = mPath + CYCLES_DEFAULT_LOCATION + mExecName;
+            if (Gewebe.file_exists(mExecAbsolutePath)) {
+                return mExecAbsolutePath;
+            }
+        }
+        return null;
+    }
+
     public static class CyclesShader {
 
         public final int ID;
@@ -412,5 +470,13 @@ public class RendererCycles extends RendererMesh {
                    ", payload=" + payload +
                    '}';
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("### found (exec) : " + tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME));
+        System.out.println(
+        "### found (zip)  : " + tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME + ".zip"));
+
+        new RendererCycles();
     }
 }

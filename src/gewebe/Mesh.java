@@ -1,6 +1,7 @@
 package gewebe;
 
 import processing.core.PGraphics;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class Mesh {
     private int mColorComponentsCount;
     private float[] mNormals;
     private float[] mTexCoords;
+    private final PVector mTextureScale;
+    private final PVector mTextureOffset;
 
     public Mesh(float[] pVertices) {
         this(pVertices, 3, null, 0, null, 0, null, PGraphics.TRIANGLES);
@@ -47,6 +50,9 @@ public class Mesh {
         mDrawStart = 0;
         mDrawLength = mNumberOfAtoms;
 
+        mTextureScale = new PVector().set(1,1);
+        mTextureOffset = new PVector();
+
         primitive(pPrimitive);
 
         /* check data integritiy */
@@ -67,7 +73,8 @@ public class Mesh {
                 return;
         }
 
-        System.out.println("### WARNING @ `Mesh.primitive(int)` / primitive type might not be supported: " + pPrimitive);
+        System.out.println(
+        "### WARNING @ `Mesh.primitive(int)` / primitive type might not be supported: " + pPrimitive);
         mPrimitive = pPrimitive;
         /*
          * POINTS,
@@ -92,27 +99,33 @@ public class Mesh {
         return mNormals;
     }
 
-    public float[] texcoords() {
+    public float[] texture_coords() {
         return mTexCoords;
     }
 
-    public void drawstart(int theStart) {
+    public PVector texture_scale() {
+        return mTextureScale;
+    }    public PVector texture_offset() {
+        return mTextureOffset;
+    }
+
+    public void draw_start(int theStart) {
         mDrawStart = theStart;
     }
 
-    public void drawlength(int theLength) {
+    public void draw_length(int theLength) {
         mDrawLength = theLength;
     }
 
-    public int drawstart() {
+    public int draw_start() {
         return mDrawStart;
     }
 
-    public int drawlength() {
+    public int draw_length() {
         return mDrawLength;
     }
 
-    public int atomcount() {
+    public int atom_count() {
         return mNumberOfAtoms;
     }
 
@@ -129,7 +142,11 @@ public class Mesh {
     }
 
     public void draw(PGraphics g) {
-        /* geometrie */
+        draw(g, null);
+    }
+
+    public void draw(PGraphics g, PImage pTexture) {
+        /* geometry */
         g.pushMatrix();
 
         /* model */
@@ -142,10 +159,9 @@ public class Mesh {
 
         boolean mHasTexture = false;
         if (mTexCoords != null && mTexCoords.length != 0) {
-            if (mTextureCoordComponentsCount == 2) {
+            if (mTextureCoordComponentsCount == 2 && pTexture != null) {
                 mHasTexture = true;
-            } else {
-                System.out.println("### WARNING @ `Mesh.draw(PGraphics)` / only 2D textures (u ,v) are supported.");
+                g.texture(pTexture);
             }
         }
 
@@ -181,8 +197,8 @@ public class Mesh {
                     g.vertex(mVertices[myVertexIndex],
                              mVertices[myVertexIndex + 1],
                              mVertices[myVertexIndex + 2],
-                             u,
-                             v); // 3f + texture
+                             u * mTextureScale.x + mTextureOffset.x,
+                             v * mTextureScale.y + mTextureOffset.y); // 3f + texture
                 } else {
                     g.vertex(mVertices[myVertexIndex],
                              mVertices[myVertexIndex + 1],

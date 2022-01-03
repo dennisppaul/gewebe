@@ -6,7 +6,7 @@ import processing.core.PGraphics;
 
 public class SketchScreenSimulator extends PApplet {
 
-    /**
+    /*
      * this example shows how to draw into an @{@link gewebe.OffscreenContext} and use it as an image.
      */
 

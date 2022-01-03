@@ -16,7 +16,7 @@ IF(NOT JAVA_HOME_USR)
         set(JAVA_HOME_USR /usr/lib/jvm/java-14-openjdk-amd64/)
     ENDIF (UNIX)
     IF (APPLE)
-        set(JAVA_HOME_USR /Library/Java/JavaVirtualMachines/jdk-15.0.1.jdk/Contents/Home)
+        set(JAVA_HOME_USR $HOME/Library/Java/JavaVirtualMachines/corretto-11.0.13/Contents/Home)
     ENDIF (APPLE)
 ENDIF(NOT JAVA_HOME_USR)
 

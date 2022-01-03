@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 public class SketchBVH extends PApplet {
 
-    private BVHParser parser;
+    private BVHParser mBVHParser;
 
     public void settings() {
         size(1280, 720, P3D);
@@ -15,26 +15,23 @@ public class SketchBVH extends PApplet {
     public void setup() {
         final String mTempDirectory = System.getProperty("user.dir");
         String[] mBVHData = loadStrings(mTempDirectory + "/out/production/C_test.bvh");
-        parser = new BVHParser();
-        parser.parse(mBVHData);
+        mBVHParser = new BVHParser();
+        mBVHParser.parse(mBVHData);
     }
 
     public void draw() {
-        background(0);
+        background(50);
 
         /* camera */
-        camera(300, 0, 200,
-               0, 0, 0,
-               0, 1, 0);
+        camera(300, 0, 200, 0, 0, 0, 0, 1, 0);
 
         /* model */
-        parser.moveMsTo(millis());
-        parser.update();
+        mBVHParser.moveMsTo(millis());
+        mBVHParser.update();
 
         pushMatrix();
-//        translate(width / 2.0f, height / 2.0f, 0);
         scale(-1, -1, -1);
-        drawBVH(parser);
+        drawBVH(mBVHParser);
         popMatrix();
     }
 

@@ -5,7 +5,7 @@ import processing.core.PApplet;
 
 public class SketchBVHViewer extends PApplet {
 
-    BVHViewer[] mBVHViewer;
+    private BVHViewer[] mBVHViewer;
 
     public void settings() {
         size(1280, 720, P3D);
@@ -20,20 +20,13 @@ public class SketchBVHViewer extends PApplet {
     }
 
     public void draw() {
-        background(0);
+        background(50);
 
         /* camera */
         float mCos = cos(millis() / 5000.f);
         float mSin = sin(millis() / 5000.f);
-        camera(width / 4.f + width / 4.f * mCos + 200,
-               height / 2.0f - 100,
-               550 + 150 * mSin,
-               width / 2.0f,
-               height / 2.0f,
-               -400,
-               0,
-               1,
-               0);
+        camera(width / 4.f + width / 4.f * mCos + 200, height / 2.0f - 100, 550 + 150 * mSin, width / 2.0f,
+               height / 2.0f, -400, 0, 1, 0);
 
         /* ground */
         fill(255);

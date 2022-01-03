@@ -1,6 +1,6 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example demonstrates how to load and draw a mesh from model data. note, that model data can also be loaded
  * from external sources ( e.g hard drive or web ) with `loadStrings()`.
  */

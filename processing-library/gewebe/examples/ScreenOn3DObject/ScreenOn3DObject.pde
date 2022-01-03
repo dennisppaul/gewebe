@@ -1,13 +1,13 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example shows how to draw into an @{@link gewebe.OffscreenContext} and use it as a texture on a 3D model.
  * move mouse to offset texture.
  */
 
-MyTexture mScreen;
-
 Mesh mModelMesh;
+
+MyTexture mScreen;
 
 void settings() {
     size(1024, 768, P3D);

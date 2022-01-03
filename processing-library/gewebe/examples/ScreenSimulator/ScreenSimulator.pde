@@ -1,6 +1,6 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example shows how to draw into an @{@link gewebe.OffscreenContext} and use it as an image.
  */
 

@@ -10,13 +10,13 @@ import processing.core.PGraphics;
 
 public class SketchScreenOn3DObject extends PApplet {
 
-    /**
+    /*
      * this example shows how to draw into an @{@link gewebe.OffscreenContext} and use it as a texture on a 3D model.
      * move mouse to offset texture.
      */
 
-    private MyTexture mScreen;
     private Mesh mModelMesh;
+    private MyTexture mScreen;
 
     public void settings() {
         size(1024, 768, P3D);

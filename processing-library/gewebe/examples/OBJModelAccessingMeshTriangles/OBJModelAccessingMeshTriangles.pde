@@ -1,6 +1,6 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example demonstrates how to manually access the triangles of a mesh.
  */
 

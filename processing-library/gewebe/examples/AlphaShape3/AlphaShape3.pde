@@ -1,24 +1,24 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example demonstrates how to use [Alpha Shapes](https://en.wikipedia.org/wiki/Alpha_shape) using a
  * Java-C/C++-Binding to [CGAL](https://www.cgal.org/).
  * <p>
  * note that this sketch currently only runs on macOS.
  */
 
-CGALAlphaShape3 cgal;
-
-float[] mPoints3;
+CGALAlphaShape3 mCGAL;
 
 Mesh mMesh;
+
+float[] mPoints3;
 
 void settings() {
     size(1024, 768, P3D);
 }
 
 void setup() {
-    cgal = new CGALAlphaShape3();
+    mCGAL = new CGALAlphaShape3();
     final int NUMBER_OF_POINTS = 2000;
     mPoints3 = new float[NUMBER_OF_POINTS * 3];
     final float mRange = 2;
@@ -30,19 +30,19 @@ void setup() {
         mPoints3[i * 3 + 1] = p.y;
         mPoints3[i * 3 + 2] = p.z;
     }
-    cgal.compute_cgal_alpha_shape(mPoints3);
+    mCGAL.compute_cgal_alpha_shape(mPoints3);
     computeAlphaShape(0.5f);
 }
 
 void draw() {
-    background(255);
+    background(50);
     directionalLight(126, 126, 126, 0, 0, -1);
     ambientLight(102, 102, 102);
     translate(width / 2.0f, height / 2.0f);
     scale(100);
     rotateX(frameCount * 0.01f);
     rotateY(frameCount * 0.003f);
-    fill(0, 127, 255);
+    fill(255);
     noStroke();
     if (mMesh != null) {
         mMesh.draw(g);
@@ -62,5 +62,5 @@ void mouseMoved() {
 }
 
 void computeAlphaShape(float mAlpha) {
-    mMesh = cgal.mesh(mAlpha);
+    mMesh = mCGAL.mesh(mAlpha);
 }

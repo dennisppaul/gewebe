@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class SketchOBJModelAccessingMeshTriangles extends PApplet {
 
-    /**
+    /*
      * this example demonstrates how to manually access the triangles of a mesh.
      */
 

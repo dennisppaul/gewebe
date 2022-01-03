@@ -1,6 +1,6 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example demonstrates how to render high-resolution images with the java-based renderer
  * [Sunflow](http://sunflow.sourceforge.net/).
  *

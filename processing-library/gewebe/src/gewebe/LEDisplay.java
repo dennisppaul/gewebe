@@ -5,13 +5,14 @@ import processing.core.PImage;
 
 public class LEDisplay {
 
+    private boolean mDisplayLEDAsSphere;
     private final PImage mLEDImage;
     private float mLEDScale;
-    private boolean mDisplayLEDAsSphere = false;
 
     public LEDisplay(PImage pImage) {
         mLEDImage = pImage;
         mLEDScale = 1.0f;
+        mDisplayLEDAsSphere = false;
     }
 
     public void setLEDScale(float pLEDScale) {
@@ -48,13 +49,14 @@ public class LEDisplay {
         pCanvas.popMatrix();
     }
 
-    public static void draw(PGraphics pCanvas, PImage pLEDImage, float[] mModelData, float pLEDScale, boolean pDisplayLEDAsSphere) {
+    public static void draw(PGraphics pCanvas, PImage pLEDImage, float[] mModelData, float pLEDScale,
+                            boolean pDisplayLEDAsSphere) {
         pCanvas.sphereDetail(8);
         pCanvas.pushMatrix();
         pCanvas.translate(pLEDImage.width / -2.0f, pLEDImage.height / -2.0f);
         pCanvas.noStroke();
         if (pLEDImage.pixels.length * 3 > mModelData.length) {
-            System.out.println("### image size does not match number of vertices");
+            System.out.println("### image size does not match number of vertices in model data");
         }
         for (int i = 0; i < pLEDImage.pixels.length; i++) {
             int c = pLEDImage.pixels[i];
@@ -68,7 +70,7 @@ public class LEDisplay {
             if (pDisplayLEDAsSphere) {
                 pCanvas.sphere(pLEDScale / 2);
             } else {
-                pCanvas.ellipse(0, 0, pLEDScale, pLEDScale);
+                pCanvas.circle(0, 0, pLEDScale);
             }
             pCanvas.popMatrix();
         }

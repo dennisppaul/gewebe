@@ -157,7 +157,7 @@ public class IcoSphere {
         return is.create(pRecursionLevel);
     }
 
-    private class TriangleIndices {
+    private static class TriangleIndices {
 
         public int v1;
         public int v2;

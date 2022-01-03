@@ -13,14 +13,14 @@ import java.util.ArrayList;
 
 public class SketchOBJModelFindPointsInside extends PApplet {
 
-    /**
-     * this example demonstrates how test if a point is inside of a mesh.
+    /*
+     * this example demonstrates how test if a point is inside a mesh.
      */
 
     private static PVector mCenterOfMass;
     PVector mPoint = new PVector();
-    private ArrayList<Triangle> mTriangles;
     private ArrayList<PVector> mPoints;
+    private ArrayList<Triangle> mTriangles;
 
     public void settings() {
         size(1024, 768, P3D);
@@ -37,7 +37,9 @@ public class SketchOBJModelFindPointsInside extends PApplet {
     public void draw() {
         background(50);
         prepareView();
-        if (!mousePressed) { drawMesh(); }
+        if (!mousePressed) {
+            drawMesh();
+        }
         queryPointPosition();
         drawPointsInside();
     }

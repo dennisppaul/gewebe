@@ -21,6 +21,151 @@ public class ModelLoaderOBJ {
     public static int PRIMITIVE = PGraphics.TRIANGLES;
     private static int GROUP_NAME_INDEX_COUNTER = 0;
 
+    public static void calculateNormal(final PVector pointA,
+                                       final PVector pointB,
+                                       final PVector pointC,
+                                       final PVector theResultNormal) {
+        final PVector mBA = PVector.sub(pointB, pointA);
+        final PVector mBC = PVector.sub(pointC, pointB);
+
+        PVector.cross(mBA, mBC, theResultNormal);
+        theResultNormal.normalize();
+    }
+
+    public static void calculateNormal(final PVector theArrayListAB,
+                                       final PVector theArrayListBC,
+                                       final PVector theResultNormal) {
+        PVector.cross(theArrayListAB, theArrayListBC, theResultNormal);
+        theResultNormal.normalize();
+    }
+
+    public static String[] convertMeshToOBJ(Mesh pMesh) {
+        if (pMesh.getVertexComponentsCount() != 3) {
+            System.out.println("+++ WARNING can only parse 3D meshes.");
+        }
+
+        return convertVertexDataToOBJ(pMesh.vertices());
+    }
+
+    public static String[] convertVertexDataToOBJ(ArrayList<PVector> pVertexData) {
+        final float[] mVertexData = new float[pVertexData.size() * 3];
+        for (int i = 0; i < pVertexData.size(); i++) {
+            final int j = i * 3;
+            final PVector p = pVertexData.get(i);
+            mVertexData[j + 0] = p.x;
+            mVertexData[j + 1] = p.y;
+            mVertexData[j + 2] = p.z;
+        }
+        return convertVertexDataToOBJ(mVertexData);
+    }
+
+    public static String[] convertVertexDataToOBJ(float[] pVertexData) {
+        final String LINE_TERMINATOR = "";
+        // @todo apparently processing automatically adds an empty line at the end of each string
+        final String GROUP_NAME = "g object" + PApplet.nf(GROUP_NAME_INDEX_COUNTER++,
+                                                          5) + LINE_TERMINATOR;
+        // @todo could be set external
+
+        ArrayList<String> s = new ArrayList<>();
+        ArrayList<String> mVertices = new ArrayList<>();
+        ArrayList<String> mFaces = new ArrayList<>();
+
+        for (int i = 0; i < pVertexData.length; i += 3) { // @todo assumes three components
+            StringBuilder mLine = new StringBuilder();
+            mLine.append("v ");
+            mLine.append(pVertexData[i + 0]);
+            mLine.append(" ");
+            mLine.append(pVertexData[i + 1]);
+            mLine.append(" ");
+            mLine.append(pVertexData[i + 2]);
+            mLine.append(LINE_TERMINATOR);
+            mVertices.add(mLine.toString());
+
+            final int FACE_OFFSET = 1;
+            StringBuilder mFace = new StringBuilder();
+            mFace.append("f ");
+            mFace.append((i + 0 + FACE_OFFSET));
+            mFace.append(" ");
+            mFace.append((i + 1 + FACE_OFFSET));
+            mFace.append(" ");
+            mFace.append((i + 2 + FACE_OFFSET));
+            mFace.append(LINE_TERMINATOR);
+            mFaces.add(mFace.toString());
+        }
+
+        s.add(GROUP_NAME);
+        s.add(LINE_TERMINATOR);
+        s.addAll(mVertices);
+        s.add(LINE_TERMINATOR);
+        s.addAll(mFaces);
+
+        String[] mStringArray = new String[s.size()];
+        return s.toArray(mStringArray);
+    }
+
+    public static PVector createNormal(final PVector pointA, final PVector pointB, final PVector pointC) {
+        final PVector myResultNormal = new PVector();
+        calculateNormal(pointA, pointB, pointC, myResultNormal);
+        return myResultNormal;
+    }
+
+    public static PVector createNormal(final PVector theArrayListAB, final PVector theArrayListBC) {
+        final PVector myResultNormal = new PVector();
+        calculateNormal(theArrayListAB, theArrayListBC, myResultNormal);
+        return myResultNormal;
+    }
+
+    public static void createNormals(float[] theVertices, float[] theNormals) {
+        final int NUMBER_OF_VERTEX_COMPONENTS = 3;
+        final int myNumberOfPoints = 3;
+        for (int i = 0; i < theVertices.length; i += (myNumberOfPoints * NUMBER_OF_VERTEX_COMPONENTS)) {
+            PVector a = new PVector(theVertices[i + 0], theVertices[i + 1], theVertices[i + 2]);
+            PVector b = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
+            PVector c = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
+            PVector myNormal = new PVector();
+            calculateNormal(a, b, c, myNormal);
+
+            theNormals[i + 0] = myNormal.x;
+            theNormals[i + 1] = myNormal.y;
+            theNormals[i + 2] = myNormal.z;
+
+            theNormals[i + 3] = myNormal.x;
+            theNormals[i + 4] = myNormal.y;
+            theNormals[i + 5] = myNormal.z;
+
+            theNormals[i + 6] = myNormal.x;
+            theNormals[i + 7] = myNormal.y;
+            theNormals[i + 8] = myNormal.z;
+        }
+    }
+
+    public static void createNormalsTRIANGLE(float[] theVertices, float[] theNormals) {
+        int myNumberOfPoints = 3;
+        for (int i = 0; i < theVertices.length; i += (myNumberOfPoints * NUMBER_OF_VERTEX_COMPONENTS)) {
+            PVector a = new PVector(theVertices[i], theVertices[i + 1], theVertices[i + 2]);
+            PVector b = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
+            PVector c = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
+            PVector myNormal = new PVector();
+            if (GET_NORMALS_DIRECTION == GET_NORMALS_CCW) {
+                calculateNormal(a, b, c, myNormal);
+            } else if (GET_NORMALS_DIRECTION == GET_NORMALS_CW) {
+                calculateNormal(b, a, c, myNormal);
+            }
+
+            theNormals[i + 0] = myNormal.x;
+            theNormals[i + 1] = myNormal.y;
+            theNormals[i + 2] = myNormal.z;
+
+            theNormals[i + 3] = myNormal.x;
+            theNormals[i + 4] = myNormal.y;
+            theNormals[i + 5] = myNormal.z;
+
+            theNormals[i + 6] = myNormal.x;
+            theNormals[i + 7] = myNormal.y;
+            theNormals[i + 8] = myNormal.z;
+        }
+    }
+
     public static gewebe.ModelData[] getModelDataGroups(String[] pLines) {
         int myNumberOfObjects = 0;
         ArrayList<Float> myTempVertices = new ArrayList<>();
@@ -83,8 +228,8 @@ public class ModelLoaderOBJ {
                                 createNormalsQUADS(myVertices, myNormals);
                             } else {
                                 System.out.println(
-                                        "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t" +
-                                        " implemented yet");
+                                "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t" +
+                                " implemented yet");
                             }
                         }
 
@@ -202,7 +347,7 @@ public class ModelLoaderOBJ {
                 createNormalsQUADS(myVertices, myNormals);
             } else {
                 System.out.println(
-                        "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
+                "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
             }
         }
 
@@ -245,57 +390,6 @@ public class ModelLoaderOBJ {
         String[] mLinesArray = new String[mLines.size()];
         mLines.toArray(mLinesArray);
         return parseModelData(mLinesArray);
-    }
-
-    public static String[] convertMeshToOBJ(Mesh pMesh) {
-        if (pMesh.getVertexComponentsCount() != 3) {
-            System.out.println("+++ WARNING can only parse 3D meshes.");
-        }
-
-        return convertVertexDataToOBJ(pMesh.vertices());
-    }
-
-    public static String[] convertVertexDataToOBJ(float[] pVertexData) {
-        final String LINE_TERMINATOR = ""; // @todo apparently processing automatically adds an empty line at the end
-        // of each string
-        final String GROUP_NAME = "g object" + PApplet.nf(GROUP_NAME_INDEX_COUNTER++,
-                                                          5) + LINE_TERMINATOR; // @todo could be set external
-
-        ArrayList<String> s = new ArrayList<>();
-        ArrayList<String> mVertices = new ArrayList<>();
-        ArrayList<String> mFaces = new ArrayList<>();
-
-        for (int i = 0; i < pVertexData.length; i += 3) { // @todo assumes three components
-            StringBuilder mLine = new StringBuilder();
-            mLine.append("v ");
-            mLine.append(pVertexData[i + 0]);
-            mLine.append(" ");
-            mLine.append(pVertexData[i + 1]);
-            mLine.append(" ");
-            mLine.append(pVertexData[i + 2]);
-            mLine.append(LINE_TERMINATOR);
-            mVertices.add(mLine.toString());
-
-            final int FACE_OFFSET = 1;
-            StringBuilder mFace = new StringBuilder();
-            mFace.append("f ");
-            mFace.append((i + 0 + FACE_OFFSET));
-            mFace.append(" ");
-            mFace.append((i + 1 + FACE_OFFSET));
-            mFace.append(" ");
-            mFace.append((i + 2 + FACE_OFFSET));
-            mFace.append(LINE_TERMINATOR);
-            mFaces.add(mFace.toString());
-        }
-
-        s.add(GROUP_NAME);
-        s.add(LINE_TERMINATOR);
-        s.addAll(mVertices);
-        s.add(LINE_TERMINATOR);
-        s.addAll(mFaces);
-
-        String[] mStringArray = new String[s.size()];
-        return s.toArray(mStringArray);
     }
 
     public static gewebe.ModelData parseModelData(String pString) {
@@ -431,7 +525,9 @@ public class ModelLoaderOBJ {
         float[] myNormals;
         if (myTempNormals.size() > 0) {
             myNormals = new float[myTempNormals.size()];
-            for (int i = 0; i < myTempNormals.size(); i++) { myNormals[i] = myTempNormals.get(i); }
+            for (int i = 0; i < myTempNormals.size(); i++) {
+                myNormals[i] = myTempNormals.get(i);
+            }
             int[] myNormalsIndices = new int[myTempNormalIndices.size()];
             for (int i = 0; i < myTempNormalIndices.size(); i++) {
                 myNormalsIndices[i] = myTempNormalIndices.get(i) - 1;
@@ -445,7 +541,7 @@ public class ModelLoaderOBJ {
                 createNormalsQUADS(myVertices, myNormals);
             } else {
                 System.out.println(
-                        "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
+                "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
             }
         }
 
@@ -472,122 +568,8 @@ public class ModelLoaderOBJ {
         return myModelData;
     }
 
-    public static void createNormalsTRIANGLE(float[] theVertices, float[] theNormals) {
-        int myNumberOfPoints = 3;
-        for (int i = 0; i < theVertices.length; i += (myNumberOfPoints * NUMBER_OF_VERTEX_COMPONENTS)) {
-            PVector a = new PVector(theVertices[i], theVertices[i + 1], theVertices[i + 2]);
-            PVector b = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
-            PVector c = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
-            PVector myNormal = new PVector();
-            if (GET_NORMALS_DIRECTION == GET_NORMALS_CCW) {
-                calculateNormal(a, b, c, myNormal);
-            } else if (GET_NORMALS_DIRECTION == GET_NORMALS_CW) {
-                calculateNormal(b, a, c, myNormal);
-            }
-
-            theNormals[i + 0] = myNormal.x;
-            theNormals[i + 1] = myNormal.y;
-            theNormals[i + 2] = myNormal.z;
-
-            theNormals[i + 3] = myNormal.x;
-            theNormals[i + 4] = myNormal.y;
-            theNormals[i + 5] = myNormal.z;
-
-            theNormals[i + 6] = myNormal.x;
-            theNormals[i + 7] = myNormal.y;
-            theNormals[i + 8] = myNormal.z;
-        }
-    }
-
-    public static void calculateNormal(final PVector pointA,
-                                       final PVector pointB,
-                                       final PVector pointC,
-                                       final PVector theResultNormal) {
-        final PVector mBA = PVector.sub(pointB, pointA);
-        final PVector mBC = PVector.sub(pointC, pointB);
-
-        PVector.cross(mBA, mBC, theResultNormal);
-        theResultNormal.normalize();
-    }
-
-    public static PVector createNormal(final PVector pointA, final PVector pointB, final PVector pointC) {
-        final PVector myResultNormal = new PVector();
-        calculateNormal(pointA, pointB, pointC, myResultNormal);
-        return myResultNormal;
-    }
-
-    public static PVector createNormal(final PVector theArrayListAB, final PVector theArrayListBC) {
-        final PVector myResultNormal = new PVector();
-        calculateNormal(theArrayListAB, theArrayListBC, myResultNormal);
-        return myResultNormal;
-    }
-
-    public static void calculateNormal(final PVector theArrayListAB,
-                                       final PVector theArrayListBC,
-                                       final PVector theResultNormal) {
-        PVector.cross(theArrayListAB, theArrayListBC, theResultNormal);
-        theResultNormal.normalize();
-    }
-
-    public static void createNormals(float[] theVertices, float[] theNormals) {
-        final int NUMBER_OF_VERTEX_COMPONENTS = 3;
-        final int myNumberOfPoints = 3;
-        for (int i = 0; i < theVertices.length; i += (myNumberOfPoints * NUMBER_OF_VERTEX_COMPONENTS)) {
-            PVector a = new PVector(theVertices[i + 0], theVertices[i + 1], theVertices[i + 2]);
-            PVector b = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
-            PVector c = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
-            PVector myNormal = new PVector();
-            calculateNormal(a, b, c, myNormal);
-
-            theNormals[i + 0] = myNormal.x;
-            theNormals[i + 1] = myNormal.y;
-            theNormals[i + 2] = myNormal.z;
-
-            theNormals[i + 3] = myNormal.x;
-            theNormals[i + 4] = myNormal.y;
-            theNormals[i + 5] = myNormal.z;
-
-            theNormals[i + 6] = myNormal.x;
-            theNormals[i + 7] = myNormal.y;
-            theNormals[i + 8] = myNormal.z;
-        }
-    }
-
-    private static float[] distributeVertices(ArrayList<Float> theTempVertices,
-                                              ArrayList<Integer> theTempVertexIndices,
-                                              float[] theUnsortedVertices,
-                                              int[] theFaces,
-                                              int theIndexOffset) {
-        float[] theVertices = new float[theTempVertices.size()];
-        for (int i = 0; i < theTempVertices.size(); i++) {
-            theVertices[i] = theTempVertices.get(i);
-            theUnsortedVertices[i] = theTempVertices.get(i);
-        }
-        for (int i = 0; i < theTempVertexIndices.size(); i++) {
-            theFaces[i] = theTempVertexIndices.get(i) - 1 - theIndexOffset;
-        }
-        theVertices = rearrangeVertices(theVertices, theFaces, 3, new PVector(1, 1, 1), new PVector(0, 0, 0));
-
-        return theVertices;
-    }
-
-    private static float[] distributeTexCoordinates(ArrayList<Float> theTempTexCoords,
-                                                    ArrayList<Integer> theTempTexCoordsIndices,
-                                                    int theIndexOffset) {
-        float[] myTexCoordinates = new float[theTempTexCoords.size()];
-        for (int i = 0; i < theTempTexCoords.size(); i++) {
-            myTexCoordinates[i] = theTempTexCoords.get(i);
-        }
-        int[] myTexCoordsIndices = new int[theTempTexCoordsIndices.size()];
-        for (int i = 0; i < theTempTexCoordsIndices.size(); i++) {
-            myTexCoordsIndices[i] = theTempTexCoordsIndices.get(i) - 1 - theIndexOffset;
-        }
-        myTexCoordinates = rearrangeVertices(myTexCoordinates,
-                                             myTexCoordsIndices,
-                                             2,
-                                             new PVector(1, 1, 1),
-                                             new PVector(0, 0, 0));
-        return myTexCoordinates;
+    private static void createNormalsQUADS(float[] theVertices, float[] theNormals) {
+        System.out.println("### WARNING @ ModelLoaderOBJ / normal autogenerator for QUADS isn t implemented yet");
     }
 
     private static float[] distributeNormals(ArrayList<Float> theTempNormals,
@@ -614,10 +596,47 @@ public class ModelLoaderOBJ {
                 createNormalsQUADS(theVertices, myNormals);
             } else {
                 System.out.println(
-                        "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
+                "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
             }
         }
         return myNormals;
+    }
+
+    private static float[] distributeTexCoordinates(ArrayList<Float> theTempTexCoords,
+                                                    ArrayList<Integer> theTempTexCoordsIndices,
+                                                    int theIndexOffset) {
+        float[] myTexCoordinates = new float[theTempTexCoords.size()];
+        for (int i = 0; i < theTempTexCoords.size(); i++) {
+            myTexCoordinates[i] = theTempTexCoords.get(i);
+        }
+        int[] myTexCoordsIndices = new int[theTempTexCoordsIndices.size()];
+        for (int i = 0; i < theTempTexCoordsIndices.size(); i++) {
+            myTexCoordsIndices[i] = theTempTexCoordsIndices.get(i) - 1 - theIndexOffset;
+        }
+        myTexCoordinates = rearrangeVertices(myTexCoordinates,
+                                             myTexCoordsIndices,
+                                             2,
+                                             new PVector(1, 1, 1),
+                                             new PVector(0, 0, 0));
+        return myTexCoordinates;
+    }
+
+    private static float[] distributeVertices(ArrayList<Float> theTempVertices,
+                                              ArrayList<Integer> theTempVertexIndices,
+                                              float[] theUnsortedVertices,
+                                              int[] theFaces,
+                                              int theIndexOffset) {
+        float[] theVertices = new float[theTempVertices.size()];
+        for (int i = 0; i < theTempVertices.size(); i++) {
+            theVertices[i] = theTempVertices.get(i);
+            theUnsortedVertices[i] = theTempVertices.get(i);
+        }
+        for (int i = 0; i < theTempVertexIndices.size(); i++) {
+            theFaces[i] = theTempVertexIndices.get(i) - 1 - theIndexOffset;
+        }
+        theVertices = rearrangeVertices(theVertices, theFaces, 3, new PVector(1, 1, 1), new PVector(0, 0, 0));
+
+        return theVertices;
     }
 
     private static float[] rearrangeVertices(float[] theVertices,
@@ -644,9 +663,5 @@ public class ModelLoaderOBJ {
             }
         }
         return myRearrangedVertices;
-    }
-
-    private static void createNormalsQUADS(float[] theVertices, float[] theNormals) {
-        System.out.println("### WARNING @ ModelLoaderOBJ / normal autogenerator for QUADS isn t implemented yet");
     }
 }

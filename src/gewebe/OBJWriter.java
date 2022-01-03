@@ -10,8 +10,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
- * https://en.wikipedia.org/wiki/Wavefront_.obj_file
- * http://paulbourke.net/dataformats/obj/
+ * https://en.wikipedia.org/wiki/Wavefront_.obj_file http://paulbourke.net/dataformats/obj/
  */
 public class OBJWriter extends PGraphics {
 
@@ -25,20 +24,15 @@ public class OBJWriter extends PGraphics {
     private static final String OBJ_FACE = "f";
     private static final String OBJ_SPACE = " ";
     private static final float EPSILON = 0.01f;
-    private final ArrayList<String> mOBJVertexList = new ArrayList<>();
-    private final ArrayList<String> mOBJIndexList = new ArrayList<>();
-    private int mLineConversionMode = LINE_CONVERSION_MODE_VIERKANTROHR_CLOSED;
+    private final PVector AXIS_X = new PVector(1, 0, 0);
+    private final PVector AXIS_Y = new PVector(0, 1, 0);
+    private final PVector AXIS_Z = new PVector(0, 0, 1);
     private File mFile;
-    private PrintWriter mWriter;
+    private int mLineConversionMode = LINE_CONVERSION_MODE_VIERKANTROHR_CLOSED;
+    private final ArrayList<String> mOBJIndexList = new ArrayList<>();
     private int mOBJVertexCount = 0;
-    // ..............................................................
-    private PVector AXIS_Z = new PVector(0, 0, 1);
-    private PVector AXIS_Y = new PVector(0, 1, 0);
-    private PVector AXIS_X = new PVector(1, 0, 0);
-
-    public static String name() {
-        return OBJWriter.class.getName();
-    }
+    private final ArrayList<String> mOBJVertexList = new ArrayList<>();
+    private PrintWriter mWriter;
 
     @Override
     public void setPath(String path) {
@@ -64,8 +58,6 @@ public class OBJWriter extends PGraphics {
         mWriter = null;
     }
 
-    // ..............................................................
-
     @Override
     public void beginDraw() {
         // have to create mFile object here, because the name isn't yet
@@ -87,6 +79,8 @@ public class OBJWriter extends PGraphics {
         writeLists();
         mWriter.flush();
     }
+
+    // ..............................................................
 
     @Override
     public void beginShape(int kind) {
@@ -309,8 +303,6 @@ public class OBJWriter extends PGraphics {
     private void writeFooter() {
     }
 
-    // ..............................................................
-
     private PVector getBestUpVector(PVector mDiff) {
         PVector mBestUpVector = new PVector();
         mBestUpVector.set(AXIS_Z);
@@ -361,5 +353,13 @@ public class OBJWriter extends PGraphics {
         mOBJVertexList.add(s);
         mOBJVertexCount++;
         return mOBJVertexCount;
+    }
+
+    public static String file_extension() {
+        return ".obj";
+    }
+
+    public static String name() {
+        return OBJWriter.class.getName();
     }
 }

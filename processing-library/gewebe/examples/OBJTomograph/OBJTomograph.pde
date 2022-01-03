@@ -1,12 +1,12 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example demonstrates how to cut a slice out of a mesh.
  */
 
-ArrayList<Triangle> mTriangles;
-
 ArcBall mArcBall;
+
+ArrayList<Triangle> mTriangles;
 
 void settings() {
     size(1024, 768, P3D);

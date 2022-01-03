@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class SketchVectorFontOutline extends PApplet {
 
-    /**
+    /*
      * this example demonstrates how to create a path from the outlines of a font.
      */
 

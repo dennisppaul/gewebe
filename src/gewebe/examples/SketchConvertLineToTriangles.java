@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class SketchConvertLineToTriangles extends PApplet {
 
-    /**
+    /*
      * this examples demonstrates how to convert a line ( of 2 or more points ) into a single 3D object or a series of
      * unconnected 3D objects.
      */

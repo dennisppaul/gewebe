@@ -1,6 +1,6 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example demonstrates how to create an *ico sphere* as an *indexed triangle list*. an *indexed
  * triangle list* allows to use the same vertex for multiple triangles.
  */

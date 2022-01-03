@@ -9,9 +9,8 @@ public class SketchLEDisplayOnModel extends PApplet {
 
     private ArcBall mArcBall;
     private PGraphics mDisplayContent;
-    private float[] mModelData;
-
     private float mLineMover;
+    private float[] mModelData;
 
     public void settings() {
         size(1024, 768, P3D);
@@ -22,10 +21,6 @@ public class SketchLEDisplayOnModel extends PApplet {
 
         mDisplayContent = createGraphics(100, 20);
         mModelData = createModelData();
-
-        LEDisplay mLEDisplay = new LEDisplay(mDisplayContent);
-        mLEDisplay.setLEDScale(0.75f);
-        mLEDisplay.displayLEDAsSphere(true);
     }
 
     public void draw() {
@@ -49,7 +44,6 @@ public class SketchLEDisplayOnModel extends PApplet {
         translate(width / 2.0f, height / 2.0f);
         LEDisplay.draw(g, mDisplayContent, mModelData, 5, true);
         popMatrix();
-
     }
 
     private void drawIntoDisplay(PGraphics pG) {

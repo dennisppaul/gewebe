@@ -1,6 +1,6 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example demonstrate how to export a mesh as an OBJ file.
  */
 
@@ -29,4 +29,5 @@ void draw() {
 void keyPressed() {
     String[] mOBJ = ModelLoaderOBJ.convertMeshToOBJ(mMesh);
     saveStrings("icosphere" + frameCount + ".obj", mOBJ);
+    println("+++ exported model to " + sketchPath());
 }

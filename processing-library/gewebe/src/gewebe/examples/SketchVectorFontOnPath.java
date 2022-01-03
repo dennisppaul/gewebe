@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class SketchVectorFontOnPath extends PApplet {
 
-    /**
+    /*
      * this example demonstrates how to arrange characters along a given path and return the result as a collection of
      * triangles.
      */
 
-    private VectorFont mPathCreator;
     private int mNumberOfTriangles = 0;
+    private VectorFont mPathCreator;
 
     public void settings() {
         size(1024, 768, P3D);
@@ -50,7 +50,7 @@ public class SketchVectorFontOnPath extends PApplet {
 
         /* toggle fill and wireframe */
         if (mousePressed) {
-            stroke(0, 127, 255, 127);
+            stroke(255, 127);
             noFill();
         } else {
             noStroke();

@@ -5,9 +5,9 @@ import gewebe.Mesh;
 import gewebe.ModelLoaderOBJ;
 import processing.core.PApplet;
 
-public class SketchOBJExportMeshToOBJ extends PApplet {
+public class SketchExportMeshToOBJ extends PApplet {
 
-    /**
+    /*
      * this example demonstrate how to export a mesh as an OBJ file.
      */
 
@@ -38,9 +38,10 @@ public class SketchOBJExportMeshToOBJ extends PApplet {
     public void keyPressed() {
         String[] mOBJ = ModelLoaderOBJ.convertMeshToOBJ(mMesh);
         saveStrings("icosphere" + frameCount + ".obj", mOBJ);
+        println("+++ exported model to " + sketchPath());
     }
 
     public static void main(String[] args) {
-        PApplet.main(SketchOBJExportMeshToOBJ.class.getName());
+        PApplet.main(SketchExportMeshToOBJ.class.getName());
     }
 }

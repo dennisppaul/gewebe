@@ -1,13 +1,13 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
+/*
  * this example demonstrates how to arrange characters along a given path and return the result as a collection of
  * triangles.
  */
 
-VectorFont mPathCreator;
-
 int mNumberOfTriangles = 0;
+
+VectorFont mPathCreator;
 
 void settings() {
     size(1024, 768, P3D);
@@ -39,7 +39,7 @@ void draw() {
     mNumberOfTriangles = mTriangles.size();
     /* toggle fill and wireframe */
     if (mousePressed) {
-        stroke(0, 127, 255, 127);
+        stroke(255, 127);
         noFill();
     } else {
         noStroke();

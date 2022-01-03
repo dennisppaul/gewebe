@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class SketchOBJTomograph extends PApplet {
 
-    /**
+    /*
      * this example demonstrates how to cut a slice out of a mesh.
      */
 
-    private ArrayList<Triangle> mTriangles;
     private ArcBall mArcBall;
+    private ArrayList<Triangle> mTriangles;
 
     public void settings() {
         size(1024, 768, P3D);

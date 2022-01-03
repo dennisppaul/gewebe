@@ -1,15 +1,15 @@
 import gewebe.*; 
 import org.sunflow.*; 
-/**
- * this example demonstrates how test if a point is inside of a mesh.
+/*
+ * this example demonstrates how test if a point is inside a mesh.
  */
 
 static PVector mCenterOfMass;
 PVector mPoint = new PVector();
 
-ArrayList<Triangle> mTriangles;
-
 ArrayList<PVector> mPoints;
+
+ArrayList<Triangle> mTriangles;
 
 void settings() {
     size(1024, 768, P3D);
@@ -26,7 +26,9 @@ void setup() {
 void draw() {
     background(50);
     prepareView();
-    if (!mousePressed) { drawMesh(); }
+    if (!mousePressed) {
+        drawMesh();
+    }
     queryPointPosition();
     drawPointsInside();
 }

@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 public class SketchRenderingWithCycles extends PApplet {
 
-    /**
+    /*
      * this example demonstrates how to render high-resolution images with [Cycles](https://www.cycles-renderer.org/) a
      * physically based renderer included in the [Blender](https://www.blender.org/) project.
      * <p>

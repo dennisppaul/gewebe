@@ -4,6 +4,18 @@
 
 a collection of tools, methods and techniques for working with meshes in [Processing](https://processing.org/).
 
+## anatomy of a mesh
+
+![](./resources/gewebe-tutorial-01.png)
+
+![](./resources/gewebe-tutorial-02.png)
+
+![](./resources/gewebe-tutorial-03.png)
+
+![](./resources/gewebe-tutorial-04.png)
+
+![](./resources/gewebe-tutorial-05.png)
+
 ## dependencies + libraries
 
 - [Processing](https://processing.org/)

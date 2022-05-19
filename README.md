@@ -1,6 +1,8 @@
 # gewebe
 
-a collection of tools and methods for working with meshes in [Processing](https://processing.org/).
+![DelaunayTriangulation2](./resources/DelaunayTriangulation2.png)
+
+a collection of tools, methods and techniques for working with meshes in [Processing](https://processing.org/).
 
 ## dependencies + libraries
 

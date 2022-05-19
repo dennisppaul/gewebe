@@ -7,29 +7,42 @@ import java.io.InputStreamReader;
 
 /**
  * add hair support for processing lines
- * - http://www.luxrender.net/wiki/Scene_file_format_dev#Hairfileshape
- * - http://www.cemyuksel.com/research/hairmodels/
+ * - <a href="http://www.luxrender.net/wiki/Scene_file_format_dev#Hairfileshape">Hairfileshape</a>
+ * - <a href="http://www.cemyuksel.com/research/hairmodels/">hairmodels</a>
  * <p>
  * <p>
  * HAIR File Format Specification
- * This is a binary file format for 3D hair models. The 3D hair model consists of strands, each one of which is represented by a number of line segments. A HAIR file begins with a 128-Byte long header followed by the following arrays (in presented order) that keep the geometry and topology data:
+ * This is a binary file format for 3D hair models. The 3D hair model consists of strands, each one of which is
+ * represented by a number of line segments. A HAIR file begins with a 128-Byte long header followed by the following
+ * arrays (in presented order) that keep the geometry and topology data:
  * <p>
  * Segments array (unsigned short)
- * This array keeps the number of segments of each hair strand. Each entry is a 16-bit unsigned integer, therefore each hair strand can have up to 65,536 segments.
+ * This array keeps the number of segments of each hair strand. Each entry is a 16-bit unsigned integer, therefore
+ * each hair strand can have up to 65,536 segments.
  * <p>
  * Points array (float)
- * This array keeps the 3D vertices each of hair strand point. These points are not shared by different hair strands; each point belongs to a particular hair strand only. Line segments of a hair strand connects consecutive points. The points in this array are ordered by strand and from root to tip; such that it begins with the root point of the first hair strand, continues with the next point of the first hair strand until the tip of the first hair strand, and then comes the points of the next hair strands. Each entry is a 32-bit floating point number, and each point is defined by 3 consecutive numbers that correspond to x, y, and z coordinates.
+ * This array keeps the 3D vertices each of hair strand point. These points are not shared by different hair strands;
+ * each point belongs to a particular hair strand only. Line segments of a hair strand connects consecutive points.
+ * The points in this array are ordered by strand and from root to tip; such that it begins with the root point of
+ * the first hair strand, continues with the next point of the first hair strand until the tip of the first hair
+ * strand, and then comes the points of the next hair strands. Each entry is a 32-bit floating point number, and each
+ * point is defined by 3 consecutive numbers that correspond to x, y, and z coordinates.
  * <p>
  * Thickness array (float)
- * This array keeps the thickness of hair strands at point locations, therefore the size of this array is equal to the number of points. Each entry is a 32-bit floating point number.
+ * This array keeps the thickness of hair strands at point locations, therefore the size of this array is equal to
+ * the number of points. Each entry is a 32-bit floating point number.
  * <p>
  * Transparency array (float)
- * This array keeps the transparency of hair strands at point locations, therefore the size of this array is equal to the number of points. Each entry is a 32-bit floating point number.
+ * This array keeps the transparency of hair strands at point locations, therefore the size of this array is equal to
+ * the number of points. Each entry is a 32-bit floating point number.
  * <p>
  * Color array (float)
- * This array keeps the color of hair strands at point locations, therefore the size of this array is three times the number of points. Each entry is a 32-bit floating point number, and each color is defined by 3 consecutive numbers that correspond to red, green, and blue components.
+ * This array keeps the color of hair strands at point locations, therefore the size of this array is three times the
+ * number of points. Each entry is a 32-bit floating point number, and each color is defined by 3 consecutive numbers
+ * that correspond to red, green, and blue components.
  * <p>
- * A HAIR file must have a points array, but all the other arrays are optional. When an array does not exist, corresponding default value from the file header is used instead of the missing array.
+ * A HAIR file must have a points array, but all the other arrays are optional. When an array does not exist,
+ * corresponding default value from the file header is used instead of the missing array.
  * <p>
  * <p>
  * HAIR File Header (128 Bytes)
@@ -149,7 +162,7 @@ public class LuxRender {
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         try {
             String osName = System.getProperty("os.name");
             System.out.println("+++ current OS: " + osName);

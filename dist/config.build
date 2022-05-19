@@ -1,5 +1,5 @@
 LIB_NAME=gewebe
-IO_EXAMPLE_PATHS=( examples )
+IO_EXAMPLE_PATHS=( examples/font examples/importexport examples/operations examples/rendering examples/technique )
 PROJECT_PACKAGE=gewebe
 SKETCH_IMPORTS=( org.sunflow.* )
 BASE_COLOR=100

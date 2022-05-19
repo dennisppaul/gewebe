@@ -38,8 +38,7 @@ public class BVHParser {
 
     /**
      * set Loop state
-     *
-     * @param value_motionLoop
+     * @param value
      */
     public void setMotionLoop(boolean value) {
         _motionLoop = value;
@@ -47,7 +46,6 @@ public class BVHParser {
 
     /**
      * to string
-     *
      * @return
      */
     public String toStr() {

@@ -31,10 +31,6 @@ import org.sunflow.image.Color;
 import org.sunflow.math.Point3;
 import org.sunflow.math.Vector3;
 
-/**
- * taken from 'http://sunflow.sourceforge.net/phpbb2/viewtopic
- * .php?t=444&postdays=0&postorder=asc&highlight=translucent&start=15'
- */
 public class ShaderTranslucentSR
         implements org.sunflow.core.Shader {
 

@@ -1704,7 +1704,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      * @param shiftY        ?
      * @param focusDistance focal blur setting
      * @param lensRadius    Lens radius
-     * @param sides         < 3 means use circular lens
+     * @param sides         smaller 3 means use circular lens
      * @param lensRotation  this rotates polygonal lenses
      */
     public void setThinlensCamera(String name,

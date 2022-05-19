@@ -28,13 +28,13 @@ import processing.core.*;
  * A simple library to write DXF files with Processing. Because this is used
  * with beginRaw() and endRaw(), only individual triangles and (discontinuous)
  * line segments will be written to the file.
- * <P/>
+ *
  * Use something like a keyPressed() in PApplet to trigger it, to avoid writing
  * a bazillion .dxf files.
- * <P/>
+ *
  * Usually, the file will be saved to the sketch's folder. Use Sketch &rarr;
  * Show Sketch Folder to see it from the PDE.
- * <p/>
+ *
  * A simple example of how to use:
  * <PRE>
  * import processing.dxf.*;
@@ -99,7 +99,7 @@ import processing.core.*;
  * }
  * </PRE> Note that even though this class is a subclass of PGraphics, it only
  * implements the parts of the API that are necessary for beginRaw/endRaw.
- * <P/>
+ *
  * Based on the original DXF writer from Simon Greenwold, February 2004. Updated
  * for Processing 0070 by Ben Fry in September 2004, and again for Processing
  * beta in April 2005. Rewritten to support beginRaw/endRaw by Ben Fry in

@@ -2,17 +2,12 @@ import gewebe.*;
 import org.sunflow.*; 
 final int mSquareSizeX = 8;
 final int mSquareSizeY = 8;
-
 float[][] mEnergyGrid;
-
 float mIsoValue = 32.0f;
-
 MetaCircle[] mMetaCircles;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     noFill();
     stroke(255);
@@ -23,7 +18,6 @@ void setup() {
         mMetaCircles[i].strength(random(5000, 50000));
     }
 }
-
 void draw() {
     background(50);
     mMetaCircles[0].position().set(mouseX, mouseY);
@@ -31,7 +25,6 @@ void draw() {
     ArrayList<ArrayList<PVector>> mBlobShapes = IsoSurface2.getBlobs(mEnergyGrid, mIsoValue);
     draw_blobs(mBlobShapes);
 }
-
 void keyPressed() {
     switch (key) {
         case '+':
@@ -42,7 +35,6 @@ void keyPressed() {
             break;
     }
 }
-
 void draw_blobs(ArrayList<ArrayList<PVector>> pBlobShapes) {
     for (ArrayList<PVector> mBlobShape : pBlobShapes) {
         beginShape();
@@ -52,7 +44,6 @@ void draw_blobs(ArrayList<ArrayList<PVector>> pBlobShapes) {
         endShape(CLOSE);
     }
 }
-
 void update_energy_field() {
     final int mNumberOfSquaresX = width / mSquareSizeX;
     final int mNumberOfSquaresY = height / mSquareSizeY;

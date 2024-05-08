@@ -1,24 +1,17 @@
 import gewebe.*; 
 import org.sunflow.*; 
-
 ArcBall mArcBall;
-
 PGraphics mDisplayContent;
-
 float mLineMover;
-
 float[] mModelData;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     mArcBall = new ArcBall(this, true);
     mDisplayContent = createGraphics(100, 20);
     mModelData = createModelData();
 }
-
 void draw() {
     background(50);
     beginShape(POINTS);
@@ -37,7 +30,6 @@ void draw() {
     LEDisplay.draw(g, mDisplayContent, mModelData, 5, true);
     popMatrix();
 }
-
 void drawIntoDisplay(PGraphics pG) {
     pG.beginDraw();
     pG.background(0);
@@ -50,7 +42,6 @@ void drawIntoDisplay(PGraphics pG) {
     pG.ellipse(mLineMover, pG.height / 2.0f, 10, 10);
     pG.endDraw();
 }
-
 float[] createModelData() {
     float[] mData = new float[mDisplayContent.width * mDisplayContent.height * 3];
     for (int i = 0; i < mData.length / 3; i++) {

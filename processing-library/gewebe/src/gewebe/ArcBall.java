@@ -1,3 +1,22 @@
+/*
+ * Gewebe
+ *
+ * This file is part of the *wellen* library (https://github.com/dennisppaul/wellen).
+ * Copyright (c) 2024 Dennis P Paul.
+ *
+ * This library is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package gewebe;
 
 import processing.core.PApplet;
@@ -14,9 +33,9 @@ public class ArcBall {
     private final PVector mDragPosition;
     public boolean pause = false;
     private float mRadius;
-    private Quaternion mCurrentQuaternion;
-    private Quaternion mDownQuaternion;
-    private Quaternion mDragQuaternion;
+    private final Quaternion mCurrentQuaternion;
+    private final Quaternion mDownQuaternion;
+    private final Quaternion mDragQuaternion;
     private boolean mLastActiveState = false;
 
     public ArcBall(PApplet pApplet, boolean pDONT_REGISTER) {
@@ -45,7 +64,6 @@ public class ArcBall {
         mParent = pApplet;
 
         if (!pDONT_REGISTER) {
-            //            pApplet.registerPre(this);
             pApplet.registerMethod("pre", this); // new in processing 3.0 @test
         }
 
@@ -142,24 +160,19 @@ public class ArcBall {
     }
 
     public static ArcBall setupRotateAroundCenter(PApplet pApplet) {
-        return new ArcBall(pApplet.width / 2,
-                           pApplet.height / 2,
-                           0,
-                           Math.min(pApplet.g.width / 2.0f, pApplet.g.height / 2.0f),
-                           pApplet,
-                           false);
+        return setupRotateAroundCenter(pApplet, false);
     }
 
     public static ArcBall setupRotateAroundCenter(PApplet pApplet, boolean pDONT_REGISTER) {
-        return new ArcBall(pApplet.width / 2,
-                           pApplet.height / 2,
+        return new ArcBall(pApplet.width / 2.0f,
+                           pApplet.height / 2.0f,
                            0,
                            Math.min(pApplet.g.width / 2.0f, pApplet.g.height / 2.0f),
                            pApplet,
                            pDONT_REGISTER);
     }
 
-    private class Quaternion {
+    private static class Quaternion {
 
         float w;
 
@@ -172,13 +185,6 @@ public class ArcBall {
         Quaternion() {
             reset();
         }
-
-        //        public Quaternion(float theW, float theX, float theY, float theZ) {
-        //            w = theW;
-        //            x = theX;
-        //            y = theY;
-        //            z = theZ;
-        //        }
 
         void reset() {
             w = 1.0f;
@@ -225,7 +231,7 @@ public class ArcBall {
         }
     }
 
-    private class Vector4f {
+    private static class Vector4f {
 
         float w;
 

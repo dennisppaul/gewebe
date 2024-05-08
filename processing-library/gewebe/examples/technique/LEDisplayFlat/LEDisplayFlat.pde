@@ -1,16 +1,11 @@
 import gewebe.*; 
 import org.sunflow.*; 
-
 ArcBall mArcBall;
-
 PGraphics mDisplayContent;
-
 LEDisplay mLEDisplay;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     mArcBall = new ArcBall(this, true);
     mDisplayContent = createGraphics(100, 20);
@@ -21,7 +16,6 @@ void setup() {
     mLEDisplay.setLEDScale(0.75f);
     mLEDisplay.displayLEDAsSphere(true);
 }
-
 void draw() {
     background(50);
     /* draw into source image */
@@ -36,7 +30,6 @@ void draw() {
     mLEDisplay.draw(g);
     popMatrix();
 }
-
 void drawIntoDisplay(PGraphics pG) {
     pG.beginDraw();
     pG.noStroke();

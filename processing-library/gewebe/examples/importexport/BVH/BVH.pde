@@ -4,20 +4,16 @@ import org.sunflow.*;
  * this example demonstrates how to play animation from BVH files.
  * for more information on the BVH file format see https://en.wikipedia.org/wiki/Biovision_Hierarchy
  */
-
 BVHParser mBVHParser;
-
 void settings() {
     size(1280, 720, P3D);
 }
-
 void setup() {
     final String mTempDirectory = System.getProperty("user.dir");
     String[] mBVHData = loadStrings(mTempDirectory + "/out/production/C_test.bvh");
     mBVHParser = new BVHParser();
     mBVHParser.parse(mBVHData);
 }
-
 void draw() {
     background(50);
     /* camera */
@@ -30,7 +26,6 @@ void draw() {
     drawBVH(mBVHParser);
     popMatrix();
 }
-
 void drawBVH(BVHParser pParser) {
     fill(255);
     stroke(255);

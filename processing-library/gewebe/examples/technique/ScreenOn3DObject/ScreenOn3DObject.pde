@@ -4,15 +4,11 @@ import org.sunflow.*;
  * this example shows how to draw into an @{@link gewebe.OffscreenContext} and use it as a texture on a 3D model.
  * move mouse to offset texture.
  */
-
 Mesh mModelMesh;
-
 MyTexture mScreen;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     hint(ENABLE_DEPTH_SORT); /* enable depth sorting when using transparent textures */
     mScreen = new MyTexture(this);
@@ -22,7 +18,6 @@ void setup() {
     mModelMesh.texture_scale().set(mScreen.width * 0.5f,
                                    mScreen.height * 0.5f); /* scale texture coords to image size */
 }
-
 void draw() {
     mScreen.update();
     background(50);
@@ -36,25 +31,20 @@ void draw() {
     mModelMesh.texture_offset().set(mouseX, mouseY - height / 2.0f); /* move texture on 3D model */
     mModelMesh.draw(g, mScreen.texture());
 }
-
 void keyPressed() {
     mScreen.texture().background(255, 0);
 }
 static class MyTexture extends OffscreenContext {
-    
-MyTexture(PApplet pParent) {
+    MyTexture(PApplet pParent) {
         super(pParent);
     }
-    
-void settings() {
+    void settings() {
         size(640, 480);
     }
-    
-void setup(PGraphics graphics) {
+    void setup(PGraphics graphics) {
         graphics.background(255, 0);
     }
-    
-void draw(PGraphics graphics) {
+    void draw(PGraphics graphics) {
         graphics.noFill();
         graphics.stroke(255);
         final float mPadding = 20;

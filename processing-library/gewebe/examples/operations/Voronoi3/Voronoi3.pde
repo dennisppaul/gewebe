@@ -1,30 +1,20 @@
 import gewebe.*; 
 import org.sunflow.*; 
-
 final static int GRID_SIZE = 4;
-
 final static float GRID_SPACE = 50;
-
 final Voronoi mQvoronoi = new Voronoi();
-
 final PVector[] mGridPoints = new PVector[GRID_SIZE * GRID_SIZE * GRID_SIZE];
-
 final PVector mAcceptableRegion = new PVector(GRID_SIZE * GRID_SPACE * 1.5f,
                                                       GRID_SIZE * GRID_SPACE * 1.5f,
                                                       GRID_SIZE * GRID_SPACE * 1.5f);
-
 PVector[][] mRegions;
-
 int mCurrentRegion;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     populatePointArray();
 }
-
 void draw() {
     mRegions = mQvoronoi.calculate3(mGridPoints);
     mRegions = mQvoronoi.cullReagions(mRegions, mAcceptableRegion);
@@ -63,16 +53,13 @@ void draw() {
         drawCross(v);
     }
 }
-
 void mousePressed() {
     mCurrentRegion++;
     mCurrentRegion %= mRegions.length;
 }
-
 void keyPressed() {
     populatePointArray();
 }
-
 void populatePointArray() {
     mCurrentRegion = 0;
     /* populate array with almost random points */
@@ -92,14 +79,12 @@ void populatePointArray() {
         }
     }
 }
-
 void drawCross(PVector v) {
     final float o = 2.0f;
     line(v.x - o, v.y, v.z, v.x + o, v.y, v.z);
     line(v.x, v.y - o, v.z, v.x, v.y + o, v.z);
     line(v.x, v.y, v.z - o, v.x, v.y, v.z + o);
 }
-
 void calcAndDrawHull(PVector[] pVertex) {
     final QuickHull3D mHull = new QuickHull3D();
     final Point3d[] myNewVertices = new Point3d[pVertex.length];

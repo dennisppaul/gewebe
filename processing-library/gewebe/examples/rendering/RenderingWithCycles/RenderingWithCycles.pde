@@ -17,18 +17,14 @@ import org.sunflow.*;
  * - if image size is not equal to sketch size the viewport is not scaled - `lights()` does not work yet - Cycles
  * materials can not be used - binary is currently only compiled for `macOS 10.15`
  */
-
 boolean mRecord = false;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     noStroke();
     sphereDetail(12);
 }
-
 void draw() {
     String mOutputFile = "";
     if (mRecord) {
@@ -49,13 +45,11 @@ void draw() {
         mRecord = false;
     }
 }
-
 void keyPressed() {
     if (key == ' ') {
         mRecord = true;
     }
 }
-
 void drawScene() {
     background(50);
     camera(height / 2.0f, height, width, 0, 0, 0, 0, 1, 0);

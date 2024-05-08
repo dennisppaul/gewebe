@@ -3,17 +3,13 @@ import org.sunflow.*;
 /*
  * this example shows how to draw into an @{@link gewebe.OffscreenContext} and use it as an image.
  */
-
 MyScreen mScreen;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     mScreen = new MyScreen(this);
 }
-
 void draw() {
     mScreen.update();
     background(50);
@@ -27,23 +23,19 @@ void draw() {
     image(mScreen.texture(), mouseX, mouseY);
 }
 static class MyScreen extends OffscreenContext {
-    
-MyScreen(PApplet pParent) {
+    MyScreen(PApplet pParent) {
         super(pParent);
     }
-    
-void settings() {
+    void settings() {
         size(640, 480);
     }
-    
-void setup(PGraphics graphics) {
+    void setup(PGraphics graphics) {
         /* call processing methods with a `parent.` e.g: */
         System.out.println("screen height is " + parent.height);
         /* call processing drawing methods with a `graphics.` e.g: */
         graphics.background(255);
     }
-    
-void draw(PGraphics graphics) {
+    void draw(PGraphics graphics) {
         graphics.stroke(0);
         float mY = parent.random(0, graphics.height);
         graphics.line(parent.random(0, graphics.width), mY, parent.random(0, graphics.width), mY);

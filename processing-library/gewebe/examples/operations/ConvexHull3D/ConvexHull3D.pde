@@ -3,13 +3,10 @@ import org.sunflow.*;
 /*
  * this example demonstrate how to find the *convex hull* around a set of 3D points.
  */
-
 final ArrayList<PVector> mPoints = new ArrayList();
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     noStroke();
     fill(255);
@@ -22,7 +19,6 @@ void setup() {
         mPoints.add(p);
     }
 }
-
 void draw() {
     background(50);
     lights();
@@ -37,7 +33,6 @@ void draw() {
         drawHull();
     }
 }
-
 void drawPoints() {
     for (PVector p : mPoints) {
         pushMatrix();
@@ -46,7 +41,6 @@ void drawPoints() {
         popMatrix();
     }
 }
-
 void drawHull() {
     final float[] mVertices = ConvexHull3.hull_vertices(mPoints);
     beginShape(TRIANGLES);

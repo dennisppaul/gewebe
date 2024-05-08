@@ -1,16 +1,11 @@
 import gewebe.*; 
 import org.sunflow.*; 
-
 static final int MAXIMUM_META_BALLS = 200;
-
 ArcBall mArcBall;
-
 MetaBallManager mMetaBallManager;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     mArcBall = new ArcBall(width / 2.0f, height / 2.0f, -height, 400.0f, this, true);
     mMetaBallManager = new MetaBallManager();
@@ -19,7 +14,6 @@ void setup() {
     mMetaBallManager.position.set(width / -2.0f, height / -2.0f, height / -2.0f);
     mMetaBallManager.isovalue(5.0f);
 }
-
 void draw() {
     background(50);
     directionalLight(126, 126, 126, 0, 0, -1);
@@ -52,7 +46,6 @@ void draw() {
     }
     endShape();
 }
-
 void keyPressed() {
     switch (key) {
         case '+':
@@ -65,12 +58,9 @@ void keyPressed() {
             break;
     }
 }
-
 class MovingMetaBall extends MetaBall {
-    
-final PVector velocity;
-    
-MovingMetaBall() {
+    final PVector velocity;
+    MovingMetaBall() {
         super(
         new PVector(random(width / -3.0f, width / 3.0f), random(height / -3.0f, height / 3.0f), height / -2.0f),
         random(1.5f, 3), random(150, 300));
@@ -78,13 +68,11 @@ MovingMetaBall() {
         velocity.z = abs(velocity.z);
         velocity.mult(random(50, 100));
     }
-    
-void update(float pDeltaTime) {
+    void update(float pDeltaTime) {
         PVector v = PVector.mult(velocity, pDeltaTime);
         position.add(v);
     }
-    
-boolean isOffTheGrid() {
+    boolean isOffTheGrid() {
         return position.x > width / 2.0f || position.x < width / -2.0f || position.y > height / 2.0f || position.y < height / -2.0f || position.z > height / 2.0f || position.z < height / -2.0f;
     }
 }

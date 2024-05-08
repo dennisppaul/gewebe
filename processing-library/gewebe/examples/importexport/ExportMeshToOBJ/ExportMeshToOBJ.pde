@@ -3,17 +3,13 @@ import org.sunflow.*;
 /*
  * this example demonstrates how to export a mesh as an OBJ file.
  */
-
 Mesh mMesh;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     mMesh = IcoSphere.mesh(5);
 }
-
 void draw() {
     background(50);
     stroke(255, 63);
@@ -25,7 +21,6 @@ void draw() {
     strokeWeight(3.0f / height); // @NOTE(this is necessary to *unscale* the stroke weight )
     mMesh.draw(g);
 }
-
 void keyPressed() {
     String[] mOBJ = ModelLoaderOBJ.convertMeshToOBJ(mMesh);
     saveStrings("icosphere" + frameCount + ".obj", mOBJ);

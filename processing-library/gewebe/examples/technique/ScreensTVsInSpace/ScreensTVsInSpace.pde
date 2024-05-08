@@ -4,24 +4,18 @@ import org.sunflow.*;
  * this example shows how to draw on @{@link gewebe.TV} *screens* and arrange them in a 3D space. use arrow keys to
  * navigate space.
  */
-
 MyTV mScreen;
-
 float mCameraPositionAngle;
-
 float mCameraPositionRadius;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     imageMode(CENTER);
     mScreen = new MyTV(this);
     mCameraPositionAngle = 0;
     mCameraPositionRadius = width;
 }
-
 void draw() {
     mScreen.update();
     background(50);
@@ -43,7 +37,6 @@ void draw() {
         popMatrix();
     }
 }
-
 void keyPressed() {
     final float mStepA = 0.1f;
     final float mStepR = 100.0f;
@@ -62,7 +55,6 @@ void keyPressed() {
             break;
     }
 }
-
 PVector getCameraPosition() {
     PVector p = new PVector();
     p.x = sin(mCameraPositionAngle) * mCameraPositionRadius;
@@ -74,19 +66,16 @@ static class MyTV extends TV {
     MyTV(PApplet pParent) {
         super(pParent);
     }
-    
-void settings() {
+    void settings() {
         size(640, 480);
     }
-    
-void setup(PGraphics graphics) {
+    void setup(PGraphics graphics) {
         /* call processing methods with a `parent.` e.g: */
         System.out.println("parent screen height is " + parent.height);
         /* call processing drawing methods with a `graphics.` e.g: */
         graphics.background(255);
     }
-    
-void draw(PGraphics graphics) {
+    void draw(PGraphics graphics) {
         /* call processing drawing methods with a `graphics.` e.g: */
         graphics.stroke(0);
         float x = parent.random(0, graphics.width);

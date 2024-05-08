@@ -3,15 +3,11 @@ import org.sunflow.*;
 /*
  * this example demonstrates how to export a mesh as an OBJ file.
  */
-
 boolean mRecord = false;
-
 float mSegments = 180;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void draw() {
     background(50);
     directionalLight(126, 126, 126, 0, 0, -1);
@@ -63,18 +59,15 @@ void draw() {
         mRecord = false;
     }
 }
-
 void keyPressed() {
     if (key == ' ') {
         mRecord = true;
         println("+++ exported model to " + sketchPath());
     }
 }
-
 void vertex(PVector p) {
     vertex(p.x, p.y, p.z);
 }
-
 PVector sphere_coord(float pAzimut, float pInclination, float pRadius) {
     return new PVector(cos(pAzimut) * sin(pInclination) * pRadius,
                        sin(pAzimut) * sin(pInclination) * pRadius,

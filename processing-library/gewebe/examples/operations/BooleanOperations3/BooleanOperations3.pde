@@ -7,21 +7,14 @@ import org.sunflow.*;
  * <p>
  * note that this sketch currently only runs on macOS.
  */
-
 CGALBooleanOperations3 mBooleanOperation;
-
 Mesh mIntersection;
-
 float mRotation;
-
 Mesh mSolidA;
-
 Mesh mSolidB;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     mSolidA = ModelLoaderOBJ.parseModelData(OBJWeirdObject.DATA).mesh();
     mSolidA.translate(100, 0, 0);
@@ -35,7 +28,6 @@ void setup() {
         mSolidA.vertices()[i] *= SCALER;
     }
 }
-
 void draw() {
     background(50);
     directionalLight(126, 126, 126, 0, 0, -1);
@@ -61,7 +53,6 @@ void draw() {
     }
     mSolidB.draw(g);
 }
-
 void keyPressed() {
     if (key == '1') {
         mIntersection = mBooleanOperation.boolean_operation_mesh(CGALBooleanOperations3.INTERSECTION,

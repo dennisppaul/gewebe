@@ -3,17 +3,13 @@ import org.sunflow.*;
 /*
  * this example demonstrate how to find the *convex hull* around a set of 2D points.
  */
-
 final ArrayList<PVector> mPoints = new ArrayList();
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     noFill();
 }
-
 void draw() {
     if (mousePressed) {
         mPoints.add(new PVector(mouseX, mouseY));
@@ -31,7 +27,6 @@ void draw() {
     }
     endShape(CLOSE);
 }
-
 void cross(PVector pPosition, float pDiameter) {
     line(pPosition.x + pDiameter, pPosition.y + pDiameter, pPosition.x - pDiameter, pPosition.y - pDiameter);
     line(pPosition.x - pDiameter, pPosition.y + pDiameter, pPosition.x + pDiameter, pPosition.y - pDiameter);

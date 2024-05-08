@@ -3,22 +3,17 @@ import org.sunflow.*;
 /*
  * this example demonstrates how to cut a slice out of a mesh.
  */
-
 ArcBall mArcBall;
-
 ArrayList<Triangle> mTriangles;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     ModelData mModelData = ModelLoaderOBJ.parseModelData(OBJMan.DATA);
     Mesh mModelMesh = mModelData.mesh();
     mTriangles = mModelMesh.triangles();
     mArcBall = new ArcBall(this, true);
 }
-
 void draw() {
     background(50);
     pushMatrix();
@@ -60,7 +55,6 @@ void draw() {
     }
     endShape(CLOSE);
 }
-
 ArrayList<PVector> scanSlice(ArrayList<Triangle> pTriangles,
                                      float pHeight,
                                      float pScanPoints,
@@ -82,7 +76,6 @@ ArrayList<PVector> scanSlice(ArrayList<Triangle> pTriangles,
     }
     return MeshUtil.giftWrap(mOutline2D);
 }
-
 boolean findIntersection(ArrayList<Triangle> pTriangles, PVector p0, PVector p1, PVector pResult) {
     final PVector pRayOrigin = p1;
     final PVector pRayDirection = PVector.sub(p1, p0);

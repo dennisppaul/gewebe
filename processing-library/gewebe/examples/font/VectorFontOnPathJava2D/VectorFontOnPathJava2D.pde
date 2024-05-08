@@ -4,13 +4,10 @@ import org.sunflow.*;
  * this example demonstrates how to arrange characters along a given path and return the result as a collection of
  * vertices using Java2D.
  */
-
 java.awt.Shape mCharacters;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     VectorFont mPathCreator = new VectorFont("Helvetica", 32);
     mPathCreator.insideFlag(VectorFont.CLOCKWISE);
@@ -26,14 +23,12 @@ void setup() {
     mPath.height = mRadius;
     mCharacters = mPathCreator.charactersJAVA2D(mText, mPath);
 }
-
 void draw() {
     background(50);
     translate(width / 2.0f, height / 2.0f);
     rotate(frameCount * 0.001f);
     drawOutline(mCharacters);
 }
-
 void drawOutline(java.awt.Shape pShape) {
     if (mousePressed) {
         fill(255);

@@ -1,18 +1,14 @@
 import gewebe.*; 
 import org.sunflow.*; 
-
 ArrayList<PVector> mVertices;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     stroke(50, 91);
     fill(255);
     mVertices = new ArrayList();
 }
-
 void draw() {
     background(50);
     if (mousePressed) {
@@ -25,13 +21,11 @@ void draw() {
     }
     endShape();
 }
-
 void keyPressed() {
     if (key == ' ') {
         mVertices.clear();
     }
 }
-
 void addVertices(float pXOffset, float pYOffset, float pRadius, float pSteps) {
     final float mSteps = TWO_PI / pSteps;
     final float mOffset = 5;

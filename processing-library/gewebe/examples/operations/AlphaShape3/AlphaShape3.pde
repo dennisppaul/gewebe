@@ -6,17 +6,12 @@ import org.sunflow.*;
  * <p>
  * note that this sketch currently only runs on macOS.
  */
-
 CGALAlphaShape3 mCGAL;
-
 Mesh mMesh;
-
 float[] mPoints3;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     mCGAL = new CGALAlphaShape3();
     final int NUMBER_OF_POINTS = 2000;
@@ -33,7 +28,6 @@ void setup() {
     mCGAL.compute_cgal_alpha_shape(mPoints3);
     computeAlphaShape(0.5f);
 }
-
 void draw() {
     background(50);
     directionalLight(126, 126, 126, 0, 0, -1);
@@ -56,11 +50,9 @@ void draw() {
     }
     endShape();
 }
-
 void mouseMoved() {
     computeAlphaShape(mouseX / (float) width);
 }
-
 void computeAlphaShape(float mAlpha) {
     mMesh = mCGAL.mesh(mAlpha);
 }

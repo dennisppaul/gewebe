@@ -3,18 +3,14 @@ import org.sunflow.*;
 /*
  * this example demonstrates how to manually access and draw the vertices of a 3D model.
  */
-
 ModelData mModelData;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     mModelData = ModelLoaderOBJ.parseModelData(OBJWeirdObject.DATA);
     println(mModelData);
 }
-
 void draw() {
     background(50);
     translate(width / 2.0f, height / 2.0f, -200);

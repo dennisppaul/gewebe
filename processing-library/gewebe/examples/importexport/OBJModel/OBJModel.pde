@@ -4,19 +4,15 @@ import org.sunflow.*;
  * this example demonstrates how to load and draw a mesh from model data. note, that model data can also be loaded
  * from external sources ( e.g hard drive or web ) with `loadStrings()`.
  */
-
 Mesh mModelMesh;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     ModelData mModelData = ModelLoaderOBJ.parseModelData(OBJMan.DATA);
     mModelMesh = mModelData.mesh();
     println(mModelData);
 }
-
 void draw() {
     background(50);
     lights();

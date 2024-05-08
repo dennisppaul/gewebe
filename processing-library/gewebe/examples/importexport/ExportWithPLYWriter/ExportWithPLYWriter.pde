@@ -1,16 +1,12 @@
 import gewebe.*; 
 import org.sunflow.*; 
-
 boolean mRecord = false;
-
 void settings() {
     size(1024, 768, P3D);
 }
-
 void setup() {
     sphereDetail(8);
 }
-
 void draw() {
     background(50);
     directionalLight(126, 126, 126, 0, 0, -1);
@@ -54,7 +50,6 @@ void draw() {
         println("+++ exported model to " + sketchPath());
     }
 }
-
 void keyPressed() {
     if (key == ' ') {
         mRecord = true;

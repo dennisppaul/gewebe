@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class RendererMesh extends PGraphics3D {
 
@@ -209,11 +210,15 @@ public abstract class RendererMesh extends PGraphics3D {
         return mLocation;
     }
 
-    protected void launchRenderProcess(String[] mCommandString) {
+    protected void launchRenderProcess(String[] pCommandString, String pDYLIBLocation) {
         try {
-            Process mProcess = Runtime.getRuntime().exec(mCommandString);
+            ProcessBuilder builder = new ProcessBuilder(pCommandString);
+            Map<String, String> env = builder.environment();
+            env.put("DYLD_LIBRARY_PATH", pDYLIBLocation);
+            Process mProcess = builder.start();
+//            Process mProcess = Runtime.getRuntime().exec(mCommandString);
             StringBuilder sb = new StringBuilder();
-            for (String s : mCommandString) {
+            for (String s : pCommandString) {
                 sb.append(s);
                 sb.append(' ');
             }

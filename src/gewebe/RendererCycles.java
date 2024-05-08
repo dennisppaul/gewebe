@@ -37,6 +37,7 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
+import java.util.Map;
 
 import static gewebe.Gewebe.get_os_name;
 
@@ -396,7 +397,8 @@ public class RendererCycles extends RendererMesh {
                                                      OPTION_OUTPUT,
                                                      mOptionOutputValue,
                                                      pXMLPath};
-        launchRenderProcess(mCommandString);
+        String mDYLIBLocation = mExecPath.substring(0, mExecPath.length()-CYCLES_DEFAULT_EXECUTABLE_NAME.length());
+        launchRenderProcess(mCommandString, mDYLIBLocation);
     }
 
     public static String DEBUG_output_path() {

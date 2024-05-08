@@ -34,7 +34,6 @@ import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 
 public class VectorFont {
 
@@ -404,8 +403,8 @@ public class VectorFont {
         if (mInsideShapes.isEmpty()) {
             addMShapes(mOutsideShapes, pAllCharacters);
         } else {
-            /* asign inside shapes to outside shapes */
-            final Iterator<MShape> mIterator = mInsideShapes.iterator();
+            /* assign inside shapes to outside shapes */
+            final java.util.Iterator<MShape> mIterator = mInsideShapes.iterator();
             while (mIterator.hasNext()) {
                 final MShape mInsideShape = mIterator.next();
                 mIterator.remove();

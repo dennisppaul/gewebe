@@ -18,7 +18,7 @@
 #include <CGAL/Alpha_shape_vertex_base_3.h>
 #include <CGAL/Delaunay_triangulation_3.h>
 #include <CGAL/Inverse_index.h>
-#include <CGAL/Linear_cell_complex.h>
+#include <CGAL/Linear_cell_complex_base.h>
 
 #include "gewebe_CGALAlphaShape3.h"
 

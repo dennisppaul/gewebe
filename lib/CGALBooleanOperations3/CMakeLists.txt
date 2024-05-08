@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 project(CGALBooleanOperations3)
 
 #set(JAVA_HOME_USR "set to location of Java SDK")
@@ -16,7 +16,7 @@ IF(NOT JAVA_HOME_USR)
         set(JAVA_HOME_USR /usr/lib/jvm/java-14-openjdk-amd64/)
     ENDIF (UNIX)
     IF (APPLE)
-        set(JAVA_HOME_USR $HOME/Library/Java/JavaVirtualMachines/corretto-11.0.13/Contents/Home)
+        set(JAVA_HOME_USR $HOME/Library/Java/JavaVirtualMachines/temurin-17.0.9/Contents/Home)
     ENDIF (APPLE)
 ENDIF(NOT JAVA_HOME_USR)
 

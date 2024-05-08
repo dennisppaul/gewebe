@@ -28,7 +28,7 @@ void draw() {
         mm.update(1.0f / frameRate);
     }
     /* remove metaballs if off the grid */
-    final Iterator<MetaBall> i = mMetaBallManager.metaballs().iterator();
+    final java.util.Iterator<MetaBall> i = mMetaBallManager.metaballs().iterator();
     while (i.hasNext()) {
         final MovingMetaBall c = (MovingMetaBall) i.next();
         if (c.isOffTheGrid()) {

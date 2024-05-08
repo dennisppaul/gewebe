@@ -7,7 +7,6 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class SketchIsoSurface3MetaBall extends PApplet {
 
@@ -47,7 +46,7 @@ public class SketchIsoSurface3MetaBall extends PApplet {
         }
 
         /* remove metaballs if off the grid */
-        final Iterator<MetaBall> i = mMetaBallManager.metaballs().iterator();
+        final java.util.Iterator<MetaBall> i = mMetaBallManager.metaballs().iterator();
         while (i.hasNext()) {
             final MovingMetaBall c = (MovingMetaBall) i.next();
             if (c.isOffTheGrid()) {

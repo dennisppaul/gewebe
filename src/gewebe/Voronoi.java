@@ -35,8 +35,27 @@ public class Voronoi {
      */
 
     private static final float VERTEX_AT_INFINITY = -10.101f;
-    public static String QVORONOI_APP = "/usr/local/bin/qvoronoi";
     public static boolean VERBOSE = false;
+
+    public static String QVORONOI_APP;
+
+    static {
+        determineQVoronoiPath();
+    }
+
+    private static void determineQVoronoiPath() {
+        String osArch = System.getProperty("os.arch");
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.contains("mac")) {
+            if (osArch.equals("aarch64")) {
+                QVORONOI_APP = "/opt/homebrew/bin/qvoronoi";
+            } else {
+                QVORONOI_APP = "/usr/local/bin/qvoronoi";
+            }
+        } else {
+            QVORONOI_APP = "/usr/local/bin/qvoronoi";
+        }
+    }
 
     public String computeDiagram(int pDimensions, PVector[] pPoints) {
 

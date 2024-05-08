@@ -22,7 +22,6 @@ package gewebe;
 import processing.core.PVector;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public abstract class IsoSurface2 {
 
@@ -123,7 +122,7 @@ public abstract class IsoSurface2 {
         int mShapesAdded;
         do {
             mShapesAdded = 0;
-            for (Iterator<Linef> iterator = pLines.iterator(); iterator.hasNext(); ) {
+            for (java.util.Iterator<Linef> iterator = pLines.iterator(); iterator.hasNext(); ) {
                 Linef l = iterator.next();
                 PVector mFirst = mBlob.get(0);
                 PVector mLast = mBlob.get(mBlob.size() - 1);

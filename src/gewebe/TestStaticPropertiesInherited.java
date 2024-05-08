@@ -19,17 +19,23 @@
 
 package gewebe;
 
-import processing.core.PVector;
+public class TestStaticPropertiesInherited {
 
-public class MetaBall {
+    Class<Device>[] devices = new Class<Device>[]{DeviceA.class, DeviceB.class};
 
-    public PVector position;
-    public float radius;
-    public float strength;
+    class Device {
+        boolean has_value;
+    }
 
-    public MetaBall(PVector pPosition, float pStrength, float pRadius) {
-        position = pPosition;
-        strength = pStrength;
-        radius = pRadius;
+    class DeviceA extends Device {
+        boolean has_value() {
+            return true;
+        }
+    }
+
+    class DeviceB extends Device {
+        boolean has_value() {
+            return true;
+        }
     }
 }

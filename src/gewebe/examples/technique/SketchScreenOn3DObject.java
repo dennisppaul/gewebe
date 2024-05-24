@@ -15,7 +15,7 @@ public class SketchScreenOn3DObject extends PApplet {
      * move mouse to offset texture.
      */
 
-    private Mesh mModelMesh;
+    private Mesh      mModelMesh;
     private MyTexture mScreen;
 
     public void settings() {
@@ -73,7 +73,7 @@ public class SketchScreenOn3DObject extends PApplet {
             graphics.noFill();
             graphics.stroke(255);
             final float mPadding = 20;
-            float mY = parent.random(mPadding, graphics.height - mPadding);
+            float       mY       = parent.random(mPadding, graphics.height - mPadding);
             graphics.line(parent.random(mPadding, graphics.width - mPadding), mY,
                           parent.random(mPadding, graphics.width - mPadding), mY);
         }

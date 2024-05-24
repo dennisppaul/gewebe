@@ -50,7 +50,7 @@ public abstract class IsoSurface2 {
                                           {-1, -1, -1, -1, -1}};
 
     public static ArrayList<ArrayList<PVector>> extractBlobs(ArrayList<Linef> pLines) {
-        ArrayList<Linef> mLines = new ArrayList<Linef>(pLines);
+        ArrayList<Linef>              mLines = new ArrayList<Linef>(pLines);
         ArrayList<ArrayList<PVector>> mBlobs = new ArrayList<>();
         while (!mLines.isEmpty()) {
             ArrayList<PVector> mBlob = extractBlob(mLines);
@@ -98,9 +98,9 @@ public abstract class IsoSurface2 {
     }
 
     public static PVector[] getLinesAsArray(float[][] theArray, float theIsoValue) {
-        ArrayList<Linef> myLines = getLines(theArray, theIsoValue);
-        PVector[] myLinesArray = new PVector[myLines.size() * 2];
-        int i = 0;
+        ArrayList<Linef> myLines      = getLines(theArray, theIsoValue);
+        PVector[]        myLinesArray = new PVector[myLines.size() * 2];
+        int              i            = 0;
         for (Linef myLine : myLines) {
             myLinesArray[i++] = myLine.p1;
             myLinesArray[i++] = myLine.p2;
@@ -114,8 +114,8 @@ public abstract class IsoSurface2 {
     }
 
     private static ArrayList<PVector> extractBlob(ArrayList<Linef> pLines) {
-        ArrayList<PVector> mBlob = new ArrayList<>();
-        Linef mFirstLine = pLines.remove(0);
+        ArrayList<PVector> mBlob      = new ArrayList<>();
+        Linef              mFirstLine = pLines.remove(0);
         mBlob.add(mFirstLine.p1);
         mBlob.add(mFirstLine.p2);
 
@@ -123,9 +123,9 @@ public abstract class IsoSurface2 {
         do {
             mShapesAdded = 0;
             for (java.util.Iterator<Linef> iterator = pLines.iterator(); iterator.hasNext(); ) {
-                Linef l = iterator.next();
+                Linef   l      = iterator.next();
                 PVector mFirst = mBlob.get(0);
-                PVector mLast = mBlob.get(mBlob.size() - 1);
+                PVector mLast  = mBlob.get(mBlob.size() - 1);
                 if (close(l.p2, mFirst) && close(l.p1, mLast)) {
                     iterator.remove();
                     return mBlob;

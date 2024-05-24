@@ -27,18 +27,18 @@ import java.util.ArrayList;
 
 public class Mesh {
 
-    private final int mNormalsComponentsCount;
-    private int mTextureCoordComponentsCount;
-    private int mNumberOfAtoms;
-    private int mDrawStart;
-    private int mDrawLength;
-    private int mPrimitive;
-    private float[] mVertices;
-    private int mVertexComponentsCount;
-    private float[] mColors;
-    private int mColorComponentsCount;
-    private float[] mNormals;
-    private float[] mTexCoords;
+    private final int     mNormalsComponentsCount;
+    private       int     mTextureCoordComponentsCount;
+    private       int     mNumberOfAtoms;
+    private       int     mDrawStart;
+    private       int     mDrawLength;
+    private       int     mPrimitive;
+    private       float[] mVertices;
+    private       int     mVertexComponentsCount;
+    private       float[] mColors;
+    private       int     mColorComponentsCount;
+    private       float[] mNormals;
+    private       float[] mTexCoords;
     private final PVector mTextureScale;
     private final PVector mTextureOffset;
 
@@ -55,21 +55,21 @@ public class Mesh {
                 float[] pNormals,
                 int pPrimitive) {
 
-        mVertices = pVertices;
-        mColors = pColors;
-        mNormals = pNormals;
+        mVertices  = pVertices;
+        mColors    = pColors;
+        mNormals   = pNormals;
         mTexCoords = pTexCoords;
 
-        mVertexComponentsCount = pVertexComponents;
-        mColorComponentsCount = pColorComponents;
-        mNormalsComponentsCount = 3;
+        mVertexComponentsCount       = pVertexComponents;
+        mColorComponentsCount        = pColorComponents;
+        mNormalsComponentsCount      = 3;
         mTextureCoordComponentsCount = pTextureCoordComponents;
 
         mNumberOfAtoms = mVertices.length / mVertexComponentsCount;
-        mDrawStart = 0;
-        mDrawLength = mNumberOfAtoms;
+        mDrawStart     = 0;
+        mDrawLength    = mNumberOfAtoms;
 
-        mTextureScale = new PVector().set(1,1);
+        mTextureScale  = new PVector().set(1, 1);
         mTextureOffset = new PVector();
 
         primitive(pPrimitive);
@@ -93,7 +93,7 @@ public class Mesh {
         }
 
         System.out.println(
-        "### WARNING @ `Mesh.primitive(int)` / primitive type might not be supported: " + pPrimitive);
+                "### WARNING @ `Mesh.primitive(int)` / primitive type might not be supported: " + pPrimitive);
         mPrimitive = pPrimitive;
         /*
          * POINTS,
@@ -124,7 +124,9 @@ public class Mesh {
 
     public PVector texture_scale() {
         return mTextureScale;
-    }    public PVector texture_offset() {
+    }
+
+    public PVector texture_offset() {
         return mTextureOffset;
     }
 
@@ -169,10 +171,10 @@ public class Mesh {
         g.pushMatrix();
 
         /* model */
-        int myNormalIndex = mDrawStart * mNormalsComponentsCount;
+        int myNormalIndex   = mDrawStart * mNormalsComponentsCount;
         int myTexCoordIndex = mDrawStart * mTextureCoordComponentsCount;
-        int myColorIndex = mDrawStart * mColorComponentsCount;
-        int myVertexIndex = mDrawStart * mVertexComponentsCount;
+        int myColorIndex    = mDrawStart * mColorComponentsCount;
+        int myVertexIndex   = mDrawStart * mVertexComponentsCount;
 
         g.beginShape(mPrimitive);
 
@@ -239,8 +241,8 @@ public class Mesh {
     }
 
     public ArrayList<gewebe.Triangle> triangles() {
-        final ArrayList<gewebe.Triangle> mTriangles = new ArrayList<>();
-        int myVertexIndex = mDrawStart * mVertexComponentsCount;
+        final ArrayList<gewebe.Triangle> mTriangles    = new ArrayList<>();
+        int                              myVertexIndex = mDrawStart * mVertexComponentsCount;
 
         for (int i = 0; i < mDrawLength; i += 3) {
             gewebe.Triangle t = new Triangle();

@@ -1,13 +1,13 @@
 package gewebe.sandbox;
 
+import gewebe.sandbox.sunflowapiapi.P5SunflowAPIAPI;
 import org.sunflow.math.Point3;
 import org.sunflow.math.Vector3;
 import processing.core.PApplet;
-import gewebe.sandbox.sunflowapiapi.P5SunflowAPIAPI;
 
 public class SketchTestSunflow extends PApplet {
 
-    int sceneWidth = 500;
+    int sceneWidth  = 500;
     int sceneHeight = 500;
 
     public void settings() {

@@ -32,13 +32,13 @@ import java.util.ArrayList;
 public class ModelLoaderOBJ {
 
     /* normal */
-    public static boolean VERBOSE = false;
-    public static int GET_NORMALS_CCW = 0;
-    public static int GET_NORMALS_CW = 1;
-    public static int GET_NORMALS_DIRECTION = GET_NORMALS_CCW;
-    public static int NUMBER_OF_VERTEX_COMPONENTS = 3;
-    public static int PRIMITIVE = PGraphics.TRIANGLES;
-    private static int GROUP_NAME_INDEX_COUNTER = 0;
+    public static  boolean VERBOSE                     = false;
+    public static  int     GET_NORMALS_CCW             = 0;
+    public static  int     GET_NORMALS_CW              = 1;
+    public static  int     GET_NORMALS_DIRECTION       = GET_NORMALS_CCW;
+    public static  int     NUMBER_OF_VERTEX_COMPONENTS = 3;
+    public static  int     PRIMITIVE                   = PGraphics.TRIANGLES;
+    private static int     GROUP_NAME_INDEX_COUNTER    = 0;
 
     public static void calculateNormal(final PVector pointA,
                                        final PVector pointB,
@@ -69,7 +69,7 @@ public class ModelLoaderOBJ {
     public static String[] convertVertexDataToOBJ(ArrayList<PVector> pVertexData) {
         final float[] mVertexData = new float[pVertexData.size() * 3];
         for (int i = 0; i < pVertexData.size(); i++) {
-            final int j = i * 3;
+            final int     j = i * 3;
             final PVector p = pVertexData.get(i);
             mVertexData[j + 0] = p.x;
             mVertexData[j + 1] = p.y;
@@ -85,9 +85,9 @@ public class ModelLoaderOBJ {
                                                           5) + LINE_TERMINATOR;
         // @todo could be set external
 
-        ArrayList<String> s = new ArrayList<>();
+        ArrayList<String> s         = new ArrayList<>();
         ArrayList<String> mVertices = new ArrayList<>();
-        ArrayList<String> mFaces = new ArrayList<>();
+        ArrayList<String> mFaces    = new ArrayList<>();
 
         for (int i = 0; i < pVertexData.length; i += 3) { // @todo assumes three components
             StringBuilder mLine = new StringBuilder();
@@ -100,8 +100,8 @@ public class ModelLoaderOBJ {
             mLine.append(LINE_TERMINATOR);
             mVertices.add(mLine.toString());
 
-            final int FACE_OFFSET = 1;
-            StringBuilder mFace = new StringBuilder();
+            final int     FACE_OFFSET = 1;
+            StringBuilder mFace       = new StringBuilder();
             mFace.append("f ");
             mFace.append((i + 0 + FACE_OFFSET));
             mFace.append(" ");
@@ -136,11 +136,11 @@ public class ModelLoaderOBJ {
 
     public static void createNormals(float[] theVertices, float[] theNormals) {
         final int NUMBER_OF_VERTEX_COMPONENTS = 3;
-        final int myNumberOfPoints = 3;
+        final int myNumberOfPoints            = 3;
         for (int i = 0; i < theVertices.length; i += (myNumberOfPoints * NUMBER_OF_VERTEX_COMPONENTS)) {
-            PVector a = new PVector(theVertices[i + 0], theVertices[i + 1], theVertices[i + 2]);
-            PVector b = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
-            PVector c = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
+            PVector a        = new PVector(theVertices[i + 0], theVertices[i + 1], theVertices[i + 2]);
+            PVector b        = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
+            PVector c        = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
             PVector myNormal = new PVector();
             calculateNormal(a, b, c, myNormal);
 
@@ -161,9 +161,9 @@ public class ModelLoaderOBJ {
     public static void createNormalsTRIANGLE(float[] theVertices, float[] theNormals) {
         int myNumberOfPoints = 3;
         for (int i = 0; i < theVertices.length; i += (myNumberOfPoints * NUMBER_OF_VERTEX_COMPONENTS)) {
-            PVector a = new PVector(theVertices[i], theVertices[i + 1], theVertices[i + 2]);
-            PVector b = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
-            PVector c = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
+            PVector a        = new PVector(theVertices[i], theVertices[i + 1], theVertices[i + 2]);
+            PVector b        = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
+            PVector c        = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
             PVector myNormal = new PVector();
             if (GET_NORMALS_DIRECTION == GET_NORMALS_CCW) {
                 calculateNormal(a, b, c, myNormal);
@@ -186,25 +186,25 @@ public class ModelLoaderOBJ {
     }
 
     public static gewebe.ModelData[] getModelDataGroups(String[] pLines) {
-        int myNumberOfObjects = 0;
-        ArrayList<Float> myTempVertices = new ArrayList<>();
-        ArrayList<Float> myTempTexCoords = new ArrayList<>();
-        ArrayList<Float> myTempNormals = new ArrayList<>();
-        ArrayList<Integer> myTempVertexIndices = new ArrayList<>();
-        ArrayList<Integer> myTempTexCoordsIndices = new ArrayList<>();
-        ArrayList<Integer> myTempNormalIndices = new ArrayList<>();
-        ArrayList<Integer> myGroupChangeIndices = new ArrayList<>();
-        ArrayList<String> myNames = new ArrayList<>();
-        ArrayList<ModelData> mModelDataSets = new ArrayList<>();
+        int                  myNumberOfObjects      = 0;
+        ArrayList<Float>     myTempVertices         = new ArrayList<>();
+        ArrayList<Float>     myTempTexCoords        = new ArrayList<>();
+        ArrayList<Float>     myTempNormals          = new ArrayList<>();
+        ArrayList<Integer>   myTempVertexIndices    = new ArrayList<>();
+        ArrayList<Integer>   myTempTexCoordsIndices = new ArrayList<>();
+        ArrayList<Integer>   myTempNormalIndices    = new ArrayList<>();
+        ArrayList<Integer>   myGroupChangeIndices   = new ArrayList<>();
+        ArrayList<String>    myNames                = new ArrayList<>();
+        ArrayList<ModelData> mModelDataSets         = new ArrayList<>();
 
         float[] myVertices;
         float[] myTexCoordinates;
         float[] myNormals;
         float[] myUnsortedVertices;
-        int[] myFaces;
-        int myIndexOffset = 0;
-        int myTexIndexOffset = 0;
-        int myNormalIndexOffset = 0;
+        int[]   myFaces;
+        int     myIndexOffset       = 0;
+        int     myTexIndexOffset    = 0;
+        int     myNormalIndexOffset = 0;
 
         for (String myLine : pLines) {
             String[] mLineElements = myLine.split("\\s+");
@@ -218,12 +218,12 @@ public class ModelLoaderOBJ {
                     if (myNumberOfObjects > 0) {
                         /* convert and rearrange vertices depending on indices described in 'f' */
                         myUnsortedVertices = new float[myTempVertices.size()];
-                        myFaces = new int[myTempVertexIndices.size()];
-                        myVertices = distributeVertices(myTempVertices,
-                                                        myTempVertexIndices,
-                                                        myUnsortedVertices,
-                                                        myFaces,
-                                                        myIndexOffset);
+                        myFaces            = new int[myTempVertexIndices.size()];
+                        myVertices         = distributeVertices(myTempVertices,
+                                                                myTempVertexIndices,
+                                                                myUnsortedVertices,
+                                                                myFaces,
+                                                                myIndexOffset);
 
                         /* convert and rearrange texcoordinates depending on indices described in 'f' */
                         myTexCoordinates = distributeTexCoordinates(myTempTexCoords,
@@ -247,8 +247,8 @@ public class ModelLoaderOBJ {
                                 createNormalsQUADS(myVertices, myNormals);
                             } else {
                                 System.out.println(
-                                "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t" +
-                                " implemented yet");
+                                        "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t" +
+                                        " implemented yet");
                             }
                         }
 
@@ -273,13 +273,13 @@ public class ModelLoaderOBJ {
                         myIndexOffset += myTempVertices.size() / NUMBER_OF_VERTEX_COMPONENTS;
                         myTexIndexOffset += myTempTexCoords.size() / 2;
                         myNormalIndexOffset += myTempNormals.size() / 3;
-                        myTempVertices = new ArrayList<>();
-                        myTempTexCoords = new ArrayList<>();
-                        myTempNormals = new ArrayList<>();
-                        myTempVertexIndices = new ArrayList<>();
+                        myTempVertices         = new ArrayList<>();
+                        myTempTexCoords        = new ArrayList<>();
+                        myTempNormals          = new ArrayList<>();
+                        myTempVertexIndices    = new ArrayList<>();
                         myTempTexCoordsIndices = new ArrayList<>();
-                        myTempNormalIndices = new ArrayList<>();
-                        myNames = new ArrayList<>();
+                        myTempNormalIndices    = new ArrayList<>();
+                        myNames                = new ArrayList<>();
                     }
 
                     myNumberOfObjects++;
@@ -323,7 +323,7 @@ public class ModelLoaderOBJ {
                 /* get indices for vertices and texture coordinates */
                 if (mLineElements[0].equals("f")) {
                     for (int i = 1; i < mLineElements.length; i++) {
-                        String myFaceElement = mLineElements[i];
+                        String   myFaceElement  = mLineElements[i];
                         String[] myFaceElements = myFaceElement.split("/");
                         if (myFaceElements.length == 1) {
                             myTempVertexIndices.add(Integer.valueOf(myFaceElements[0]));
@@ -342,12 +342,12 @@ public class ModelLoaderOBJ {
 
         /* convert and rearrange vertices depending on indices described in 'f' */
         myUnsortedVertices = new float[myTempVertices.size()];
-        myFaces = new int[myTempVertexIndices.size()];
-        myVertices = distributeVertices(myTempVertices,
-                                        myTempVertexIndices,
-                                        myUnsortedVertices,
-                                        myFaces,
-                                        myIndexOffset);
+        myFaces            = new int[myTempVertexIndices.size()];
+        myVertices         = distributeVertices(myTempVertices,
+                                                myTempVertexIndices,
+                                                myUnsortedVertices,
+                                                myFaces,
+                                                myIndexOffset);
 
         /* convert and rearrange texcoordinates depending on indices described in 'f' */
         myTexCoordinates = distributeTexCoordinates(myTempTexCoords, myTempTexCoordsIndices, myTexIndexOffset);
@@ -366,7 +366,7 @@ public class ModelLoaderOBJ {
                 createNormalsQUADS(myVertices, myNormals);
             } else {
                 System.out.println(
-                "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
+                        "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
             }
         }
 
@@ -395,8 +395,8 @@ public class ModelLoaderOBJ {
 
     public static gewebe.ModelData parseModelData(InputStream theModelFile) {
         InputStreamReader myInputStreamReader = new InputStreamReader(theModelFile);
-        BufferedReader myBufferedReader = new BufferedReader(myInputStreamReader);
-        ArrayList<String> mLines = new ArrayList<>();
+        BufferedReader    myBufferedReader    = new BufferedReader(myInputStreamReader);
+        ArrayList<String> mLines              = new ArrayList<>();
         try {
             String myLine;
             while ((myLine = myBufferedReader.readLine()) != null) {
@@ -416,15 +416,15 @@ public class ModelLoaderOBJ {
     }
 
     public static ModelData parseModelData(String[] pLines) {
-        int myNumberOfObjects = 0;
-        ArrayList<Float> myTempVertices = new ArrayList<>();
-        ArrayList<Float> myTempTexCoords = new ArrayList<>();
-        ArrayList<Float> myTempNormals = new ArrayList<>();
-        ArrayList<Integer> myTempVertexIndices = new ArrayList<>();
+        int                myNumberOfObjects      = 0;
+        ArrayList<Float>   myTempVertices         = new ArrayList<>();
+        ArrayList<Float>   myTempTexCoords        = new ArrayList<>();
+        ArrayList<Float>   myTempNormals          = new ArrayList<>();
+        ArrayList<Integer> myTempVertexIndices    = new ArrayList<>();
         ArrayList<Integer> myTempTexCoordsIndices = new ArrayList<>();
-        ArrayList<Integer> myTempNormalIndices = new ArrayList<>();
-        ArrayList<Integer> myGroupChangeIndices = new ArrayList<>();
-        ArrayList<String> myNames = new ArrayList<>();
+        ArrayList<Integer> myTempNormalIndices    = new ArrayList<>();
+        ArrayList<Integer> myGroupChangeIndices   = new ArrayList<>();
+        ArrayList<String>  myNames                = new ArrayList<>();
 
         for (String myLine : pLines) {
             String[] myLineElements = myLine.split("\\s+");
@@ -462,7 +462,7 @@ public class ModelLoaderOBJ {
                 /* get indices for vertices and texture coordinates */
                 if (myLineElements[0].equals("f")) {
                     for (int i = 1; i < myLineElements.length; i++) {
-                        String myFaceElement = myLineElements[i];
+                        String   myFaceElement  = myLineElements[i];
                         String[] myFaceElements = myFaceElement.split("/");
                         if (myFaceElements.length == 1) {
                             try {
@@ -510,10 +510,10 @@ public class ModelLoaderOBJ {
         }
 
         /* convert and rearrange vertices depending on indices described in 'f' */
-        float[] myVertices = new float[myTempVertices.size()];
+        float[] myVertices         = new float[myTempVertices.size()];
         float[] myUnsortedVertices = new float[myTempVertices.size()];
         for (int i = 0; i < myTempVertices.size(); i++) {
-            myVertices[i] = myTempVertices.get(i);
+            myVertices[i]         = myTempVertices.get(i);
             myUnsortedVertices[i] = myTempVertices.get(i);
         }
         int[] myFaces = new int[myTempVertexIndices.size()];
@@ -560,7 +560,7 @@ public class ModelLoaderOBJ {
                 createNormalsQUADS(myVertices, myNormals);
             } else {
                 System.out.println(
-                "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
+                        "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
             }
         }
 
@@ -615,7 +615,7 @@ public class ModelLoaderOBJ {
                 createNormalsQUADS(theVertices, myNormals);
             } else {
                 System.out.println(
-                "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
+                        "### WARNING @ ModelLoaderOBJ / normal autogenerator for this primitive isn t implemented yet");
             }
         }
         return myNormals;
@@ -647,7 +647,7 @@ public class ModelLoaderOBJ {
                                               int theIndexOffset) {
         float[] theVertices = new float[theTempVertices.size()];
         for (int i = 0; i < theTempVertices.size(); i++) {
-            theVertices[i] = theTempVertices.get(i);
+            theVertices[i]         = theTempVertices.get(i);
             theUnsortedVertices[i] = theTempVertices.get(i);
         }
         for (int i = 0; i < theTempVertexIndices.size(); i++) {
@@ -664,7 +664,7 @@ public class ModelLoaderOBJ {
                                              PVector theScale,
                                              PVector thePosition) {
         float[] myRearrangedVertices = new float[theIndices.length * theNumberOfVertexComponents];
-        int myVertexIndex = -1;
+        int     myVertexIndex        = -1;
         for (int theIndex : theIndices) {
             int myIndex = theIndex * theNumberOfVertexComponents;
             if (theNumberOfVertexComponents == 3) {

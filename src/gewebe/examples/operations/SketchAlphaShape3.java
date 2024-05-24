@@ -15,8 +15,8 @@ public class SketchAlphaShape3 extends PApplet {
      */
 
     private CGALAlphaShape3 mCGAL;
-    private Mesh mMesh;
-    private float[] mPoints3;
+    private Mesh            mMesh;
+    private float[]         mPoints3;
 
     public void settings() {
         size(1024, 768, P3D);

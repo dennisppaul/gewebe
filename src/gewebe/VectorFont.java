@@ -24,7 +24,8 @@ import processing.core.PVector;
 
 import javax.media.j3d.GeometryArray;
 import javax.vecmath.Point3f;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
@@ -37,15 +38,15 @@ import java.util.Collections;
 
 public class VectorFont {
 
-    public static final int CLOCKWISE = 1;
-    public static final int COUNTERCLOCKWISE = -1;
-    private final Font mFont;
-    private final FontRenderContext mFRC;
-    private boolean mStretchToFit = false;
-    private boolean mRepeat = false;
-    private float mPathFlatness = 1.0f;
-    private float mOutlineFlatness = 1.0f;
-    private int mInsideFlag = CLOCKWISE;
+    public static final int               CLOCKWISE        = 1;
+    public static final int               COUNTERCLOCKWISE = -1;
+    private final       Font              mFont;
+    private final       FontRenderContext mFRC;
+    private             boolean           mStretchToFit    = false;
+    private             boolean           mRepeat          = false;
+    private             float             mPathFlatness    = 1.0f;
+    private             float             mOutlineFlatness = 1.0f;
+    private             int               mInsideFlag      = CLOCKWISE;
 
     public VectorFont(final String pFontName, final float mFontSize) {
         this(Font.decode(pFontName).deriveFont(Font.PLAIN, mFontSize));
@@ -53,13 +54,13 @@ public class VectorFont {
 
     public VectorFont(final Font pFont) {
         mFont = pFont;
-        mFRC = new FontRenderContext(null, true, true);
+        mFRC  = new FontRenderContext(null, true, true);
     }
 
     public static ArrayList<PVector> convertToVertices(final ArrayList<ArrayList<ArrayList<PVector>>> pVectors) {
         final ArrayList<PVector> myCharTriangles = new ArrayList<>();
         for (ArrayList<ArrayList<PVector>> pVector : pVectors) {
-            final ArrayList<PVector> myVertices = new ArrayList<>();
+            final ArrayList<PVector> myVertices         = new ArrayList<>();
             final ArrayList<Integer> myVertivesPerShape = new ArrayList<>();
             for (final ArrayList<PVector> myOutline : pVector) {
                 myVertivesPerShape.add(myOutline.size());
@@ -115,7 +116,7 @@ public class VectorFont {
 
     public ArrayList<ArrayList<ArrayList<PVector>>> characters(String pText) {
         final ArrayList<ArrayList<ArrayList<PVector>>> myOutlines = new ArrayList<>();
-        final GlyphVector mVector = mFont.createGlyphVector(mFRC, pText);
+        final GlyphVector                              mVector    = mFont.createGlyphVector(mFRC, pText);
         for (int j = 0; j < mVector.getNumGlyphs(); j++) {
             final Shape mGlyph = mVector.getGlyphOutline(j);
             final ArrayList<ArrayList<ArrayList<PVector>>> mNewCharacters = extractOutlineFromComplexGlyph(mGlyph,
@@ -137,17 +138,18 @@ public class VectorFont {
     }
 
     public ArrayList<ArrayList<ArrayList<PVector>>> characters(final String pText, final Shape pPath) {
-        final ArrayList<ArrayList<ArrayList<PVector>>> mAllCharacters = new ArrayList<>();
-        final GlyphVector mGlyphVector = mFont.createGlyphVector(mFRC, pText);
-        final PathIterator it = new FlatteningPathIterator(pPath.getPathIterator(null), mPathFlatness);
-        float[] mPoints = new float[6];
-        float moveX = 0, moveY = 0;
-        float lastX = 0, lastY = 0;
-        float mThisX, mThisY;
-        int type;
-        float mNext = 0;
-        int mCurrentCharID = 0;
-        int mNumberOfGlyphs = mGlyphVector.getNumGlyphs();
+        final ArrayList<ArrayList<ArrayList<PVector>>> mAllCharacters  = new ArrayList<>();
+        final GlyphVector                              mGlyphVector    = mFont.createGlyphVector(mFRC, pText);
+        final PathIterator                             it              = new FlatteningPathIterator(pPath.getPathIterator(null),
+                                                                                                    mPathFlatness);
+        float[]                                        mPoints         = new float[6];
+        float                                          moveX           = 0, moveY = 0;
+        float                                          lastX           = 0, lastY = 0;
+        float                                          mThisX, mThisY;
+        int                                            type;
+        float                                          mNext           = 0;
+        int                                            mCurrentCharID  = 0;
+        int                                            mNumberOfGlyphs = mGlyphVector.getNumGlyphs();
 
         if (mNumberOfGlyphs == 0) {
             return mAllCharacters;
@@ -155,7 +157,7 @@ public class VectorFont {
 
         float factor = mStretchToFit ? measurePathLength(pPath,
                                                          mPathFlatness) / (float) mGlyphVector.getLogicalBounds()
-                                                                                              .getWidth() : 1.0f;
+                .getWidth() : 1.0f;
         float nextAdvance = 0;
 
         while (mCurrentCharID < mNumberOfGlyphs && !it.isDone()) {
@@ -180,16 +182,16 @@ public class VectorFont {
                     final float dy = mThisY - lastY;
                     float distance = (float) Math.sqrt(dx * dx + dy * dy);
                     if (distance >= mNext) {
-                        float r = 1.0f / distance;
+                        float r     = 1.0f / distance;
                         float angle = (float) Math.atan2(dy, dx);
                         while (mCurrentCharID < mNumberOfGlyphs && distance >= mNext) {
-                            final Shape mGlyph = mGlyphVector.getGlyphOutline(mCurrentCharID);
-                            final Point2D p = mGlyphVector.getGlyphPosition(mCurrentCharID);
-                            final float px = (float) p.getX();
-                            final float py = (float) p.getY();
-                            final float x = lastX + mNext * dx * r;
-                            final float y = lastY + mNext * dy * r;
-                            final float advance = nextAdvance;
+                            final Shape   mGlyph  = mGlyphVector.getGlyphOutline(mCurrentCharID);
+                            final Point2D p       = mGlyphVector.getGlyphPosition(mCurrentCharID);
+                            final float   px      = (float) p.getX();
+                            final float   py      = (float) p.getY();
+                            final float   x       = lastX + mNext * dx * r;
+                            final float   y       = lastY + mNext * dy * r;
+                            final float   advance = nextAdvance;
                             nextAdvance = mCurrentCharID < mNumberOfGlyphs - 1 ? mGlyphVector.getGlyphMetrics(
                                     mCurrentCharID + 1).getAdvance() * 0.5f : 0;
                             final AffineTransform mTransform = new AffineTransform();
@@ -201,9 +203,9 @@ public class VectorFont {
                             final Shape mShape = mTransform.createTransformedShape(mGlyph);
                             final ArrayList<ArrayList<ArrayList<PVector>>> mNewCharacters =
                                     extractOutlineFromComplexGlyph(
-                                    mShape,
-                                    mOutlineFlatness,
-                                    mInsideFlag);
+                                            mShape,
+                                            mOutlineFlatness,
+                                            mInsideFlag);
                             mAllCharacters.addAll(mNewCharacters);
                             mNext += (advance + nextAdvance) * factor;
                             mCurrentCharID++;
@@ -231,16 +233,16 @@ public class VectorFont {
 
         final GlyphVector mGlyphVector = mFont.createGlyphVector(mFRC, pText);
 
-        final GeneralPath mResult = new GeneralPath();
-        final PathIterator it = new FlatteningPathIterator(mPath.getPathIterator(null), mPathFlatness);
-        float mPoints[] = new float[6];
-        float moveX = 0, moveY = 0;
-        float lastX = 0, lastY = 0;
-        float thisX, thisY;
-        int type;
-        float next = 0;
-        int currentChar = 0;
-        int length = mGlyphVector.getNumGlyphs();
+        final GeneralPath  mResult     = new GeneralPath();
+        final PathIterator it          = new FlatteningPathIterator(mPath.getPathIterator(null), mPathFlatness);
+        float              mPoints[]   = new float[6];
+        float              moveX       = 0, moveY = 0;
+        float              lastX       = 0, lastY = 0;
+        float              thisX, thisY;
+        int                type;
+        float              next        = 0;
+        int                currentChar = 0;
+        int                length      = mGlyphVector.getNumGlyphs();
 
         if (length == 0) {
             return mResult;
@@ -248,7 +250,7 @@ public class VectorFont {
 
         float factor = mStretchToFit ? measurePathLength(mPath,
                                                          mPathFlatness) / (float) mGlyphVector.getLogicalBounds()
-                                                                                              .getWidth() : 1.0f;
+                .getWidth() : 1.0f;
         float nextAdvance = 0;
 
         while (currentChar < length && !it.isDone()) {
@@ -274,18 +276,18 @@ public class VectorFont {
                     float dy = thisY - lastY;
                     float distance = (float) Math.sqrt(dx * dx + dy * dy);
                     if (distance >= next) {
-                        float r = 1.0f / distance;
+                        float r     = 1.0f / distance;
                         float angle = (float) Math.atan2(dy, dx);
                         while (currentChar < length && distance >= next) {
-                            Shape glyph = mGlyphVector.getGlyphOutline(currentChar);
-                            Point2D p = mGlyphVector.getGlyphPosition(currentChar);
-                            float px = (float) p.getX();
-                            float py = (float) p.getY();
-                            float x = lastX + next * dx * r;
-                            float y = lastY + next * dy * r;
-                            float advance = nextAdvance;
+                            Shape   glyph   = mGlyphVector.getGlyphOutline(currentChar);
+                            Point2D p       = mGlyphVector.getGlyphPosition(currentChar);
+                            float   px      = (float) p.getX();
+                            float   py      = (float) p.getY();
+                            float   x       = lastX + next * dx * r;
+                            float   y       = lastY + next * dy * r;
+                            float   advance = nextAdvance;
                             nextAdvance = currentChar < length - 1 ? mGlyphVector.getGlyphMetrics(currentChar + 1)
-                                                                                 .getAdvance() * 0.5f : 0;
+                                                                             .getAdvance() * 0.5f : 0;
                             final AffineTransform mTransform = new AffineTransform();
                             mTransform.setToTranslation(x, y);
                             mTransform.rotate(angle);
@@ -335,8 +337,8 @@ public class VectorFont {
     private static ArrayList<ArrayList<ArrayList<PVector>>> extractOutlineFromComplexGlyph(final Shape pShape,
                                                                                            final float pOutlineFlatness,
                                                                                            final int pInsideFlag) {
-        final ArrayList<ArrayList<ArrayList<PVector>>> pAllCharacters = new ArrayList<>();
-        final ArrayList<ArrayList<PVector>> mSingleCharacter = extractOutlineFromSimpleShape(pShape, pOutlineFlatness);
+        final ArrayList<ArrayList<ArrayList<PVector>>> pAllCharacters   = new ArrayList<>();
+        final ArrayList<ArrayList<PVector>>            mSingleCharacter = extractOutlineFromSimpleShape(pShape, pOutlineFlatness);
         /* add simple character or handle and split complex glyphs */
         if (mSingleCharacter.size() <= 1) {
             pAllCharacters.add(mSingleCharacter);
@@ -352,12 +354,12 @@ public class VectorFont {
         if (pFlatness <= 0) {
             return myCharacter;
         }
-        final PathIterator mIt = new FlatteningPathIterator(pShape.getPathIterator(null), pFlatness);
-        final float[] mSegment = new float[6];
-        float x;
-        float y;
-        float mx = 0;
-        float my = 0;
+        final PathIterator mIt      = new FlatteningPathIterator(pShape.getPathIterator(null), pFlatness);
+        final float[]      mSegment = new float[6];
+        float              x;
+        float              y;
+        float              mx       = 0;
+        float              my       = 0;
         ArrayList<PVector> mOutline = new ArrayList<>();
         while (!mIt.isDone()) {
             final int mSegmentType = mIt.currentSegment(mSegment);
@@ -389,7 +391,7 @@ public class VectorFont {
                                             final ArrayList<ArrayList<ArrayList<PVector>>> pAllCharacters,
                                             final int pInsideFlag) {
         /*  sort inside and outside shapes */
-        final ArrayList<MShape> mInsideShapes = new ArrayList<>();
+        final ArrayList<MShape> mInsideShapes  = new ArrayList<>();
         final ArrayList<MShape> mOutsideShapes = new ArrayList<>();
         for (final ArrayList<PVector> mSingleShape : pSingleCharacter) {
             final boolean mIsInside = gewebe.MeshUtil.isClockWise2D(mSingleShape) == pInsideFlag;
@@ -444,13 +446,13 @@ public class VectorFont {
     }
 
     private static float measurePathLength(final Shape shape, final float pPathFlatness) {
-        PathIterator it = new FlatteningPathIterator(shape.getPathIterator(null), pPathFlatness);
-        float points[] = new float[6];
-        float moveX = 0, moveY = 0;
-        float lastX = 0, lastY = 0;
-        float thisX, thisY;
-        int type;
-        float total = 0;
+        PathIterator it       = new FlatteningPathIterator(shape.getPathIterator(null), pPathFlatness);
+        float        points[] = new float[6];
+        float        moveX    = 0, moveY = 0;
+        float        lastX    = 0, lastY = 0;
+        float        thisX, thisY;
+        int          type;
+        float        total    = 0;
 
         while (!it.isDone()) {
             type = it.currentSegment(points);
@@ -488,7 +490,7 @@ public class VectorFont {
         myGeometryInfo.setContourCounts(theContourCount);
 
         final GeometryArray myGeometryArray = myGeometryInfo.getGeometryArray();
-        final PVector[] myPoints = new PVector[myGeometryArray.getValidVertexCount()];
+        final PVector[]     myPoints        = new PVector[myGeometryArray.getValidVertexCount()];
         for (int i = 0; i < myGeometryArray.getValidVertexCount(); i++) {
             final Point3f p = new Point3f();
             myGeometryArray.getCoordinate(i, p);
@@ -502,7 +504,7 @@ public class VectorFont {
     private static ArrayList<PVector[]> convertToTriangles(final ArrayList<ArrayList<ArrayList<PVector>>> pVectors) {
         final ArrayList<PVector[]> myCharTriangles = new ArrayList<>();
         for (ArrayList<ArrayList<PVector>> pVector : pVectors) {
-            final ArrayList<PVector> myVertices = new ArrayList<>();
+            final ArrayList<PVector> myVertices         = new ArrayList<>();
             final ArrayList<Integer> myVertivesPerShape = new ArrayList<>();
             for (final ArrayList<PVector> myOutline : pVector) {
                 myVertivesPerShape.add(myOutline.size());
@@ -526,8 +528,8 @@ public class VectorFont {
         final ArrayList<MShape> inside_shape;
 
         private MShape(final boolean pInside, final ArrayList<PVector> pShape) {
-            inside = pInside;
-            shape = pShape;
+            inside       = pInside;
+            shape        = pShape;
             inside_shape = new ArrayList<>();
         }
     }

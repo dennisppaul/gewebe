@@ -66,7 +66,7 @@ public class MeshUtil {
             final PVector p1 = mPoints.get(i);
             final PVector p2 = mPoints.get((i + 1) % mPoints.size());
             final PVector p3 = mPoints.get((i + 2) % mPoints.size());
-            float z;
+            float         z;
             z = (p2.x - p1.x) * (p3.y - p2.y);
             z -= (p2.y - p1.y) * (p3.x - p2.x);
             if (z < 0) {
@@ -142,11 +142,11 @@ public class MeshUtil {
 
     public static void createNormals(float[] theVertices, float[] theNormals) {
         final int NUMBER_OF_VERTEX_COMPONENTS = 3;
-        final int myNumberOfPoints = 3;
+        final int myNumberOfPoints            = 3;
         for (int i = 0; i < theVertices.length; i += (myNumberOfPoints * NUMBER_OF_VERTEX_COMPONENTS)) {
-            PVector a = new PVector(theVertices[i + 0], theVertices[i + 1], theVertices[i + 2]);
-            PVector b = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
-            PVector c = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
+            PVector a        = new PVector(theVertices[i + 0], theVertices[i + 1], theVertices[i + 2]);
+            PVector b        = new PVector(theVertices[i + 3], theVertices[i + 4], theVertices[i + 5]);
+            PVector c        = new PVector(theVertices[i + 6], theVertices[i + 7], theVertices[i + 8]);
             PVector myNormal = new PVector();
             calculateNormal(a, b, c, myNormal);
 
@@ -222,8 +222,8 @@ public class MeshUtil {
                                                final IntersectionResult pIntersectionResult,
                                                final boolean pCullingFlag) {
 
-        float det;
-        float inv_det;
+        float       det;
+        float       inv_det;
         final float M_EPSILON = 0.0000001f;
 
         PVector P_VEC = new PVector();
@@ -265,7 +265,7 @@ public class MeshUtil {
 
             /* calculate t, scale parameters, ray intersects triangle */
             pIntersectionResult.t = TMP_EDGE_2.dot(Q_VEC);
-            inv_det = 1.0f / det;
+            inv_det               = 1.0f / det;
             pIntersectionResult.t *= inv_det;
             pIntersectionResult.u *= inv_det;
             pIntersectionResult.v *= inv_det;
@@ -324,7 +324,7 @@ public class MeshUtil {
         PVector h;
         PVector s;
         PVector q;
-        float a, f, u, v;
+        float   a, f, u, v;
         PVector edge1 = PVector.sub(pTriangleVertex1, pTriangleVertex0);
         PVector edge2 = PVector.sub(pTriangleVertex2, pTriangleVertex0);
         h = pRayVector.cross(edge2);
@@ -404,7 +404,7 @@ public class MeshUtil {
             }
         }
         int bottom = q1;
-        int q2 = -1;
+        int q2     = -1;
         outputList.add(points.get(q1));
 
         // now choose next point as q2 and keep finding next vertex via giftwrap.

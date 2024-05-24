@@ -25,16 +25,16 @@ import java.util.ArrayList;
 
 public class MetaBallManager {
 
-    public boolean accumulate_energy_levels = false;
-    public boolean clamp_energy_levels = false;
-    public PVector dimension = new PVector(100, 100, 100);
-    public float maximum_energy_level = 1.0f;
-    public float minimum_energy_level = 0.0f;
-    public PVector position = new PVector();
-    public Vector3i resolution = new Vector3i(10, 10, 10);
-    protected ArrayList<MetaBall> mMetaBalls = new ArrayList<>();
-    protected float[][][] mForceField;
-    private float mIsoValue = 0.1f;
+    public    boolean             accumulate_energy_levels = false;
+    public    boolean             clamp_energy_levels      = false;
+    public    PVector             dimension                = new PVector(100, 100, 100);
+    public    float               maximum_energy_level     = 1.0f;
+    public    float               minimum_energy_level     = 0.0f;
+    public    PVector             position                 = new PVector();
+    public    Vector3i            resolution               = new Vector3i(10, 10, 10);
+    protected ArrayList<MetaBall> mMetaBalls               = new ArrayList<>();
+    protected float[][][]         mForceField;
+    private   float               mIsoValue                = 0.1f;
 
     public float isovalue() {
         return mIsoValue;
@@ -131,7 +131,7 @@ public class MetaBallManager {
         float f = 0;
         for (final MetaBall myMetaBall : mMetaBalls) {
             final float myDistanceSquared = MeshUtil.distanceSquared(myMetaBall.position, thePosition);
-            float myRadiusSquared = myMetaBall.radius * myMetaBall.radius;
+            float       myRadiusSquared   = myMetaBall.radius * myMetaBall.radius;
             if (myDistanceSquared < myRadiusSquared) {
                 //float fallOff = ( myRadiusSquared - distance ) /  myRadiusSquared;
                 float fallOff = 1f - (myDistanceSquared / myRadiusSquared);

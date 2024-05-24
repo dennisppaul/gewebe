@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class SketchAttractors extends PApplet {
 
-    private static final int ATTRACTOR_LORENZ = 0;
-    private static final int ATTRACTOR_SPROTT = 1;
+    private static final int ATTRACTOR_LORENZ    = 0;
+    private static final int ATTRACTOR_SPROTT    = 1;
     private static final int ATTRACTOR_FOUR_WING = 2;
-    private static final int ATTRACTOR_THOMAS = 3;
+    private static final int ATTRACTOR_THOMAS    = 3;
     int mCurrentAttractor = ATTRACTOR_LORENZ;
 
     float x;
@@ -60,18 +60,18 @@ public class SketchAttractors extends PApplet {
 
         if (mClearVertices) {
             mVertices.clear();
-            x = 0.01f;
-            y = 0;
-            z = 0;
+            x              = 0.01f;
+            y              = 0;
+            z              = 0;
             mClearVertices = false;
         }
     }
 
     private void calcFourWingAttractor() {
         float dt = 0.1f;
-        float a = 0.2f;
-        float b = 0.01f;
-        float c = -0.4f;
+        float a  = 0.2f;
+        float b  = 0.01f;
+        float c  = -0.4f;
 
         float dx = a * x + y * z;
         float dy = b * x + c * y - x * z;
@@ -88,7 +88,7 @@ public class SketchAttractors extends PApplet {
 
     private void calcSprottAttractor() {
         float dt = 0.01f;
-        float a = 2.07f; // Sprott attractor parameter
+        float a  = 2.07f; // Sprott attractor parameter
 
         float dx = y + a * x * y + x * z;
         float dy = 1 - a * (x * x) + y * z;
@@ -105,9 +105,9 @@ public class SketchAttractors extends PApplet {
 
     private void calcLorenzAttractor() {
         float dt = 0.01f;
-        float a = 10;
-        float b = 28;
-        float c = 8.0f / 3.0f;
+        float a  = 10;
+        float b  = 28;
+        float c  = 8.0f / 3.0f;
 
         float dx = (a * (y - x)) * dt;
         float dy = (x * (b - z) - y) * dt;
@@ -124,7 +124,7 @@ public class SketchAttractors extends PApplet {
 
     private void calcThomasAttractor() {
         float dt = 0.2f;
-        float b = 0.208186f;
+        float b  = 0.208186f;
 
         float dx = sin(y) - b * x;
         float dy = sin(z) - b * y;

@@ -26,17 +26,17 @@ import java.util.ArrayList;
 
 public class ModelData implements Serializable {
 
-    private static final int DEFAULT_VERTEX_COLOR_COMPONENT_COUNT = 4;
-    private static final int DEFAULT_TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
-    public final float[] vertices;
-    public final float[] texture_coordinates;
-    public final float[] vertex_normals;
-    public final float[] vertex_colors;
-    public final int[] faces;
-    public final int primitive;
-    public final int object_count;
-    public final int vertex_component_count;
-    public final String name;
+    private static final int     DEFAULT_VERTEX_COLOR_COMPONENT_COUNT        = 4;
+    private static final int     DEFAULT_TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
+    public final         float[] vertices;
+    public final         float[] texture_coordinates;
+    public final         float[] vertex_normals;
+    public final         float[] vertex_colors;
+    public final         int[]   faces;
+    public final         int     primitive;
+    public final         int     object_count;
+    public final         int     vertex_component_count;
+    public final         String  name;
 
     public ModelData(float[] pVertices,
                      float[] pTextureCoordinates,
@@ -47,15 +47,15 @@ public class ModelData implements Serializable {
                      int pVertexComponentCount,
                      int pNumberOfObjects,
                      String pName) {
-        vertices = pVertices;
-        texture_coordinates = pTextureCoordinates;
-        vertex_normals = pNormals;
-        vertex_colors = pVertexColors;
-        primitive = pPrimitive;
-        faces = pFaces;
-        object_count = pNumberOfObjects;
+        vertices               = pVertices;
+        texture_coordinates    = pTextureCoordinates;
+        vertex_normals         = pNormals;
+        vertex_colors          = pVertexColors;
+        primitive              = pPrimitive;
+        faces                  = pFaces;
+        object_count           = pNumberOfObjects;
         vertex_component_count = pVertexComponentCount;
-        name = pName;
+        name                   = pName;
     }
 
     public float[] vertices() {
@@ -96,7 +96,7 @@ public class ModelData implements Serializable {
         System.out.println(
                 "### INFO @ ModelData.averageNormals() / this algorithm is not very efficient yet. Takes quite long!");
         for (int i = 0; i < vertices.length; i += vertex_component_count) {
-            PVector myVertex = new PVector(vertices[i + 0], vertices[i + 1], vertices[i + 2]);
+            PVector            myVertex  = new PVector(vertices[i + 0], vertices[i + 1], vertices[i + 2]);
             ArrayList<PVector> myNormals = new ArrayList<>();
 
             ArrayList<Integer> myNormalIndices = new ArrayList<>();

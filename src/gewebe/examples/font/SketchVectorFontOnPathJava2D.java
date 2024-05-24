@@ -23,14 +23,14 @@ public class SketchVectorFontOnPathJava2D extends PApplet {
         mPathCreator.stretch_to_fit(true);
         mPathCreator.repeat(false);
 
-        final float mRadius = 550;
-        final String mText = "Since I was very young I realized I never wanted to be human size. ";
-        final java.awt.geom.Ellipse2D.Float mPath = new java.awt.geom.Ellipse2D.Float();
-        mPath.x = -mRadius / 2;
-        mPath.y = -mRadius / 2;
-        mPath.width = mRadius;
+        final float                         mRadius = 550;
+        final String                        mText   = "Since I was very young I realized I never wanted to be human size. ";
+        final java.awt.geom.Ellipse2D.Float mPath   = new java.awt.geom.Ellipse2D.Float();
+        mPath.x      = -mRadius / 2;
+        mPath.y      = -mRadius / 2;
+        mPath.width  = mRadius;
         mPath.height = mRadius;
-        mCharacters = mPathCreator.charactersJAVA2D(mText, mPath);
+        mCharacters  = mPathCreator.charactersJAVA2D(mText, mPath);
     }
 
     public void draw() {
@@ -50,9 +50,9 @@ public class SketchVectorFontOnPathJava2D extends PApplet {
         }
 
         if (pShape != null) {
-            final java.awt.geom.PathIterator it = pShape.getPathIterator(null, 1.0f);
-            int type;
-            float[] points = new float[6];
+            final java.awt.geom.PathIterator it     = pShape.getPathIterator(null, 1.0f);
+            int                              type;
+            float[]                          points = new float[6];
             beginShape(POLYGON);
             while (!it.isDone()) {
                 type = it.currentSegment(points);

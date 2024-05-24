@@ -9,7 +9,7 @@ import org.sunflow.math.Vector3;
 import processing.core.PApplet;
 import processing.opengl.PGraphics3D;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * This class glues Sunflow and Processing together. Partly borrowed from Hipsterinc P5Sunflow
@@ -20,97 +20,97 @@ import java.awt.*;
 
 public class P5SunflowAPIAPI extends PGraphics3D {
 
-    public final String BUCKET_ORDER_COLUMN = "column";
-    public final String BUCKET_ORDER_DIAGONAL = "diagonal";
-    public final String BUCKET_ORDER_HILBERT = "hilbert";
-    public final String BUCKET_ORDER_RANDOM = "random";
-    public final String BUCKET_ORDER_ROW = "row";
-    public final String BUCKET_ORDER_SPIRAL = "spiral";
-    public final String CAMERA_FISHEYE = "fisheye";
-    public final String CAMERA_PINHOLE = "pinhole";
-    public final String CAMERA_SPHERICAL = "spherical";
-    public final String CAMERA_THINLENS = "thinlens";
-    public final String COLORSPACE_SRGB_LINEAR = "sRGB linear";
-    public final String COLORSPACE_SRGB_NONLINEAR = "sRGB nonlinear";
-    public final String COLORSPACE_XYZ = "XYZ";
-    public final String FILTER_BLACKMAN_HARRIS = "blackman-harris";
-    public final String FILTER_BOX = "box";
-    public final String FILTER_BSPLINE = "bspline";
-    public final String FILTER_CATMULL_ROM = "catmull-rom";
-    public final String FILTER_GAUSSIAN = "gaussian";
-    public final String FILTER_LANCZOS = "lanczos";
-    public final String FILTER_MITCHELL = "mitchell";
-    public final String FILTER_SINC = "sinc";
-    public final String FILTER_TRIANGLE = "triangle";
-    public final String GI_AMBIENT_OCCLUSION = "ambocc";
-    public final String GI_FAKE = "fake";
-    public final String GI_INSTANT_GI = "igi";
-    public final String GI_IRRADIANCE_CACHE = "irr-cache";
-    public final String GI_PATH = "path";
-    public final String LIGHT_DIRECTIONAL = "directional";
-    public final String LIGHT_IMAGEBASED = "ibl";
-    public final String LIGHT_MESH = "triangle_mesh";
-    public final String LIGHT_POINT = "point";
-    public final String LIGHT_SPHERE = "sphere";
-    public final String LIGHT_SUNSKY = "sunsky";
-    public final String MODIFIER_BUMP_MAP = "bump_map";
-    public final String MODIFIER_NORMAL_MAP = "normal_map";
-    public final String MODIFIER_PERLIN_MAP = "perlin";
-    public final String SHADER_AMBIENT_OCCLUSION = "ambient_occlusion";
-    public final String SHADER_CONSTANT = "constant";
-    public final String SHADER_DIFFUSE = "diffuse";
-    public final String SHADER_GLASS = "glass";
-    public final String SHADER_MIRROR = "mirror";
-    public final String SHADER_PHONG = "phong";
-    public final String SHADER_SHINY_DIFFUSE = "shiny_diffuse";
-    public final String SHADER_TEXTURED_AMBIENT_OCCLUSION = "textured_ambient_occlusion";
-    public final String SHADER_TEXTURED_DIFFUSE = "textured_diffuse";
-    public final String SHADER_TEXTURED_PHONG = "textured_phong";
-    public final String SHADER_TEXTURED_SHINY_DIFFUSE = "textured_shiny_diffuse";
-    public final String SHADER_TEXTURED_WARD = "textured_ward";
-    public final String SHADER_UBER = "uber";
-    public final String SHADER_WARD = "ward";
-    public final String SHADER_WIREFRAME = "wireframe";
+    public final String                                         BUCKET_ORDER_COLUMN               = "column";
+    public final String                                         BUCKET_ORDER_DIAGONAL             = "diagonal";
+    public final String                                         BUCKET_ORDER_HILBERT              = "hilbert";
+    public final String                                         BUCKET_ORDER_RANDOM               = "random";
+    public final String                                         BUCKET_ORDER_ROW                  = "row";
+    public final String                                         BUCKET_ORDER_SPIRAL               = "spiral";
+    public final String                                         CAMERA_FISHEYE                    = "fisheye";
+    public final String                                         CAMERA_PINHOLE                    = "pinhole";
+    public final String                                         CAMERA_SPHERICAL                  = "spherical";
+    public final String                                         CAMERA_THINLENS                   = "thinlens";
+    public final String                                         COLORSPACE_SRGB_LINEAR            = "sRGB linear";
+    public final String                                         COLORSPACE_SRGB_NONLINEAR         = "sRGB nonlinear";
+    public final String                                         COLORSPACE_XYZ                    = "XYZ";
+    public final String                                         FILTER_BLACKMAN_HARRIS            = "blackman-harris";
+    public final String                                         FILTER_BOX                        = "box";
+    public final String                                         FILTER_BSPLINE                    = "bspline";
+    public final String                                         FILTER_CATMULL_ROM                = "catmull-rom";
+    public final String                                         FILTER_GAUSSIAN                   = "gaussian";
+    public final String                                         FILTER_LANCZOS                    = "lanczos";
+    public final String                                         FILTER_MITCHELL                   = "mitchell";
+    public final String                                         FILTER_SINC                       = "sinc";
+    public final String                                         FILTER_TRIANGLE                   = "triangle";
+    public final String                                         GI_AMBIENT_OCCLUSION              = "ambocc";
+    public final String                                         GI_FAKE                           = "fake";
+    public final String                                         GI_INSTANT_GI                     = "igi";
+    public final String                                         GI_IRRADIANCE_CACHE               = "irr-cache";
+    public final String                                         GI_PATH                           = "path";
+    public final String                                         LIGHT_DIRECTIONAL                 = "directional";
+    public final String                                         LIGHT_IMAGEBASED                  = "ibl";
+    public final String                                         LIGHT_MESH                        = "triangle_mesh";
+    public final String                                         LIGHT_POINT                       = "point";
+    public final String                                         LIGHT_SPHERE                      = "sphere";
+    public final String                                         LIGHT_SUNSKY                      = "sunsky";
+    public final String                                         MODIFIER_BUMP_MAP                 = "bump_map";
+    public final String                                         MODIFIER_NORMAL_MAP               = "normal_map";
+    public final String                                         MODIFIER_PERLIN_MAP               = "perlin";
+    public final String                                         SHADER_AMBIENT_OCCLUSION          = "ambient_occlusion";
+    public final String                                         SHADER_CONSTANT                   = "constant";
+    public final String                                         SHADER_DIFFUSE                    = "diffuse";
+    public final String                                         SHADER_GLASS                      = "glass";
+    public final String                                         SHADER_MIRROR                     = "mirror";
+    public final String                                         SHADER_PHONG                      = "phong";
+    public final String                                         SHADER_SHINY_DIFFUSE              = "shiny_diffuse";
+    public final String                                         SHADER_TEXTURED_AMBIENT_OCCLUSION = "textured_ambient_occlusion";
+    public final String                                         SHADER_TEXTURED_DIFFUSE           = "textured_diffuse";
+    public final String                                         SHADER_TEXTURED_PHONG             = "textured_phong";
+    public final String                                         SHADER_TEXTURED_SHINY_DIFFUSE     = "textured_shiny_diffuse";
+    public final String                                         SHADER_TEXTURED_WARD              = "textured_ward";
+    public final String                                         SHADER_UBER                       = "uber";
+    public final String                                         SHADER_WARD                       = "ward";
+    public final String                                         SHADER_WIREFRAME                  = "wireframe";
     //////////////////////////////////////////////////////////////////
     // Sunflow parameters
-    protected SunflowAPI sunflow;
-    protected PApplet applet;
-    protected gewebe.sandbox.sunflowapiapi.ProcessingDisplay display;
+    protected    SunflowAPI                                     sunflow;
+    protected    PApplet                                        applet;
+    protected    gewebe.sandbox.sunflowapiapi.ProcessingDisplay display;
     /* for conversion from processing */
     gewebe.sandbox.sunflowapiapi.SunflowShader shader;
-    private String currShader;
-    private String currModifier;
-    private String currCamera;
-    private String currBucketOrder;
-    private String currFilter;
-    private String cameraType;
-    private String modifierType;
+    private String       currShader;
+    private String       currModifier;
+    private String       currCamera;
+    private String       currBucketOrder;
+    private String       currFilter;
+    private String       cameraType;
+    private String       modifierType;
     private FrameDisplay windowDisplay;
-    private FileDisplay fileDisplay;
-    private String colorSpace = COLORSPACE_SRGB_NONLINEAR;
-    private Point3 eye;
-    private Point3 target;
-    private Vector3 up;
-    private int sides;
-    private float fov;
-    private float aspect = 1;
-    private float shiftX;
-    private float shiftY;
-    private float focusDistance;
-    private float lensRadius;
-    private float lensRotation;
-    private int tileX;
-    private int tileY;
+    private FileDisplay  fileDisplay;
+    private String       colorSpace    = COLORSPACE_SRGB_NONLINEAR;
+    private Point3       eye;
+    private Point3       target;
+    private Vector3      up;
+    private int          sides;
+    private float        fov;
+    private float        aspect        = 1;
+    private float        shiftX;
+    private float        shiftY;
+    private float        focusDistance;
+    private float        lensRadius;
+    private float        lensRotation;
+    private int          tileX;
+    private int          tileY;
     // unique name id
-    private int uniqueID = 0;
+    private int          uniqueID      = 0;
     // modifier parameters
-    private int modifiercount = 0;
-    private boolean isModifiers = false;
+    private int          modifiercount = 0;
+    private boolean      isModifiers   = false;
 
     // private int width = 640;
     // private int height = 480;
-    private int aaMin = 1;
-    private int aaMax = 2;
+    private int aaMin        = 1;
+    private int aaMax        = 2;
     private int previewAaMin = 0;
     private int previewAaMax = 1;
 
@@ -125,9 +125,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      * Called in response to a resize event, handles setting the
      * new width and height internally, as well as re-allocating
      * the pixel buffer for the new size.
-     *
+     * <p>
      * Note that this will nuke any cameraMode() settings.
-     *
+     * <p>
      * No drawing can happen in this function, and no talking to the graphics
      * context. That is, no glXxxx() calls, or other things that change state.
      */
@@ -144,11 +144,11 @@ public class P5SunflowAPIAPI extends PGraphics3D {
         super.beginDraw();
         // set default values
         uniqueID = 0;
-        shader = null;
-        sunflow = null;
-        sunflow = new SunflowAPI();
-        shader = new SunflowShader(sunflow);
-        fov = cameraFOV * RAD_TO_DEG;
+        shader   = null;
+        sunflow  = null;
+        sunflow  = new SunflowAPI();
+        shader   = new SunflowShader(sunflow);
+        fov      = cameraFOV * RAD_TO_DEG;
         // default cam
         this.setPinholeCamera("internal_defaultcamera", fov, aspect);
         // default shader
@@ -889,7 +889,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
         sunflow.parameter("triangles", triangles);
         sunflow.geometry(name, "triangle_mesh");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -936,7 +938,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "bezier_mesh");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -958,7 +962,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void drawSphere(String name) {
         sunflow.geometry(name, "sphere");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -973,7 +979,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      */
     public void drawSphere(String name, float x, float y, float z, float size) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
 
         Matrix4 m = Matrix4.IDENTITY;
         m = scale.multiply(m);
@@ -981,7 +987,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "sphere");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
     }
@@ -994,7 +1002,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void drawBox(String name) {
         sunflow.geometry(name, "box");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -1010,7 +1020,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      */
     public void drawBox(String name, float x, float y, float z, float size) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
 
         Matrix4 m = Matrix4.IDENTITY;
         m = scale.multiply(m);
@@ -1019,7 +1029,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
         sunflow.geometry(name, "box");
         sunflow.parameter("shaders", currShader);
         sunflow.parameter("transform", m);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -1045,7 +1057,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
                         float yRotation,
                         float zRotation) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
         Matrix4 rotate = Matrix4.IDENTITY
                 .multiply(Matrix4.rotateZ(zRotation))
                 .multiply(Matrix4.rotateX(xRotation))
@@ -1058,7 +1070,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "box");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
     }
@@ -1089,7 +1103,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
                         float yRotation,
                         float zRotation) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(xSize, ySize, zSize));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(xSize, ySize, zSize));
         Matrix4 rotate = Matrix4.IDENTITY
                 .multiply(Matrix4.rotateZ(zRotation))
                 .multiply(Matrix4.rotateX(xRotation))
@@ -1102,7 +1116,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "box");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
     }
@@ -1115,7 +1131,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void drawCylinder(String name) {
         sunflow.geometry(name, "cylinder");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -1130,7 +1148,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      */
     public void drawCylinder(String name, float x, float y, float z, float size) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
 
         Matrix4 m = Matrix4.IDENTITY;
         m = scale.multiply(m);
@@ -1138,7 +1156,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "cylinder");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
     }
@@ -1158,7 +1178,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void drawCylinder(String name, float x, float y, float z, float size, float xRotation, float yRotation,
                              float zRotation) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
         Matrix4 rotate = Matrix4.IDENTITY
                 .multiply(Matrix4.rotateZ(zRotation))
                 .multiply(Matrix4.rotateX(xRotation))
@@ -1171,7 +1191,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "cylinder");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
     }
@@ -1202,7 +1224,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
                              float yRotation,
                              float zRotation) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(xSize, ySize, zSize));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(xSize, ySize, zSize));
         Matrix4 rotate = Matrix4.IDENTITY
                 .multiply(Matrix4.rotateZ(zRotation))
                 .multiply(Matrix4.rotateX(xRotation))
@@ -1215,7 +1237,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "cylinder");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
     }
@@ -1228,7 +1252,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void drawBanchoffSurface(String name) {
         sunflow.geometry(name, "banchoff");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -1243,7 +1269,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      */
     public void drawBanchoffSurface(String name, float x, float y, float z, float size) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
 
         Matrix4 m = Matrix4.IDENTITY;
         m = scale.multiply(m);
@@ -1251,7 +1277,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "banchoff");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
     }
@@ -1271,7 +1299,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void drawBanchoffSurface(String name, float x, float y, float z, float size, float xRotation,
                                     float yRotation, float zRotation) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
         Matrix4 rotate = Matrix4.IDENTITY
                 .multiply(Matrix4.rotateZ(zRotation))
                 .multiply(Matrix4.rotateX(xRotation))
@@ -1284,7 +1312,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "banchoff");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
     }
@@ -1318,7 +1348,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
                           float epsilon) {
 
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
         Matrix4 rotate = Matrix4.IDENTITY
                 .multiply(Matrix4.rotateZ(zRotation))
                 .multiply(Matrix4.rotateX(xRotation))
@@ -1340,7 +1370,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
         sunflow.geometry(name, "julia");
         sunflow.parameter("shaders", currShader);
 
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
 
@@ -1361,7 +1393,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "sphereflake");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -1385,7 +1419,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
                                 float zRotation,
                                 int level, Vector3 axis, float radius) {
         Matrix4 translate = Matrix4.IDENTITY.multiply(Matrix4.translation(x, y, z));
-        Matrix4 scale = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
+        Matrix4 scale     = Matrix4.IDENTITY.multiply(Matrix4.scale(size, size, size));
         Matrix4 rotate = Matrix4.IDENTITY
                 .multiply(Matrix4.rotateZ(zRotation))
                 .multiply(Matrix4.rotateX(xRotation))
@@ -1402,7 +1436,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "sphereflake");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.parameter("transform", m);
         sunflow.instance(name + ".instance", name);
     }
@@ -1415,7 +1451,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void setBackground(String name) {
         sunflow.geometry(name, "background");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -1434,7 +1472,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "hair");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
 
     }
@@ -1454,7 +1494,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "particles");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -1471,7 +1513,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "plane");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
@@ -1484,10 +1528,10 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      */
     public void drawCircularShape(String name, Point3[] points) {
         //    	 vertex amount
-        int verticesLength = points.length * 3;
-        int trianglesLength = points.length - 1;
-        float[] vertices = new float[verticesLength];
-        int[] triangles = new int[trianglesLength];
+        int     verticesLength  = points.length * 3;
+        int     trianglesLength = points.length - 1;
+        float[] vertices        = new float[verticesLength];
+        int[]   triangles       = new int[trianglesLength];
 
         // create vertices array
         int verticesIndex = 0;
@@ -1498,7 +1542,7 @@ public class P5SunflowAPIAPI extends PGraphics3D {
         }
         // create triangles array
         int trianglesIndex = 0;
-        int runx = 0;
+        int runx           = 0;
         for (int i = 0; i < trianglesLength; i++) {
             if (runx == 0) {
                 triangles[i] = 0; // center point is always first in vertices array
@@ -1510,7 +1554,11 @@ public class P5SunflowAPIAPI extends PGraphics3D {
                 triangles[i] = i;// i+1; // point 3
             }
 
-            if (runx == 2) { runx = 0; } else { runx++; }
+            if (runx == 2) {
+                runx = 0;
+            } else {
+                runx++;
+            }
         }
         triangles[trianglesIndex++] = 0; // center point is always first in vertices array
         triangles[trianglesIndex++] = points.length - 1; // point 2
@@ -1521,12 +1569,15 @@ public class P5SunflowAPIAPI extends PGraphics3D {
 
         sunflow.geometry(name, "triangle_mesh");
         sunflow.parameter("shaders", currShader);
-        if (isModifiers) { sunflow.parameter("modifiers", currModifier); }
+        if (isModifiers) {
+            sunflow.parameter("modifiers", currModifier);
+        }
         sunflow.instance(name + ".instance", name);
     }
 
     /**
      * draws a rectangle
+     *
      * @param name
      * @param corner0
      * @param corner1
@@ -1615,8 +1666,8 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void setPinholeCamera(String name, float fov, float aspect) {
         // save parameters
         this.currCamera = name;
-        this.fov = fov;
-        this.aspect = aspect;
+        this.fov        = fov;
+        this.aspect     = aspect;
         this.cameraType = this.CAMERA_PINHOLE;
 
         // set currCamera for rendering
@@ -1647,10 +1698,10 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void setPinholeCamera(String name, float fov, float aspect, float shiftX, float shiftY) {
         // save parameters
         this.currCamera = name;
-        this.fov = fov;
-        this.aspect = aspect;
-        this.shiftX = shiftX;
-        this.shiftY = shiftY;
+        this.fov        = fov;
+        this.aspect     = aspect;
+        this.shiftX     = shiftX;
+        this.shiftY     = shiftY;
         this.cameraType = this.CAMERA_PINHOLE;
 
         // set currCamera for rendering
@@ -1679,8 +1730,8 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     public void setThinlensCamera(String name, float fov, float aspect) {
         // save parameters
         this.currCamera = name;
-        this.fov = fov;
-        this.aspect = aspect;
+        this.fov        = fov;
+        this.aspect     = aspect;
         this.cameraType = this.CAMERA_THINLENS;
 
         float[] camMatrix = {cameraInv.m00, cameraInv.m01, cameraInv.m02, cameraInv.m03,
@@ -1717,16 +1768,16 @@ public class P5SunflowAPIAPI extends PGraphics3D {
                                   int sides,
                                   float lensRotation) {
         // save parameters
-        this.currCamera = name;
-        this.fov = fov;
-        this.aspect = aspect;
-        this.shiftX = shiftX;
-        this.shiftY = shiftY;
+        this.currCamera    = name;
+        this.fov           = fov;
+        this.aspect        = aspect;
+        this.shiftX        = shiftX;
+        this.shiftY        = shiftY;
         this.focusDistance = focusDistance;
-        this.lensRadius = lensRadius;
-        this.sides = sides;
-        this.lensRotation = lensRotation;
-        this.cameraType = this.CAMERA_THINLENS;
+        this.lensRadius    = lensRadius;
+        this.sides         = sides;
+        this.lensRotation  = lensRotation;
+        this.cameraType    = this.CAMERA_THINLENS;
 
         // set currCamera for rendering
         currCamera = name;
@@ -1889,7 +1940,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
             colorSpace = theColorSpace;
         } else if (theColorSpace == COLORSPACE_SRGB_LINEAR) {
             colorSpace = theColorSpace;
-        } else if (theColorSpace == COLORSPACE_XYZ) { colorSpace = theColorSpace; } else {
+        } else if (theColorSpace == COLORSPACE_XYZ) {
+            colorSpace = theColorSpace;
+        } else {
             System.out.println("Colorspace not found, keeping current one");
         }
     }
@@ -1909,12 +1962,24 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      * @param newBucketOrder bucket order type
      */
     public void setBucketOrder(String newBucketOrder) {
-        if (newBucketOrder == this.BUCKET_ORDER_COLUMN) { this.currBucketOrder = this.BUCKET_ORDER_COLUMN; }
-        if (newBucketOrder == this.BUCKET_ORDER_DIAGONAL) { this.currBucketOrder = this.BUCKET_ORDER_DIAGONAL; }
-        if (newBucketOrder == this.BUCKET_ORDER_HILBERT) { this.currBucketOrder = this.BUCKET_ORDER_HILBERT; }
-        if (newBucketOrder == this.BUCKET_ORDER_RANDOM) { this.currBucketOrder = this.BUCKET_ORDER_RANDOM; }
-        if (newBucketOrder == this.BUCKET_ORDER_SPIRAL) { this.currBucketOrder = this.BUCKET_ORDER_SPIRAL; }
-        if (newBucketOrder == this.BUCKET_ORDER_ROW) { this.currBucketOrder = this.BUCKET_ORDER_ROW; }
+        if (newBucketOrder == this.BUCKET_ORDER_COLUMN) {
+            this.currBucketOrder = this.BUCKET_ORDER_COLUMN;
+        }
+        if (newBucketOrder == this.BUCKET_ORDER_DIAGONAL) {
+            this.currBucketOrder = this.BUCKET_ORDER_DIAGONAL;
+        }
+        if (newBucketOrder == this.BUCKET_ORDER_HILBERT) {
+            this.currBucketOrder = this.BUCKET_ORDER_HILBERT;
+        }
+        if (newBucketOrder == this.BUCKET_ORDER_RANDOM) {
+            this.currBucketOrder = this.BUCKET_ORDER_RANDOM;
+        }
+        if (newBucketOrder == this.BUCKET_ORDER_SPIRAL) {
+            this.currBucketOrder = this.BUCKET_ORDER_SPIRAL;
+        }
+        if (newBucketOrder == this.BUCKET_ORDER_ROW) {
+            this.currBucketOrder = this.BUCKET_ORDER_ROW;
+        }
     }
 
     /*
@@ -1941,7 +2006,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
     }
 
     public void removeBackground() {
-        if (sunflow.lookupGeometry("internal_background") != null) { sunflow.remove("internal_background"); }
+        if (sunflow.lookupGeometry("internal_background") != null) {
+            sunflow.remove("internal_background");
+        }
     }
 
     public void render() {
@@ -2018,7 +2085,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      * @param name
      */
     public void removeObject(String name) {
-        if (sunflow.lookupGeometry(name) != null) { sunflow.remove(name); }
+        if (sunflow.lookupGeometry(name) != null) {
+            sunflow.remove(name);
+        }
     }
 
     /*
@@ -2026,7 +2095,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      * @param name
      */
     public void removeShader(String name) {
-        if (sunflow.lookupShader(name) != null) { sunflow.remove(name); }
+        if (sunflow.lookupShader(name) != null) {
+            sunflow.remove(name);
+        }
     }
 
     /*
@@ -2034,7 +2105,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      * @param name
      */
     public void removeModifier(String name) {
-        if (sunflow.lookupModifier(name) != null) { sunflow.remove(name); }
+        if (sunflow.lookupModifier(name) != null) {
+            sunflow.remove(name);
+        }
     }
 
     public SunflowAPI sunflowObject() {
@@ -2181,7 +2254,9 @@ public class P5SunflowAPIAPI extends PGraphics3D {
      * one has to do that after having updated the position for example
      */
     private void resetCamera() {
-        if (currCamera != null) { sunflow.remove(currCamera); }
+        if (currCamera != null) {
+            sunflow.remove(currCamera);
+        }
         if (cameraType == this.CAMERA_FISHEYE) {
             this.setFisheyeCamera(currCamera);
         } else if (cameraType == this.CAMERA_PINHOLE) {

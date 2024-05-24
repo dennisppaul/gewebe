@@ -20,86 +20,91 @@ package gewebe.sandbox;
  * write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA  02111-1307  USA
  */
-import java.io.*;
 
-import processing.core.*;
+import processing.core.PGraphics;
+import processing.core.PVector;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * A simple library to write DXF files with Processing. Because this is used
  * with beginRaw() and endRaw(), only individual triangles and (discontinuous)
  * line segments will be written to the file.
- *
+ * <p>
  * Use something like a keyPressed() in PApplet to trigger it, to avoid writing
  * a bazillion .dxf files.
- *
+ * <p>
  * Usually, the file will be saved to the sketch's folder. Use Sketch &rarr;
  * Show Sketch Folder to see it from the PDE.
- *
+ * <p>
  * A simple example of how to use:
  * <PRE>
  * import processing.dxf.*;
- *
+ * <p>
  * boolean record;
- *
+ * <p>
  * void setup() {
- *   size(500, 500, P3D);
+ * size(500, 500, P3D);
  * }
- *
+ * <p>
  * void keyPressed() {
- *   // use a key press so that it doesn't make a million files
- *   if (key == 'r') record = true;
+ * // use a key press so that it doesn't make a million files
+ * if (key == 'r') record = true;
  * }
- *
+ * <p>
  * void draw() {
- *   if (record) {
- *     beginRaw(DXF, "output.dxf");
- *   }
- *
- *   // do all your drawing here
- *
- *   if (record) {
- *     endRaw();
- *     record = false;
- *   }
+ * if (record) {
+ * beginRaw(DXF, "output.dxf");
+ * }
+ * <p>
+ * // do all your drawing here
+ * <p>
+ * if (record) {
+ * endRaw();
+ * record = false;
+ * }
  * }
  * </PRE> or to use it and be able to control the current layer:
  * <PRE>
  * import processing.dxf.*;
- *
+ * <p>
  * boolean record;
  * RawDXF dxf;
- *
+ * <p>
  * void setup() {
- *   size(500, 500, P3D);
+ * size(500, 500, P3D);
  * }
- *
+ * <p>
  * void keyPressed() {
- *   // use a key press so that it doesn't make a million files
- *   if (key == 'r') record = true;
+ * // use a key press so that it doesn't make a million files
+ * if (key == 'r') record = true;
  * }
- *
+ * <p>
  * void draw() {
- *   if (record) {
- *     dxf = (RawDXF) createGraphics(width, height, DXF, "output.dxf");
- *     beginRaw(dxf);
- *   }
- *
- *   // do all your drawing here, and to set the layer, call:
- *   // if (record) {
- *   //   dxf.setLayer(num);
- *   // }
- *   // where 'num' is an integer.
- *   // the default is zero, or you can set it to whatever.
- *
- *   if (record) {
- *     endRaw();
- *     record = false;
- *     dxf = null;
- *   }
+ * if (record) {
+ * dxf = (RawDXF) createGraphics(width, height, DXF, "output.dxf");
+ * beginRaw(dxf);
+ * }
+ * <p>
+ * // do all your drawing here, and to set the layer, call:
+ * // if (record) {
+ * //   dxf.setLayer(num);
+ * // }
+ * // where 'num' is an integer.
+ * // the default is zero, or you can set it to whatever.
+ * <p>
+ * if (record) {
+ * endRaw();
+ * record = false;
+ * dxf = null;
+ * }
  * }
  * </PRE> Note that even though this class is a subclass of PGraphics, it only
  * implements the parts of the API that are necessary for beginRaw/endRaw.
- *
+ * <p>
  * Based on the original DXF writer from Simon Greenwold, February 2004. Updated
  * for Processing 0070 by Ben Fry in September 2004, and again for Processing
  * beta in April 2005. Rewritten to support beginRaw/endRaw by Ben Fry in
@@ -177,6 +182,7 @@ public class WriterDXF extends PGraphics {
     }
 
     // ..............................................................
+
     /**
      * Set the current layer being used in the DXF file. The default is zero.
      */
@@ -367,7 +373,7 @@ public class WriterDXF extends PGraphics {
             mUp.set(1.0f, 0.0f, 0.0f);
         }
 
-        PVector vP = new PVector(0, 0, 1.0f);
+        PVector     vP   = new PVector(0, 0, 1.0f);
         final float mDot = v.dot(mUp);
         if (mDot < 1.0f && mDot > -1.0f) {
             PVector.cross(v, mUp, vP);

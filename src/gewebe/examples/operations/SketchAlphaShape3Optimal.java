@@ -14,9 +14,9 @@ public class SketchAlphaShape3Optimal extends PApplet {
      */
 
     private CGALAlphaShape3 mCGAL;
-    private int mNumberOfSolidComponents = 1;
-    private float[] mOptimalAlphaShape;
-    private float[] mPoints3;
+    private int             mNumberOfSolidComponents = 1;
+    private float[]         mOptimalAlphaShape;
+    private float[]         mPoints3;
 
     public void settings() {
         size(1024, 768, P3D);

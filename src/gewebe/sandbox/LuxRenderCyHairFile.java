@@ -7,30 +7,30 @@ import java.nio.file.Paths;
 
 public class LuxRenderCyHairFile {
 
-    public static final int CY_HAIR_FILE_SEGMENTS_BIT = 1;
-    public static final int CY_HAIR_FILE_POINTS_BIT = 2;
-    public static final int CY_HAIR_FILE_THICKNESS_BIT = 4;
+    public static final int CY_HAIR_FILE_SEGMENTS_BIT     = 1;
+    public static final int CY_HAIR_FILE_POINTS_BIT       = 2;
+    public static final int CY_HAIR_FILE_THICKNESS_BIT    = 4;
     public static final int CY_HAIR_FILE_TRANSPARENCY_BIT = 8;
-    public static final int CY_HAIR_FILE_COLORS_BIT = 16;
+    public static final int CY_HAIR_FILE_COLORS_BIT       = 16;
 
     public static final int CY_HAIR_FILE_INFO_SIZE = 88;
 
     // File read errors
-    public static final int CY_HAIR_FILE_ERROR_CANT_OPEN_FILE = -1;
-    public static final int CY_HAIR_FILE_ERROR_CANT_READ_HEADER = -2;
-    public static final int CY_HAIR_FILE_ERROR_WRONG_SIGNATURE = -3;
-    public static final int CY_HAIR_FILE_ERROR_READING_SEGMENTS = -4;
-    public static final int CY_HAIR_FILE_ERROR_READING_POINTS = -5;
-    public static final int CY_HAIR_FILE_ERROR_READING_THICKNESS = -6;
+    public static final int CY_HAIR_FILE_ERROR_CANT_OPEN_FILE       = -1;
+    public static final int CY_HAIR_FILE_ERROR_CANT_READ_HEADER     = -2;
+    public static final int CY_HAIR_FILE_ERROR_WRONG_SIGNATURE      = -3;
+    public static final int CY_HAIR_FILE_ERROR_READING_SEGMENTS     = -4;
+    public static final int CY_HAIR_FILE_ERROR_READING_POINTS       = -5;
+    public static final int CY_HAIR_FILE_ERROR_READING_THICKNESS    = -6;
     public static final int CY_HAIR_FILE_ERROR_READING_TRANSPARENCY = -7;
-    public static final int CY_HAIR_FILE_ERROR_READING_COLORS = -8;
+    public static final int CY_HAIR_FILE_ERROR_READING_COLORS       = -8;
 
     cyHairFileHeader header;
-    short[] segments;
-    float[] points;
-    float[] thickness;
-    float[] transparency;
-    float[] colors;
+    short[]          segments;
+    float[]          points;
+    float[]          thickness;
+    float[]          transparency;
+    float[]          colors;
 
     public LuxRenderCyHairFile() {
         initialize();
@@ -61,19 +61,19 @@ public class LuxRenderCyHairFile {
     }                ///< Returns colors array (rgb color at each hair point).
 
     private void initialize() {
-        header.signature[0] = 'H';
-        header.signature[1] = 'A';
-        header.signature[2] = 'I';
-        header.signature[3] = 'R';
-        header.hair_count = 0;
-        header.point_count = 0;
-        header.arrays = 0;    // no arrays
-        header.d_segments = 0;
-        header.d_thickness = 1.0f;
+        header.signature[0]   = 'H';
+        header.signature[1]   = 'A';
+        header.signature[2]   = 'I';
+        header.signature[3]   = 'R';
+        header.hair_count     = 0;
+        header.point_count    = 0;
+        header.arrays         = 0;    // no arrays
+        header.d_segments     = 0;
+        header.d_thickness    = 1.0f;
         header.d_transparency = 0.0f;
-        header.d_color[0] = 1.0f;
-        header.d_color[1] = 1.0f;
-        header.d_color[2] = 1.0f;
+        header.d_color[0]     = 1.0f;
+        header.d_color[1]     = 1.0f;
+        header.d_color[2]     = 1.0f;
         //        memset( header.info, '\0', CY_HAIR_FILE_INFO_SIZE );
     }
 
@@ -146,13 +146,13 @@ public class LuxRenderCyHairFile {
     static class cyHairFileHeader {
 
         char[] signature = new char[4];    ///< This should be "HAIR"
-        int hair_count;        ///< number of hair strands
-        int point_count;    ///< total number of points of all strands
-        int arrays;            ///< bit array of data in the file
+        int    hair_count;        ///< number of hair strands
+        int    point_count;    ///< total number of points of all strands
+        int    arrays;            ///< bit array of data in the file
 
-        int d_segments;        ///< default number of segments of each strand
-        float d_thickness;    ///< default thickness of hair strands
-        float d_transparency;    ///< default transparency of hair strands
+        int     d_segments;        ///< default number of segments of each strand
+        float   d_thickness;    ///< default thickness of hair strands
+        float   d_transparency;    ///< default transparency of hair strands
         float[] d_color = new float[3];        ///< default color of hair strands
 
         char[] info = new char[CY_HAIR_FILE_INFO_SIZE];    ///< information about the file
@@ -165,7 +165,7 @@ public class LuxRenderCyHairFile {
             System.out.println(data.length);
 
             byte[] part1 = new byte[128];
-            byte[] part2 = new byte[data.length-part1.length];
+            byte[] part2 = new byte[data.length - part1.length];
 
             System.arraycopy(data, 0, part1, 0, part1.length);
             System.arraycopy(data, part1.length, part2, 0, part2.length);

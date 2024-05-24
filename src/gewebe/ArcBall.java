@@ -27,16 +27,16 @@ import processing.core.PVector;
  */
 public class ArcBall {
 
-    private final PApplet mParent;
-    private final PVector mCenter;
-    private final PVector mDownPosition;
-    private final PVector mDragPosition;
-    public boolean pause = false;
-    private float mRadius;
+    private final PApplet    mParent;
+    private final PVector    mCenter;
+    private final PVector    mDownPosition;
+    private final PVector    mDragPosition;
+    public        boolean    pause            = false;
+    private       float      mRadius;
     private final Quaternion mCurrentQuaternion;
     private final Quaternion mDownQuaternion;
     private final Quaternion mDragQuaternion;
-    private boolean mLastActiveState = false;
+    private       boolean    mLastActiveState = false;
 
     public ArcBall(PApplet pApplet, boolean pDONT_REGISTER) {
         this(pApplet.g.width / 2.0f,
@@ -74,8 +74,8 @@ public class ArcBall {
         mDragPosition = new PVector();
 
         mCurrentQuaternion = new Quaternion();
-        mDownQuaternion = new Quaternion();
-        mDragQuaternion = new Quaternion();
+        mDownQuaternion    = new Quaternion();
+        mDragQuaternion    = new Quaternion();
     }
 
     public void reset() {

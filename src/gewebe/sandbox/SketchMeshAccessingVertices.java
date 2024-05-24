@@ -9,8 +9,8 @@ import processing.core.PApplet;
 public class SketchMeshAccessingVertices extends PApplet {
 
     private ModelData mModelData;
-    private Mesh mMesh;
-    private int i;
+    private Mesh      mMesh;
+    private int       i;
 
     public void settings() {
         size(1024, 768, P3D);
@@ -18,7 +18,7 @@ public class SketchMeshAccessingVertices extends PApplet {
 
     public void setup() {
         mModelData = ModelLoaderOBJ.parseModelData(OBJTetrahedron.DATA);
-        mMesh = mModelData.mesh();
+        mMesh      = mModelData.mesh();
         println(mModelData);
     }
 

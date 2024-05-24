@@ -33,15 +33,15 @@ import java.util.Map;
 
 public abstract class RendererMesh extends PGraphics3D {
 
-    protected static final String STREAM_NAME_ERR = "ERR";
-    protected static final String STREAM_NAME_OUT = "OUT";
-    public static boolean DEBUG_PRINT_RENDER_PROGRESS = false;
-    public static boolean RENDERING_PROCESS_BLOCKING = true;
-    public static boolean LINE_EXPAND_WITH_CLOSED_CAPS = true;
-    private final ArrayList<ShaderTriangleBucket> mShaderTriangleBuckets = new ArrayList<>();
-    private final Color mColorFill = new Color();
-    private ShaderTriangleBucket mBucket = null;
-    private int mMaterialID;
+    protected static final String                          STREAM_NAME_ERR              = "ERR";
+    protected static final String                          STREAM_NAME_OUT              = "OUT";
+    public static          boolean                         DEBUG_PRINT_RENDER_PROGRESS  = false;
+    public static          boolean                         RENDERING_PROCESS_BLOCKING   = true;
+    public static          boolean                         LINE_EXPAND_WITH_CLOSED_CAPS = true;
+    private final          ArrayList<ShaderTriangleBucket> mShaderTriangleBuckets       = new ArrayList<>();
+    private final          Color                           mColorFill                   = new Color();
+    private                ShaderTriangleBucket            mBucket                      = null;
+    private                int                             mMaterialID;
 
     public void beginDraw() {
         prepareFrame();
@@ -94,14 +94,14 @@ public abstract class RendererMesh extends PGraphics3D {
             vertex[G] = fillG;
             vertex[B] = fillB;
             vertex[A] = fillA;
-            mMaterialID = fillColor;
+                        mMaterialID = fillColor;
         } else if (stroke) {
             vertex[SR] = strokeR;
             vertex[SG] = strokeG;
             vertex[SB] = strokeB;
             vertex[SA] = strokeA;
             vertex[SW] = strokeWeight;
-            mMaterialID = strokeColor;
+                         mMaterialID = strokeColor;
         } else {
             error("neither `stroke` nor `fill` defined");
             mMaterialID = -1;
@@ -152,7 +152,7 @@ public abstract class RendererMesh extends PGraphics3D {
         if (fill) {
             // @TODO individual vertex coloring is ignored. last vertex color is used to color triangle
             float[] vertex = vertices[2];
-            Color c = new Color(vertex[R], vertex[G], vertex[B], vertex[A]);
+            Color   c      = new Color(vertex[R], vertex[G], vertex[B], vertex[A]);
             selectBucket(c);
             for (int i = 0; i < 3; i++) {
                 addTriangleVertex(
@@ -167,12 +167,12 @@ public abstract class RendererMesh extends PGraphics3D {
     protected void writeLine(int v0, int v1) {
         if (stroke) {
             float[] vertex = vertices[v0];
-            Color c = new Color(vertex[SR], vertex[SG], vertex[SB], vertex[SA]);
+            Color   c      = new Color(vertex[SR], vertex[SG], vertex[SB], vertex[SA]);
             selectBucket(c);
 
-            PVector p0 = new PVector(vertices[v0][X], vertices[v0][Y], vertices[v0][Z]);
-            PVector p1 = new PVector(vertices[v1][X], vertices[v1][Y], vertices[v1][Z]);
-            final float mSize = strokeWeight / 2.0f;
+            PVector            p0         = new PVector(vertices[v0][X], vertices[v0][Y], vertices[v0][Z]);
+            PVector            p1         = new PVector(vertices[v1][X], vertices[v1][Y], vertices[v1][Z]);
+            final float        mSize      = strokeWeight / 2.0f;
             ArrayList<PVector> pTriangles = Line3.triangles(p0, p1, mSize, LINE_EXPAND_WITH_CLOSED_CAPS, null);
             for (PVector p : pTriangles) {
                 addTriangleVertex(p.x, p.y, p.z, 0, 0, 1);
@@ -212,8 +212,8 @@ public abstract class RendererMesh extends PGraphics3D {
 
     protected void launchRenderProcess(String[] pCommandString, String pDYLIBLocation) {
         try {
-            ProcessBuilder builder = new ProcessBuilder(pCommandString);
-            Map<String, String> env = builder.environment();
+            ProcessBuilder      builder = new ProcessBuilder(pCommandString);
+            Map<String, String> env     = builder.environment();
             env.put("DYLD_LIBRARY_PATH", pDYLIBLocation);
             Process mProcess = builder.start();
 //            Process mProcess = Runtime.getRuntime().exec(mCommandString);
@@ -224,7 +224,7 @@ public abstract class RendererMesh extends PGraphics3D {
             }
             console("started render process: `" + sb.toString() + "`");
 
-            StreamConsumer mErrorStream = new StreamConsumer(mProcess.getErrorStream(), STREAM_NAME_ERR);
+            StreamConsumer mErrorStream  = new StreamConsumer(mProcess.getErrorStream(), STREAM_NAME_ERR);
             StreamConsumer mOutputStream = new StreamConsumer(mProcess.getInputStream(), STREAM_NAME_OUT);
             mErrorStream.start();
             mOutputStream.start();
@@ -287,15 +287,15 @@ public abstract class RendererMesh extends PGraphics3D {
         private final String mStreamName;
 
         StreamConsumer(InputStream theStream, String theStreamName) {
-            mStream = theStream;
+            mStream     = theStream;
             mStreamName = theStreamName;
         }
 
         public void run() {
             try {
                 final InputStreamReader isr = new InputStreamReader(mStream);
-                final BufferedReader br = new BufferedReader(isr);
-                String line;
+                final BufferedReader    br  = new BufferedReader(isr);
+                String                  line;
                 while ((line = br.readLine()) != null) {
                     if (mStreamName.equalsIgnoreCase(STREAM_NAME_ERR) || DEBUG_PRINT_RENDER_PROGRESS) {
                         System.out.println(mStreamName + "> " + line);
@@ -380,14 +380,14 @@ public abstract class RendererMesh extends PGraphics3D {
 
     protected static class ShaderTriangleBucket {
 
-        final Color color;
+        final Color            color;
         final ArrayList<Float> vertices = new ArrayList<>();
-        final ArrayList<Float> normals = new ArrayList<>();
-        final int shaderID;
+        final ArrayList<Float> normals  = new ArrayList<>();
+        final int              shaderID;
         // @TODO maybe add normals and UV coords
 
         ShaderTriangleBucket(Color pColor, int pMaterialID) {
-            color = new Color(pColor);
+            color    = new Color(pColor);
             shaderID = pMaterialID;
         }
     }

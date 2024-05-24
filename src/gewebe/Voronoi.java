@@ -34,8 +34,8 @@ public class Voronoi {
      * and set `QVORONOI_APP` to path to binary.
      */
 
-    private static final float VERTEX_AT_INFINITY = -10.101f;
-    public static boolean VERBOSE = false;
+    private static final float   VERTEX_AT_INFINITY = -10.101f;
+    public static        boolean VERBOSE            = false;
 
     public static String QVORONOI_APP;
 
@@ -62,18 +62,18 @@ public class Voronoi {
         File f = new File(QVORONOI_APP);
         if (!f.exists()) {
             System.err.println(
-            "### ERROR @" + Voronoi.class.getCanonicalName() + " / couldn t find *qvoronoi* at '" + QVORONOI_APP +
-            "' from Qhull ( http://www.qhull.org/ ).");
+                    "### ERROR @" + Voronoi.class.getCanonicalName() + " / couldn t find *qvoronoi* at '" + QVORONOI_APP +
+                    "' from Qhull ( http://www.qhull.org/ ).");
             System.err.println(
-            "### on MacOS try installing Qhull via homebrew ( http://brew.sh ) e.g `$: brew install qhull`");
+                    "### on MacOS try installing Qhull via homebrew ( http://brew.sh ) e.g `$: brew install qhull`");
             System.exit(-1);
         }
         try {
             /* assemble shell command */
-            String myParameter = "cat - | " + QVORONOI_APP + " o";
-            String[] myExecString = new String[]{"sh", "-c", myParameter};
-            Process myProcess = Runtime.getRuntime().exec(myExecString);
-            BufferedReader br = new BufferedReader(new InputStreamReader(myProcess.getInputStream()));
+            String         myParameter  = "cat - | " + QVORONOI_APP + " o";
+            String[]       myExecString = new String[]{"sh", "-c", myParameter};
+            Process        myProcess    = Runtime.getRuntime().exec(myExecString);
+            BufferedReader br           = new BufferedReader(new InputStreamReader(myProcess.getInputStream()));
 
             /* assemble query */
             OutputStream myOutputStream = myProcess.getOutputStream();
@@ -95,7 +95,7 @@ public class Voronoi {
 
             /* collect result */
             final StringBuilder myResult = new StringBuilder();
-            String myLine;
+            String              myLine;
             while ((myLine = br.readLine()) != null) {
                 myResult.append(myLine);
                 myResult.append('\n');
@@ -123,31 +123,31 @@ public class Voronoi {
         }
 
         /* header line 1 */
-        final int LINE_HEADER_A = 0;
-        final String[] mHeaderA = mResult[LINE_HEADER_A].split(" ");
+        final int      LINE_HEADER_A = 0;
+        final String[] mHeaderA      = mResult[LINE_HEADER_A].split(" ");
         if (mHeaderA.length == 0 || mHeaderA[0].isEmpty()) {
             return null;
         }
 //        final int myDimensions = Integer.parseInt(mHeaderA[0]);
 
         /* header line 2 */
-        final int LINE_HEADER_B = 1;
-        final String[] mHeaderB = mResult[LINE_HEADER_B].split(" ");
-        final int ELEMENT_NUMBER_OF_VERTICES = 0;
-        final int ELEMENT_NUMBER_OF_REGIONS = 1;
+        final int      LINE_HEADER_B              = 1;
+        final String[] mHeaderB                   = mResult[LINE_HEADER_B].split(" ");
+        final int      ELEMENT_NUMBER_OF_VERTICES = 0;
+        final int      ELEMENT_NUMBER_OF_REGIONS  = 1;
 //        final int ELEMENT_NUMBER_OF_RIDGES = 2;
         final int mNumberOfVertices = Integer.parseInt(mHeaderB[ELEMENT_NUMBER_OF_VERTICES]);
-        final int mNumberOfRegions = Integer.parseInt(mHeaderB[ELEMENT_NUMBER_OF_REGIONS]);
+        final int mNumberOfRegions  = Integer.parseInt(mHeaderB[ELEMENT_NUMBER_OF_REGIONS]);
 //        final int mNumberOfRidges = Integer.parseInt(mHeaderB[ELEMENT_NUMBER_OF_RIDGES]);
 
         /* vertices */
-        int myVertexCounter = 0;
-        int mVertexAtInfinityMarker = -1;
-        final int LINE_VERTEX_OFFSET = LINE_HEADER_B + 1;
-        final PVector[] myVertices = new PVector[mNumberOfVertices];
+        int             myVertexCounter         = 0;
+        int             mVertexAtInfinityMarker = -1;
+        final int       LINE_VERTEX_OFFSET      = LINE_HEADER_B + 1;
+        final PVector[] myVertices              = new PVector[mNumberOfVertices];
         for (int i = LINE_VERTEX_OFFSET; i < mNumberOfVertices + LINE_VERTEX_OFFSET; i++) {
             final String[] mVertexStr = mResult[i].split(" ");
-            final PVector mVertex = new PVector();
+            final PVector  mVertex    = new PVector();
             if (pDimesions == 3) {
                 mVertex.set(Float.parseFloat(mVertexStr[0]),
                             Float.parseFloat(mVertexStr[1]),
@@ -167,17 +167,17 @@ public class Voronoi {
 
         /* faces */
 //        int mRegionsCounter = 0;
-        final int LINE_FACE_OFFSET = LINE_VERTEX_OFFSET + mNumberOfVertices;
-        final ArrayList<PVector[]> myRegions = new ArrayList<>();
+        final int                  LINE_FACE_OFFSET = LINE_VERTEX_OFFSET + mNumberOfVertices;
+        final ArrayList<PVector[]> myRegions        = new ArrayList<>();
         for (int i = LINE_FACE_OFFSET; i < LINE_FACE_OFFSET + mNumberOfRegions; i++) {
-            boolean mVertexAtInfinityMark = false;
-            final String[] mFaces = mResult[i].split(" ");
-            final int ENTRY_FACE_COUNT = 0;
-            final int mNumberOfFaces = Integer.parseInt(mFaces[ENTRY_FACE_COUNT]);
-            final PVector[] mRegion = new PVector[mNumberOfFaces];
+            boolean         mVertexAtInfinityMark = false;
+            final String[]  mFaces                = mResult[i].split(" ");
+            final int       ENTRY_FACE_COUNT      = 0;
+            final int       mNumberOfFaces        = Integer.parseInt(mFaces[ENTRY_FACE_COUNT]);
+            final PVector[] mRegion               = new PVector[mNumberOfFaces];
             for (int j = 0; j < mNumberOfFaces; j++) {
                 final int ENTRY_OFFSET = 1;
-                final int mIndex = Integer.parseInt(mFaces[j + ENTRY_OFFSET]);
+                final int mIndex       = Integer.parseInt(mFaces[j + ENTRY_OFFSET]);
                 if (mIndex == mVertexAtInfinityMarker) {
                     mVertexAtInfinityMark = true;
                 }
@@ -196,7 +196,7 @@ public class Voronoi {
 
     public PVector[][] cullReagions(PVector[][] pRegions, PVector pBox) {
         int[] myNonCulledRegions = new int[pRegions.length];
-        int myNonCulledCounter = 0;
+        int   myNonCulledCounter = 0;
         for (int i = 0; i < pRegions.length; i++) {
             boolean isInArea = true;
             for (int j = 0; j < pRegions[i].length; j++) {
@@ -264,8 +264,8 @@ public class Voronoi {
                                                          0.4645876571310951f,
                                                          0.1845193179395177f)};
 
-        Voronoi myQhull = new Voronoi();
-        String myResult = myQhull.computeDiagram(3, myTestData);
+        Voronoi     myQhull  = new Voronoi();
+        String      myResult = myQhull.computeDiagram(3, myTestData);
         PVector[][] mDiagram = myQhull.parseRegions(myResult, 3);
         System.out.println(myResult);
 

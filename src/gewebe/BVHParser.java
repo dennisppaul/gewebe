@@ -32,19 +32,19 @@ import java.util.List;
 
 public class BVHParser {
 
-    private final List<BVHBone> _bones;
-    private BVHBone _currentBone;
-    private int _currentFrame = 0;
-    private int _currentLine;
-    private float _frameTime;
-    private List<List<Float>> _frames;
-    private List<BVHLine> _lines;
-    private boolean _motionLoop;
-    private int _nbFrames;
-    private BVHBone _rootBone;
+    private final List<BVHBone>     _bones;
+    private       BVHBone           _currentBone;
+    private       int               _currentFrame = 0;
+    private       int               _currentLine;
+    private       float             _frameTime;
+    private       List<List<Float>> _frames;
+    private       List<BVHLine>     _lines;
+    private       boolean           _motionLoop;
+    private       int               _nbFrames;
+    private       BVHBone           _rootBone;
 
     public BVHParser() {
-        _bones = new ArrayList<>();
+        _bones      = new ArrayList<>();
         _motionLoop = true;
     }
 
@@ -57,6 +57,7 @@ public class BVHParser {
 
     /**
      * set Loop state
+     *
      * @param value
      */
     public void setMotionLoop(boolean value) {
@@ -65,6 +66,7 @@ public class BVHParser {
 
     /**
      * to string
+     *
      * @return
      */
     public String toStr() {
@@ -113,7 +115,7 @@ public class BVHParser {
      */
     public void moveMsTo(int mills) {
         float frameTime = _frameTime * 1000;
-        int curFrame = (int) (mills / frameTime);
+        int   curFrame  = (int) (mills / frameTime);
         moveFrameTo(curFrame);
     }
 
@@ -134,7 +136,7 @@ public class BVHParser {
         }
 
         _currentLine = 1;
-        _rootBone = _parseBone();
+        _rootBone    = _parseBone();
 
         // center locs
         //_rootBone.offsetX = _rootBone.offsetY = _rootBone.offsetZ = 0;
@@ -175,10 +177,10 @@ public class BVHParser {
             return;
         }
         List<Float> frame = _frames.get(_currentFrame);
-        int count = 0;
+        int         count = 0;
         for (float n : frame) {
             BVHBone bone = _getBoneInFrameAt(count);
-            String prop = _getBonePropInFrameAt(count);
+            String  prop = _getBonePropInFrameAt(count);
             if (bone != null) {
                 Method getterMethod;
                 try {

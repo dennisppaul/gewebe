@@ -7,10 +7,10 @@ import processing.core.PGraphics;
 
 public class SketchLEDisplayOnModel extends PApplet {
 
-    private ArcBall mArcBall;
+    private ArcBall   mArcBall;
     private PGraphics mDisplayContent;
-    private float mLineMover;
-    private float[] mModelData;
+    private float     mLineMover;
+    private float[]   mModelData;
 
     public void settings() {
         size(1024, 768, P3D);
@@ -20,7 +20,7 @@ public class SketchLEDisplayOnModel extends PApplet {
         mArcBall = new ArcBall(this, true);
 
         mDisplayContent = createGraphics(100, 20);
-        mModelData = createModelData();
+        mModelData      = createModelData();
     }
 
     public void draw() {

@@ -26,34 +26,34 @@ import java.util.List;
 
 public class BVHLine {
 
-    public static final String HIERARCHY = "HIERARCHY";
-    public static final String BONE = "BONE";
-    public static final String BRACE_OPEN = "BRACE_OPEN";
+    public static final String HIERARCHY    = "HIERARCHY";
+    public static final String BONE         = "BONE";
+    public static final String BRACE_OPEN   = "BRACE_OPEN";
     public static final String BRACE_CLOSED = "BRACE_CLOSED";
-    public static final String OFFSET = "OFFSET";
-    public static final String CHANNELS = "CHANNELS";
-    public static final String END_SITE = "END_SITE";
+    public static final String OFFSET       = "OFFSET";
+    public static final String CHANNELS     = "CHANNELS";
+    public static final String END_SITE     = "END_SITE";
 
-    public static final String MOTION = "MOTION";
-    public static final String FRAMES = "FRAMES";
+    public static final String MOTION     = "MOTION";
+    public static final String FRAMES     = "FRAMES";
     public static final String FRAME_TIME = "FRAME_TIME";
-    public static final String FRAME = "FRAME";
+    public static final String FRAME      = "FRAME";
 
-    public static final String BONE_TYPE_ROOT = "ROOT";
+    public static final String BONE_TYPE_ROOT  = "ROOT";
     public static final String BONE_TYPE_JOINT = "JOINT";
 
-    public String _boneName;
-    private String _boneType;
+    public  String       _boneName;
+    private String       _boneType;
     private List<String> _channelsProps;
-    private float _frameTime;
-    private List<Float> _frames;
-    private String _lineStr;
-    private String _lineType;
-    private int _nbChannels;
-    private int _nbFrames;
-    private float _offsetX;
-    private float _offsetY;
-    private float _offsetZ;
+    private float        _frameTime;
+    private List<Float>  _frames;
+    private String       _lineStr;
+    private String       _lineType;
+    private int          _nbChannels;
+    private int          _nbFrames;
+    private float        _offsetX;
+    private float        _offsetY;
+    private float        _offsetZ;
 
     public BVHLine(String __lineStr) {
         _parse(__lineStr);
@@ -129,7 +129,7 @@ public class BVHLine {
             _offsetY = Float.parseFloat(words[2]);
             _offsetZ = Float.parseFloat(words[3]);
         } else if (CHANNELS.equals(_lineType)) {
-            _nbChannels = Integer.parseInt(words[1]);
+            _nbChannels    = Integer.parseInt(words[1]);
             _channelsProps = new ArrayList<>();
             for (int i = 0; i < _nbChannels; i++) {
                 _channelsProps.add(words[i + 2]);

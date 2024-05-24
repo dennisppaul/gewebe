@@ -21,7 +21,6 @@ package gewebe;
 
 import processing.core.PApplet;
 import processing.core.PGraphics;
-import processing.core.PImage;
 
 public abstract class OffscreenContext {
 
@@ -35,15 +34,15 @@ public abstract class OffscreenContext {
     private boolean mIsSetupCalled;
 
     public OffscreenContext(PApplet pParent) {
-        parent = pParent;
+        parent         = pParent;
         mIsSetupCalled = false;
         settings();
     }
 
     public final void size(int pWidth, int pHeight) {
         graphics = parent.createGraphics(pWidth, pHeight); // defaults to JAVA2D
-        width = pWidth;
-        height = pHeight;
+        width    = pWidth;
+        height   = pHeight;
     }
 
     public abstract void settings();

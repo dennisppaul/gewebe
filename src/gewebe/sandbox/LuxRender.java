@@ -71,7 +71,7 @@ import java.io.InputStreamReader;
 public class LuxRender {
 
     private static String LUX_RENDERER_BINARY_PATH = "/usr/local/bin/luxconsole";
-    private static String OUTPUT_PATH = "/Users/dennisppaul/Desktop/foo1.png";
+    private static String OUTPUT_PATH              = "/Users/dennisppaul/Desktop/foo1.png";
 
     public static void _main(String[] args) {
         try {
@@ -84,8 +84,8 @@ public class LuxRender {
                                                  "--output",
                                                  OUTPUT_PATH,
                                                  "/Applications/LuxRender/examples/custom_render_scene/custom_render_scene.lxs"};
-            Process myProcess = Runtime.getRuntime().exec(myExecString);
-            BufferedReader br = new BufferedReader(new InputStreamReader(myProcess.getInputStream()));
+            Process        myProcess = Runtime.getRuntime().exec(myExecString);
+            BufferedReader br        = new BufferedReader(new InputStreamReader(myProcess.getInputStream()));
 
             //            /* assemble query */
             //            OutputStream myOutputStream = myProcess.getOutputStream();
@@ -141,18 +141,18 @@ public class LuxRender {
     static class StreamGobbler extends Thread {
 
         InputStream is;
-        String type;
+        String      type;
 
         StreamGobbler(InputStream is, String type) {
-            this.is = is;
+            this.is   = is;
             this.type = type;
         }
 
         public void run() {
             try {
                 InputStreamReader isr = new InputStreamReader(is);
-                BufferedReader br = new BufferedReader(isr);
-                String line;
+                BufferedReader    br  = new BufferedReader(isr);
+                String            line;
                 while ((line = br.readLine()) != null) {
                     System.out.println(type + ">" + line);
                 }
@@ -183,7 +183,7 @@ public class LuxRender {
             System.out.println("Execing " + cmd[0] + " " + cmd[1] + " " + cmd[2]);
             Process proc = rt.exec(cmd);
 
-            StreamGobbler errorGobbler = new StreamGobbler(proc.getErrorStream(), "ERROR");
+            StreamGobbler errorGobbler  = new StreamGobbler(proc.getErrorStream(), "ERROR");
             StreamGobbler outputGobbler = new StreamGobbler(proc.getInputStream(), "OUTPUT");
             errorGobbler.start();
             outputGobbler.start();

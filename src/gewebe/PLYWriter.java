@@ -39,7 +39,7 @@ import java.io.PrintWriter;
  */
 public class PLYWriter extends PGraphics {
 
-    public static float VERTEX_SCALE = 1.0f;
+    public static float        VERTEX_SCALE      = 1.0f;
     /*
      * RawDXF - Code to write DXF files with beginRaw/endRaw
      * An extension for the Processing project - http://processing.org
@@ -80,11 +80,11 @@ public class PLYWriter extends PGraphics {
      3 0 1 2                    { start of face list }
      *
      */
-    private File file;
-    private final StringBuffer mFaces = new StringBuffer();
-    private int mVertexCounterPLY = 0;
-    private final StringBuffer mVertices = new StringBuffer();
-    private PrintWriter writer;
+    private       File         file;
+    private final StringBuffer mFaces            = new StringBuffer();
+    private       int          mVertexCounterPLY = 0;
+    private final StringBuffer mVertices         = new StringBuffer();
+    private       PrintWriter  writer;
 
     public void setPath(String path) {
         this.path = path;
@@ -143,8 +143,8 @@ public class PLYWriter extends PGraphics {
             && (shape != TRIANGLES)
             && (shape != POLYGON)) {
             String err
-            = PLYWriter.class.getSimpleName() + "can only be used with beginRaw(), "
-              + "because it only supports lines and triangles";
+                    = PLYWriter.class.getSimpleName() + "can only be used with beginRaw(), "
+                      + "because it only supports lines and triangles";
             throw new RuntimeException(err);
         }
 
@@ -372,10 +372,10 @@ public class PLYWriter extends PGraphics {
             vertices[2][SG] = vertices[0][SG];
             vertices[2][SB] = vertices[0][SB];
             vertices[2][SA] = vertices[0][SA];
-            vertices[2][R] = vertices[0][R];
-            vertices[2][G] = vertices[0][G];
-            vertices[2][B] = vertices[0][B];
-            vertices[2][A] = vertices[0][A];
+            vertices[2][R]  = vertices[0][R];
+            vertices[2][G]  = vertices[0][G];
+            vertices[2][B]  = vertices[0][B];
+            vertices[2][A]  = vertices[0][A];
         }
         appendVertex(vertices[0], pStrokeColor);
         appendVertex(vertices[2], pStrokeColor);
@@ -440,7 +440,7 @@ public class PLYWriter extends PGraphics {
             mUp.set(1.0f, 0.0f, 0.0f);
         }
 
-        PVector vP = new PVector(0, 0, 1.0f);
+        PVector     vP   = new PVector(0, 0, 1.0f);
         final float mDot = v.dot(mUp);
         if (mDot < 1.0f && mDot > -1.0f) {
             PVector.cross(v, mUp, vP);

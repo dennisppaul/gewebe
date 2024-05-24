@@ -26,24 +26,24 @@ import java.util.ArrayList;
 
 public class IndexedTriangleList {
 
-    private static final int NOT_FOUND = -1;
-    public final ArrayList<PVector> vertices;
-    public final ArrayList<Integer> indices;
+    private static final int                NOT_FOUND = -1;
+    public final         ArrayList<PVector> vertices;
+    public final         ArrayList<Integer> indices;
 
     public IndexedTriangleList() {
         vertices = new ArrayList<>();
-        indices = new ArrayList<>();
+        indices  = new ArrayList<>();
     }
 
     public IndexedTriangleList(ArrayList<PVector> pVertexList, ArrayList<Integer> pIndexList) {
         vertices = pVertexList;
-        indices = pIndexList;
+        indices  = pIndexList;
     }
 
     private static int findVertexInIndexList(ArrayList<PVector> mOptimizedVertexList, PVector v, float pEpsilon) {
         for (int j = 0; j < mOptimizedVertexList.size(); j++) {
-            final PVector vo = mOptimizedVertexList.get(j);
-            boolean isNear = near(v, vo, pEpsilon);
+            final PVector vo     = mOptimizedVertexList.get(j);
+            boolean       isNear = near(v, vo, pEpsilon);
             if (isNear) {
                 return j;
             }
@@ -63,8 +63,8 @@ public class IndexedTriangleList {
     public void draw(PGraphics g) {
         g.beginShape(PGraphics.TRIANGLES);
         for (Integer indice : indices) {
-            int mIndex = indice;
-            PVector p = vertices.get(mIndex);
+            int     mIndex = indice;
+            PVector p      = vertices.get(mIndex);
             g.vertex(p.x, p.y, p.z);
         }
         g.endShape();
@@ -86,8 +86,8 @@ public class IndexedTriangleList {
 
     public static IndexedTriangleList optimize(ArrayList<PVector> pVertexList, float pMinDistance) {
         ArrayList<PVector> mOptimizedVertexList = new ArrayList<>();
-        ArrayList<Integer> mOptimizedIndexList = new ArrayList<>();
-        int mIndexCounter = 0;
+        ArrayList<Integer> mOptimizedIndexList  = new ArrayList<>();
+        int                mIndexCounter        = 0;
         for (final PVector v : pVertexList) {
             int mExistingIndex = findVertexInIndexList(mOptimizedVertexList, v, pMinDistance);
             if (mExistingIndex == NOT_FOUND) {

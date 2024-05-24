@@ -53,28 +53,28 @@ public class ShaderTranslucent
         implements org.sunflow.core.Shader {
 
     /* http://sfwiki.geneome.net/index.php5?title=Shaders/Janino_Translucent */
-    public static final String name = "translucent";
-    public org.sunflow.image.Color absorptionColor = org.sunflow.image.Color.BLUE;
+    public static final String                  name               = "translucent";
+    public              org.sunflow.image.Color absorptionColor    = org.sunflow.image.Color.BLUE;
     // object absorption color
     //public Color absorptionColor = Color.RED;
-    public float absorptionDistance = 0.25f;
+    public              float                   absorptionDistance = 0.25f;
     // inverse of absorption color
     // object color
-    public org.sunflow.image.Color color = org.sunflow.image.Color.WHITE;
+    public              org.sunflow.image.Color color              = org.sunflow.image.Color.WHITE;
     // global color-saving variable
     /* FIXME!?? - globals are not good */
-    public org.sunflow.image.Color glob = org.sunflow.image.Color.black();
+    public              org.sunflow.image.Color glob               = org.sunflow.image.Color.black();
     // phong specular color
 
-    public org.sunflow.image.Color pcolor = org.sunflow.image.Color.BLACK;
+    public org.sunflow.image.Color pcolor             = org.sunflow.image.Color.BLACK;
     // object absorption distance
-    public boolean phong = true;
+    public boolean                 phong              = true;
     // depth correction parameter
-    public float ppower = 85f;
+    public float                   ppower             = 85f;
     // phong specular power
-    public int psamples = 1;
+    public int                     psamples           = 1;
     // phong specular samples
-    public float thickness = 0.002f;
+    public float                   thickness          = 0.002f;
     // phong flag
     public org.sunflow.image.Color transmittanceColor = absorptionColor.copy().opposite();
 
@@ -90,7 +90,7 @@ public class ShaderTranslucent
     }
 
     public org.sunflow.image.Color getRadiance(ShadingState state) {
-        org.sunflow.image.Color ret = org.sunflow.image.Color.black();
+        org.sunflow.image.Color ret        = org.sunflow.image.Color.black();
         org.sunflow.image.Color absorbtion = org.sunflow.image.Color.white();
         glob.set(org.sunflow.image.Color.black());
         state.faceforward();
@@ -101,7 +101,7 @@ public class ShaderTranslucent
             bury(state, thickness);
         } else {
             absorbtion = org.sunflow.image.Color.mul(-state.getRay().getMax() / absorptionDistance, transmittanceColor)
-                                                .exp();
+                    .exp();
         }
         state.traceRefraction(new Ray(state.getPoint(), randomVector()), 0);
         glob.add(state.diffuse(color));
@@ -121,7 +121,7 @@ public class ShaderTranslucent
     }
 
     public void bury(ShadingState state, float th) {
-        Point3 pt = state.getPoint();
+        Point3  pt   = state.getPoint();
         Vector3 norm = state.getNormal();
         pt.x = pt.x - norm.x * th;
         pt.y = pt.y - norm.y * th;

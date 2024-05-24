@@ -17,10 +17,10 @@ public class SketchBooleanOperations3 extends PApplet {
      */
 
     private CGALBooleanOperations3 mBooleanOperation;
-    private Mesh mIntersection;
-    private float mRotation;
-    private Mesh mSolidA;
-    private Mesh mSolidB;
+    private Mesh                   mIntersection;
+    private float                  mRotation;
+    private Mesh                   mSolidA;
+    private Mesh                   mSolidB;
 
     public void settings() {
         size(1024, 768, P3D);

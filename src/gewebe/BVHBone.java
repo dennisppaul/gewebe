@@ -29,35 +29,35 @@ import java.util.List;
 
 public class BVHBone {
 
-    public PVector absEndPos = new PVector();
-    public PVector absPos = new PVector();
-    public PMatrix3D global_matrix;
-    private float _Xposition = 0;
-    private float _Xrotation = 0;
-    private float _Yposition = 0;
-    private float _Yrotation = 0;
-    private float _Zposition = 0;
-    private float _Zrotation = 0;
-    private List<String> _channels;
+    public  PVector       absEndPos   = new PVector();
+    public  PVector       absPos      = new PVector();
+    public  PMatrix3D     global_matrix;
+    private float         _Xposition  = 0;
+    private float         _Xrotation  = 0;
+    private float         _Yposition  = 0;
+    private float         _Yrotation  = 0;
+    private float         _Zposition  = 0;
+    private float         _Zrotation  = 0;
+    private List<String>  _channels;
     private List<BVHBone> _children;
-    private float _endOffsetX = 0;
-    private float _endOffsetY = 0;
-    private float _endOffsetZ = 0;
-    private String _name;
-    private int _nbChannels;
-    private float _offsetX = 0;
-    private float _offsetY = 0;
-    private float _offsetZ = 0;
-    private BVHBone _parent;
+    private float         _endOffsetX = 0;
+    private float         _endOffsetY = 0;
+    private float         _endOffsetZ = 0;
+    private String        _name;
+    private int           _nbChannels;
+    private float         _offsetX    = 0;
+    private float         _offsetY    = 0;
+    private float         _offsetZ    = 0;
+    private BVHBone       _parent;
 
     public BVHBone(BVHBone __parent) {
-        _parent = __parent;
+        _parent   = __parent;
         _channels = new ArrayList<String>();
         _children = new ArrayList<BVHBone>();
     }
 
     public BVHBone() {
-        _parent = null;
+        _parent   = null;
         _channels = new ArrayList<String>();
         _children = new ArrayList<BVHBone>();
     }

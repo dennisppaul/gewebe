@@ -27,8 +27,8 @@ void keyPressed() {
     }
 }
 void addVertices(float pXOffset, float pYOffset, float pRadius, float pSteps) {
-    final float mSteps = TWO_PI / pSteps;
-    final float mOffset = 5;
+    final float mSteps   = TWO_PI / pSteps;
+    final float mOffset  = 5;
     final float mROffset = random(TWO_PI);
     for (float r = 0; r < TWO_PI; r += mSteps) {
         final float x = sin(r + mROffset) * pRadius + pXOffset + random(-mOffset, mOffset);

@@ -1,14 +1,14 @@
 import gewebe.*; 
 import org.sunflow.*; 
-final static int GRID_SIZE = 4;
-final static float GRID_SPACE = 50;
-final Voronoi mQvoronoi = new Voronoi();
-final PVector[] mGridPoints = new PVector[GRID_SIZE * GRID_SIZE * GRID_SIZE];
-final PVector mAcceptableRegion = new PVector(GRID_SIZE * GRID_SPACE * 1.5f,
-                                                      GRID_SIZE * GRID_SPACE * 1.5f,
-                                                      GRID_SIZE * GRID_SPACE * 1.5f);
+final static int       GRID_SIZE         = 4;
+final static float     GRID_SPACE        = 50;
+final        Voronoi   mQvoronoi         = new Voronoi();
+final        PVector[] mGridPoints       = new PVector[GRID_SIZE * GRID_SIZE * GRID_SIZE];
+final        PVector   mAcceptableRegion = new PVector(GRID_SIZE * GRID_SPACE * 1.5f,
+                                                               GRID_SIZE * GRID_SPACE * 1.5f,
+                                                               GRID_SIZE * GRID_SPACE * 1.5f);
 PVector[][] mRegions;
-int mCurrentRegion;
+int         mCurrentRegion;
 void settings() {
     size(1024, 768, P3D);
 }
@@ -101,9 +101,9 @@ void calcAndDrawHull(PVector[] pVertex) {
     for (int[] mIndices : mFaces) {
         for (int i : mIndices) {
             Point3d p = vertices[i];
-            float x = (float) p.x;
-            float y = (float) p.y;
-            float z = (float) p.z;
+            float   x = (float) p.x;
+            float   y = (float) p.y;
+            float   z = (float) p.z;
             vertex(x, y, z);
         }
     }

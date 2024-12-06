@@ -18,7 +18,7 @@ void draw() {
     fill(255);
     translate(250, height - 225);
     for (int i = 0; i < mVertices.size(); i++) {
-        PVector p = mVertices.get(i);
+        PVector     p       = mVertices.get(i);
         final float mRadius = sin(radians(i * 10 + frameCount * 3)) * 2 + 4;
         ellipse(p.x, p.y, mRadius * 2, mRadius * 2);
     }

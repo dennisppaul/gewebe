@@ -12,7 +12,7 @@ public class SketchScreensTVsInSpace extends PApplet {
      * navigate space.
      */
 
-    private MyTV mScreen;
+    private MyTV  mScreen;
     private float mCameraPositionAngle;
     private float mCameraPositionRadius;
 
@@ -22,8 +22,8 @@ public class SketchScreensTVsInSpace extends PApplet {
 
     public void setup() {
         imageMode(CENTER);
-        mScreen = new MyTV(this);
-        mCameraPositionAngle = 0;
+        mScreen               = new MyTV(this);
+        mCameraPositionAngle  = 0;
         mCameraPositionRadius = width;
     }
 

@@ -33,25 +33,25 @@ import java.util.ArrayList;
  */
 public class OBJWriter extends PGraphics {
 
-    public static final int LINE_CONVERSION_MODE_PLANE = 0;
-    public static final int LINE_CONVERSION_MODE_VIERKANTROHR = 2;
-    public static final int LINE_CONVERSION_MODE_VIERKANTROHR_CLOSED = 3;
-    private static final int LINE_CONVERSION_MODE_CYLINDER = 1;
-    private static final String OBJ_GROUP_NAME = "GROUP";
-    private static final String OBJ_GROUP = "g";
-    private static final String OBJ_VERTEX = "v";
-    private static final String OBJ_FACE = "f";
-    private static final String OBJ_SPACE = " ";
-    private static final float EPSILON = 0.01f;
-    private final PVector AXIS_X = new PVector(1, 0, 0);
-    private final PVector AXIS_Y = new PVector(0, 1, 0);
-    private final PVector AXIS_Z = new PVector(0, 0, 1);
-    private File mFile;
-    private int mLineConversionMode = LINE_CONVERSION_MODE_VIERKANTROHR_CLOSED;
-    private final ArrayList<String> mOBJIndexList = new ArrayList<>();
-    private int mOBJVertexCount = 0;
-    private final ArrayList<String> mOBJVertexList = new ArrayList<>();
-    private PrintWriter mWriter;
+    public static final  int               LINE_CONVERSION_MODE_PLANE               = 0;
+    public static final  int               LINE_CONVERSION_MODE_VIERKANTROHR        = 2;
+    public static final  int               LINE_CONVERSION_MODE_VIERKANTROHR_CLOSED = 3;
+    private static final int               LINE_CONVERSION_MODE_CYLINDER            = 1;
+    private static final String            OBJ_GROUP_NAME                           = "GROUP";
+    private static final String            OBJ_GROUP                                = "g";
+    private static final String            OBJ_VERTEX                               = "v";
+    private static final String            OBJ_FACE                                 = "f";
+    private static final String            OBJ_SPACE                                = " ";
+    private static final float             EPSILON                                  = 0.01f;
+    private final        PVector           AXIS_X                                   = new PVector(1, 0, 0);
+    private final        PVector           AXIS_Y                                   = new PVector(0, 1, 0);
+    private final        PVector           AXIS_Z                                   = new PVector(0, 0, 1);
+    private              File              mFile;
+    private              int               mLineConversionMode                      = LINE_CONVERSION_MODE_VIERKANTROHR_CLOSED;
+    private final        ArrayList<String> mOBJIndexList                            = new ArrayList<>();
+    private              int               mOBJVertexCount                          = 0;
+    private final        ArrayList<String> mOBJVertexList                           = new ArrayList<>();
+    private              PrintWriter       mWriter;
 
     @Override
     public void setPath(String path) {
@@ -217,9 +217,9 @@ public class OBJWriter extends PGraphics {
 
     protected void writeLine(int index0, int index1) {
         if (mLineConversionMode == LINE_CONVERSION_MODE_PLANE) {
-            PVector l0 = new PVector(vertices[index0][X], vertices[index0][Y], vertices[index0][Z]);
-            PVector l1 = new PVector(vertices[index1][X], vertices[index1][Y], vertices[index1][Z]);
-            PVector mDiff = PVector.sub(l1, l0);
+            PVector l0            = new PVector(vertices[index0][X], vertices[index0][Y], vertices[index0][Z]);
+            PVector l1            = new PVector(vertices[index1][X], vertices[index1][Y], vertices[index1][Z]);
+            PVector mDiff         = PVector.sub(l1, l0);
             PVector mBestUpVector = getBestUpVector(mDiff);
 
             PVector mCross = mDiff.cross(mBestUpVector);
@@ -230,16 +230,16 @@ public class OBJWriter extends PGraphics {
             writeOBJTriangle(PVector.add(l0, mCross), l1, l0);
             writeOBJTriangle(PVector.add(l0, mCross), PVector.add(l1, mCross), l1);
         } else if (mLineConversionMode == LINE_CONVERSION_MODE_VIERKANTROHR || mLineConversionMode == LINE_CONVERSION_MODE_VIERKANTROHR_CLOSED) {
-            PVector l0 = new PVector(vertices[index0][X], vertices[index0][Y], vertices[index0][Z]);
-            PVector l1 = new PVector(vertices[index1][X], vertices[index1][Y], vertices[index1][Z]);
-            PVector mDiff = PVector.sub(l1, l0);
+            PVector l0            = new PVector(vertices[index0][X], vertices[index0][Y], vertices[index0][Z]);
+            PVector l1            = new PVector(vertices[index1][X], vertices[index1][Y], vertices[index1][Z]);
+            PVector mDiff         = PVector.sub(l1, l0);
             PVector mBestUpVector = getBestUpVector(mDiff);
 
             final float mWidth = strokeWeight * 0.5f;
-            PVector p00 = mDiff.cross(mBestUpVector).normalize().mult(mWidth);
-            PVector p01 = mDiff.cross(p00).normalize().mult(mWidth);
-            PVector p02 = mDiff.cross(p01).normalize().mult(mWidth);
-            PVector p03 = mDiff.cross(p02).normalize().mult(mWidth);
+            PVector     p00    = mDiff.cross(mBestUpVector).normalize().mult(mWidth);
+            PVector     p01    = mDiff.cross(p00).normalize().mult(mWidth);
+            PVector     p02    = mDiff.cross(p01).normalize().mult(mWidth);
+            PVector     p03    = mDiff.cross(p02).normalize().mult(mWidth);
 
             // p00-p01
             writeOBJTriangle(PVector.add(l0, p00), PVector.add(l0, p01), PVector.add(l1, p00));

@@ -13,7 +13,7 @@ public class SketchPointSprites extends PApplet {
     }
 
     PointSprites fPointSprites;
-    PVector[] fPoints;
+    PVector[]    fPoints;
 
     public void setup() {
         size(1024, 768, P3D);

@@ -24,13 +24,13 @@ import processing.core.PImage;
 
 public class LEDisplay {
 
-    private boolean mDisplayLEDAsSphere;
-    private final PImage mLEDImage;
-    private float mLEDScale;
+    private       boolean mDisplayLEDAsSphere;
+    private final PImage  mLEDImage;
+    private       float   mLEDScale;
 
     public LEDisplay(PImage pImage) {
-        mLEDImage = pImage;
-        mLEDScale = 1.0f;
+        mLEDImage           = pImage;
+        mLEDScale           = 1.0f;
         mDisplayLEDAsSphere = false;
     }
 
@@ -78,11 +78,11 @@ public class LEDisplay {
             System.out.println("### image size does not match number of vertices in model data");
         }
         for (int i = 0; i < pLEDImage.pixels.length; i++) {
-            int c = pLEDImage.pixels[i];
+            int       c = pLEDImage.pixels[i];
             final int j = i * 3;
-            float x = mModelData[j + 0];
-            float y = mModelData[j + 1];
-            float z = mModelData[j + 2];
+            float     x = mModelData[j + 0];
+            float     y = mModelData[j + 1];
+            float     z = mModelData[j + 2];
             pCanvas.fill(c);
             pCanvas.pushMatrix();
             pCanvas.translate(x, y, z);

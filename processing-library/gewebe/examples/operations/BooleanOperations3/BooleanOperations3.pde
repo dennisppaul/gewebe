@@ -8,10 +8,10 @@ import org.sunflow.*;
  * note that this sketch currently only runs on macOS.
  */
 CGALBooleanOperations3 mBooleanOperation;
-Mesh mIntersection;
-float mRotation;
-Mesh mSolidA;
-Mesh mSolidB;
+Mesh                   mIntersection;
+float                  mRotation;
+Mesh                   mSolidA;
+Mesh                   mSolidB;
 void settings() {
     size(1024, 768, P3D);
 }

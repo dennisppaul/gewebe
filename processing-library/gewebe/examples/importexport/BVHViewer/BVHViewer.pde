@@ -10,7 +10,7 @@ void settings() {
 }
 void setup() {
     final String mTempDirectory = System.getProperty("user.dir");
-    mBVHViewer = new BVHViewer[3];
+    mBVHViewer    = new BVHViewer[3];
     mBVHViewer[0] = new BVHViewer(loadStrings(mTempDirectory + "/out/production/07_11.bvh"));
     mBVHViewer[1] = new BVHViewer(loadStrings(mTempDirectory + "/out/production/09_06.bvh"));
     mBVHViewer[2] = new BVHViewer(loadStrings(mTempDirectory + "/out/production/C_test.bvh"));

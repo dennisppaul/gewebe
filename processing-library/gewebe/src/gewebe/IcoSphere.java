@@ -32,8 +32,8 @@ import java.util.Hashtable;
 
 public class IcoSphere {
 
-    private IndexedTriangleList mGeometry;
-    private int mIndex;
+    private IndexedTriangleList         mGeometry;
+    private int                         mIndex;
     private Hashtable<Integer, Integer> mMiddlePointIndexCache;
 
     private IcoSphere() {
@@ -51,9 +51,9 @@ public class IcoSphere {
 
         // first check if we have it already
         boolean firstIsSmaller = p1 < p2;
-        int smallerIndex = firstIsSmaller ? p1 : p2;
-        int greaterIndex = firstIsSmaller ? p2 : p1;
-        int key = (smallerIndex << 16) + greaterIndex;
+        int     smallerIndex   = firstIsSmaller ? p1 : p2;
+        int     greaterIndex   = firstIsSmaller ? p2 : p1;
+        int     key            = (smallerIndex << 16) + greaterIndex;
 
         Integer ret = mMiddlePointIndexCache.get(key);
         if (ret != null) {
@@ -77,9 +77,9 @@ public class IcoSphere {
     }
 
     public IndexedTriangleList create(int pRecursionLevel) {
-        mGeometry = new IndexedTriangleList();
+        mGeometry              = new IndexedTriangleList();
         mMiddlePointIndexCache = new Hashtable<>();
-        mIndex = 0;
+        mIndex                 = 0;
 
         // create 12 vertices of a icosahedron
         float t = (1.0f + PApplet.sqrt(5.0f)) / 2.0f;
@@ -158,9 +158,9 @@ public class IcoSphere {
     }
 
     public static Mesh mesh(int pRecursionLevel) {
-        IcoSphere is = new IcoSphere();
-        IndexedTriangleList m = is.create(pRecursionLevel);
-        float[] mVertices = new float[m.indices.size() * 3];
+        IcoSphere           is        = new IcoSphere();
+        IndexedTriangleList m         = is.create(pRecursionLevel);
+        float[]             mVertices = new float[m.indices.size() * 3];
         for (int i = 0; i < m.indices.size(); i++) {
             PVector v = m.vertices.get(m.indices.get(i));
             mVertices[i * 3 + 0] = v.x;

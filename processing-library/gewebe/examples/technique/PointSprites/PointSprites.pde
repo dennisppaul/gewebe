@@ -4,7 +4,7 @@ void settings() {
     size(1024, 768, P3D);
 }
 PointSprites fPointSprites;
-PVector[] fPoints;
+PVector[]    fPoints;
 void setup() {
     size(1024, 768, P3D);
     hint(DISABLE_DEPTH_TEST);

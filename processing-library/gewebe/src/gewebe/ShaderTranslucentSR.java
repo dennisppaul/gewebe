@@ -54,30 +54,30 @@ public class ShaderTranslucentSR
         implements org.sunflow.core.Shader {
 
     /* TRANSLUCENT - WITH STORAGE AND REFLECTION OF PHOTONS */
-    public static final String name = "translucent_sr";
-    public Color absorptionColor = Color.BLUE;
+    public static final String name               = "translucent_sr";
+    public              Color  absorptionColor    = Color.BLUE;
     // object absorption color
     //public Color absorptionColor = Color.RED;
-    public float absorptionDistance = 0.25f;
+    public              float  absorptionDistance = 0.25f;
     // inverse of absorption color
     // object color
-    public Color color = Color.WHITE;
+    public              Color  color              = Color.WHITE;
     // global color-saving variable
     /* FIXME!?? - globals are not good */
-    public Color glob = Color.black();
+    public              Color  glob               = Color.black();
     // phong specular color
 
-    public Color pcolor = Color.BLACK;
+    public Color   pcolor             = Color.BLACK;
     // object absorption distance
-    public boolean phong = false;
+    public boolean phong              = false;
     // depth correction parameter
-    public float ppower = 85f;
+    public float   ppower             = 85f;
     // phong specular power
-    public int psamples = 1;
+    public int     psamples           = 1;
     // phong specular samples
-    public float thickness = 0.002f;
+    public float   thickness          = 0.002f;
     // phong flag
-    public Color transmittanceColor = absorptionColor.copy().opposite();
+    public Color   transmittanceColor = absorptionColor.copy().opposite();
 
     public boolean update(ParameterList pl, SunflowAPI api) {
         color = pl.getColor("color", color);
@@ -91,7 +91,7 @@ public class ShaderTranslucentSR
     }
 
     public Color getRadiance(ShadingState state) {
-        Color ret = Color.black();
+        Color ret        = Color.black();
         Color absorbtion = Color.white();
         glob.set(Color.black());
         state.faceforward();
@@ -120,7 +120,7 @@ public class ShaderTranslucentSR
     }
 
     public void bury(ShadingState state, float th) {
-        Point3 pt = state.getPoint();
+        Point3  pt   = state.getPoint();
         Vector3 norm = state.getNormal();
         pt.x = pt.x - norm.x * th;
         pt.y = pt.y - norm.y * th;

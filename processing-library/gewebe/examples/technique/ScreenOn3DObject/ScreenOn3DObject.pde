@@ -4,7 +4,7 @@ import org.sunflow.*;
  * this example shows how to draw into an @{@link gewebe.OffscreenContext} and use it as a texture on a 3D model.
  * move mouse to offset texture.
  */
-Mesh mModelMesh;
+Mesh      mModelMesh;
 MyTexture mScreen;
 void settings() {
     size(1024, 768, P3D);
@@ -48,7 +48,7 @@ static class MyTexture extends OffscreenContext {
         graphics.noFill();
         graphics.stroke(255);
         final float mPadding = 20;
-        float mY = parent.random(mPadding, graphics.height - mPadding);
+        float       mY       = parent.random(mPadding, graphics.height - mPadding);
         graphics.line(parent.random(mPadding, graphics.width - mPadding), mY,
                       parent.random(mPadding, graphics.width - mPadding), mY);
     }

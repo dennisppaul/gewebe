@@ -14,10 +14,10 @@ public class SketchRenderingWithCyclesAndCustomShaders extends PApplet {
      */
 
     private RendererCycles mCycles;
-    private boolean mRecord = false;
-    private int mShaderIDSpheres;
-    private int mShaderIDBlue;
-    private int mShaderIDGlass;
+    private boolean        mRecord = false;
+    private int            mShaderIDSpheres;
+    private int            mShaderIDBlue;
+    private int            mShaderIDGlass;
 
     public void settings() {
         size(1024, 768, P3D);
@@ -29,22 +29,22 @@ public class SketchRenderingWithCyclesAndCustomShaders extends PApplet {
 
         /* use `color` to assign shader IDs */
         mShaderIDSpheres = color(254);
-        mShaderIDBlue = color(200);
-        mShaderIDGlass = color(1, 0, 0, 0);
+        mShaderIDBlue    = color(200);
+        mShaderIDGlass   = color(1, 0, 0, 0);
     }
 
     public void draw() {
         String mOutputFile = "";
         if (mRecord) {
-            RendererCycles.NUMBER_OF_SAMPLES = 100;
-            RendererCycles.OUTPUT_IMAGE_FILE_TYPE = RendererCycles.IMAGE_FILE_TYPE_PNG;
-            RendererCycles.RENDERING_PROCESS_BLOCKING = true;
+            RendererCycles.NUMBER_OF_SAMPLES           = 100;
+            RendererCycles.OUTPUT_IMAGE_FILE_TYPE      = RendererCycles.IMAGE_FILE_TYPE_PNG;
+            RendererCycles.RENDERING_PROCESS_BLOCKING  = true;
             RendererCycles.DEBUG_PRINT_RENDER_PROGRESS = true;
             RendererCycles.BACKGROUND_COLOR.set(0.5f);
-            RendererCycles.RENDER_VIEWPORT_SCALE = 1.0f;
-            RendererCycles.KEEP_XML_SCENE_FILE = true;
-            mOutputFile = "cycles-" + nf(frameCount, 4);
-            mCycles = RendererCycles.create(this, mOutputFile);
+            RendererCycles.RENDER_VIEWPORT_SCALE                 = 1.0f;
+            RendererCycles.KEEP_XML_SCENE_FILE                   = true;
+            mOutputFile                                          = "cycles-" + nf(frameCount, 4);
+            mCycles                                              = RendererCycles.create(this, mOutputFile);
             RendererCycles.PARSE_COLORS_AS_CUSTOM_CYCLES_SHADERS = true;
             /* register shader configuration with ID generated from processing colors */
             mCycles.registerShader(mShaderIDSpheres, createShaderCubeVolume());

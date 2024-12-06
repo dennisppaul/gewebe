@@ -9,7 +9,7 @@ void settings() {
 }
 void setup() {
     ModelData mModelData = ModelLoaderOBJ.parseModelData(OBJWeirdObject.DATA);
-    Mesh mModelMesh = mModelData.mesh();
+    Mesh      mModelMesh = mModelData.mesh();
     mTriangles = mModelMesh.triangles();
 }
 void draw() {

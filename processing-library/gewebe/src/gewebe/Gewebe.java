@@ -37,9 +37,9 @@ public class Gewebe {
      */
     public static void zip(String pZipFile, String pSourceFileOrFolder) {
         try {
-            FileOutputStream fos = new FileOutputStream(pZipFile);
-            ZipOutputStream zipOut = new ZipOutputStream(fos);
-            File fileToZip = new File(pSourceFileOrFolder);
+            FileOutputStream fos       = new FileOutputStream(pZipFile);
+            ZipOutputStream  zipOut    = new ZipOutputStream(fos);
+            File             fileToZip = new File(pSourceFileOrFolder);
 
             zipFile(fileToZip, fileToZip.getName(), zipOut);
             zipOut.close();
@@ -80,10 +80,10 @@ public class Gewebe {
      */
     public static void unzip(String pZipFile, String pDestinationPath) {
         try {
-            File destDir = new File(pDestinationPath);
-            byte[] buffer = new byte[1024];
-            ZipInputStream zis = new ZipInputStream(new FileInputStream(pZipFile));
-            ZipEntry zipEntry = zis.getNextEntry();
+            File           destDir  = new File(pDestinationPath);
+            byte[]         buffer   = new byte[1024];
+            ZipInputStream zis      = new ZipInputStream(new FileInputStream(pZipFile));
+            ZipEntry       zipEntry = zis.getNextEntry();
             while (zipEntry != null) {
                 File newFile = newFile(destDir, zipEntry);
                 if (zipEntry.isDirectory()) {
@@ -99,7 +99,7 @@ public class Gewebe {
 
                     // write file content
                     FileOutputStream fos = new FileOutputStream(newFile);
-                    int len;
+                    int              len;
                     while ((len = zis.read(buffer)) > 0) {
                         fos.write(buffer, 0, len);
                     }
@@ -117,7 +117,7 @@ public class Gewebe {
     private static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
         File destFile = new File(destinationDir, zipEntry.getName());
 
-        String destDirPath = destinationDir.getCanonicalPath();
+        String destDirPath  = destinationDir.getCanonicalPath();
         String destFilePath = destFile.getCanonicalPath();
 
         if (!destFilePath.startsWith(destDirPath + File.separator)) {
@@ -145,11 +145,11 @@ public class Gewebe {
                 }
                 return;
             }
-            FileInputStream fis = new FileInputStream(pFileOrDirectoryToZip);
-            ZipEntry zipEntry = new ZipEntry(fileName);
+            FileInputStream fis      = new FileInputStream(pFileOrDirectoryToZip);
+            ZipEntry        zipEntry = new ZipEntry(fileName);
             zipOut.putNextEntry(zipEntry);
             byte[] bytes = new byte[1024];
-            int length;
+            int    length;
             while ((length = fis.read(bytes)) >= 0) {
                 zipOut.write(bytes, 0, length);
             }

@@ -49,12 +49,12 @@ public class SketchConvertLineToTriangles extends PApplet {
     private void drawRing() {
         noStroke();
         fill(255);
-        float mRadius = 200;
-        PVector mPPrev = null;
+        float       mRadius    = 200;
+        PVector     mPPrev     = null;
         final float mLineWidth = 30;
-        final int mStep = 36;
+        final int   mStep      = 36;
         for (int i = -mStep; i < 360; i += mStep) {
-            float r = radians(i);
+            float   r  = radians(i);
             PVector mP = new PVector(sin(r) * mRadius, cos(r) * mRadius);
             if (mPPrev != null) {
                 drawLineSegment(mPPrev, mP, mLineWidth);
@@ -67,15 +67,15 @@ public class SketchConvertLineToTriangles extends PApplet {
         noFill();
         stroke(255);
 
-        float mRadius = 200;
+        float       mRadius    = 200;
         final float mLineWidth = 50;
-        final int mStep = 36;
-        final int mHeightInc = 10;
-        int mHeight = 0;
+        final int   mStep      = 36;
+        final int   mHeightInc = 10;
+        int         mHeight    = 0;
 
         ArrayList<PVector> mVertices = new ArrayList<>();
         for (int i = 0; i < 360 * 3; i += mStep) {
-            float r = radians(i);
+            float   r = radians(i);
             PVector p = new PVector(sin(r) * mRadius, cos(r) * mRadius, mHeight);
             mHeight += mHeightInc;
             mVertices.add(p);
@@ -88,14 +88,14 @@ public class SketchConvertLineToTriangles extends PApplet {
     private void drawSpiral() {
         noFill();
         stroke(255);
-        float mRadius = 200;
-        PVector mPPrev = null;
+        float       mRadius    = 200;
+        PVector     mPPrev     = null;
         final float mLineWidth = 30;
-        final int mStep = 36;
-        final int mHeightInc = 10;
-        int mHeight = 0;
+        final int   mStep      = 36;
+        final int   mHeightInc = 10;
+        int         mHeight    = 0;
         for (int i = 0; i < 360 * 3; i += mStep) {
-            float r = radians(i);
+            float   r  = radians(i);
             PVector mP = new PVector(sin(r) * mRadius, cos(r) * mRadius);
             if (mPPrev != null) {
                 mHeight += mHeightInc;
@@ -108,7 +108,7 @@ public class SketchConvertLineToTriangles extends PApplet {
     private void drawBasket() {
         noStroke();
         fill(255);
-        float v = 200;
+        float   v = 200;
         PVector p = null;
         for (int i = -10; i < 360; i += 10) {
             float r = radians(i);

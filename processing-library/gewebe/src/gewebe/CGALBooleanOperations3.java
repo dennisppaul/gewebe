@@ -22,8 +22,8 @@ package gewebe;
 public class CGALBooleanOperations3 {
 
     public static int INTERSECTION = 0;
-    public static int JOIN = 1;
-    public static int DIFFERENCE = 2;
+    public static int JOIN         = 1;
+    public static int DIFFERENCE   = 2;
 
     static {
         System.out.print("### loading native lib `" + CGALBooleanOperations3.class.getName() + "` ...");
@@ -42,6 +42,6 @@ public class CGALBooleanOperations3 {
     public static void main(String[] args) {
         CGALBooleanOperations3 mCGALBooleanOperations3 = new CGALBooleanOperations3();
         System.out.println(
-        CGALBooleanOperations3.class.getSimpleName() + " :: version: " + mCGALBooleanOperations3.version());
+                CGALBooleanOperations3.class.getSimpleName() + " :: version: " + mCGALBooleanOperations3.version());
     }
 }

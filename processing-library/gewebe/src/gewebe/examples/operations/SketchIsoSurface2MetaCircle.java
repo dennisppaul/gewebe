@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class SketchIsoSurface2MetaCircle extends PApplet {
 
-    final int mSquareSizeX = 8;
-    final int mSquareSizeY = 8;
-    private float[][] mEnergyGrid;
-    private float mIsoValue = 32.0f;
+    final   int          mSquareSizeX = 8;
+    final   int          mSquareSizeY = 8;
+    private float[][]    mEnergyGrid;
+    private float        mIsoValue    = 32.0f;
     private MetaCircle[] mMetaCircles;
 
     public void settings() {

@@ -38,14 +38,14 @@ public class SketchRenderingWithCycles extends PApplet {
     public void draw() {
         String mOutputFile = "";
         if (mRecord) {
-            RendererCycles.NUMBER_OF_SAMPLES = 25;
-            RendererCycles.OUTPUT_IMAGE_FILE_TYPE = RendererCycles.IMAGE_FILE_TYPE_PNG;
-            RendererCycles.RENDERING_PROCESS_BLOCKING = true;
+            RendererCycles.NUMBER_OF_SAMPLES           = 25;
+            RendererCycles.OUTPUT_IMAGE_FILE_TYPE      = RendererCycles.IMAGE_FILE_TYPE_PNG;
+            RendererCycles.RENDERING_PROCESS_BLOCKING  = true;
             RendererCycles.DEBUG_PRINT_RENDER_PROGRESS = false;
             RendererCycles.BACKGROUND_COLOR.set(0.5f);
             RendererCycles.RENDER_VIEWPORT_SCALE = 2.0f;
-            RendererCycles.KEEP_XML_SCENE_FILE = true;
-            mOutputFile = "cycles-" + nf(frameCount, 4);
+            RendererCycles.KEEP_XML_SCENE_FILE   = true;
+            mOutputFile                          = "cycles-" + nf(frameCount, 4);
             beginRaw(createGraphics(width, height, RendererCycles.name(), mOutputFile));
         }
 
@@ -84,7 +84,7 @@ public class SketchRenderingWithCycles extends PApplet {
             translate(random(-mRange, mRange),
                       random(-mRange, mRange),
                       random(-mRange, mRange)
-            );
+                     );
             sphere(random(10, 30));
             popMatrix();
         }

@@ -19,7 +19,7 @@ public class SketchBVH extends PApplet {
 
     public void setup() {
         final String mTempDirectory = System.getProperty("user.dir");
-        String[] mBVHData = loadStrings(mTempDirectory + "/out/production/C_test.bvh");
+        String[]     mBVHData       = loadStrings(mTempDirectory + "/out/production/C_test.bvh");
         mBVHParser = new BVHParser();
         mBVHParser.parse(mBVHData);
     }

@@ -32,8 +32,9 @@ import org.sunflow.system.ImagePanel;
 import processing.core.PMatrix;
 import processing.core.PVector;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -43,44 +44,44 @@ public class RendererSunflow extends RendererMesh {
     // @TODO(separate lines from triangles to make use of hair renderer)
     // @TODO(find a way to export scene as `.sc` file. look into `renderObjects`)
 
-    private static final String SHADER_AMBIENT_OCCLUSION = "ambient_occlusion";
-    private static final String GI_PATH = "path";
-    private static final String GI_FAKE = "fake";
-    private static final String SHADER_PHONG = "phong";
-    private static final String SHADER_NAME = "my_shader";
-    private static final String SHADER_TEXTURED_PHONG = "textured_phong";
-    private static final PVector _myFloor = new PVector();
-    private static final float MAX_DIST = 600f;
-    private static final String COLORSPACE_SRGB_NONLINEAR = "sRGB nonlinear";
-    private static final String GI_INSTANT_GI = "igi";
-    private static final String GI_IRRADIANCE_CACHE = "irr-cache";
-    private static final String LIGHT_SUNSKY = "sunsky";
-    private static final String FILTER_BLACKMAN_HARRIS = "blackman-harris";
-    private static final String FILTER_BOX = "box";
-    private static final String FILTER_CATMULL_ROM = "catmull-rom";
-    private static final String FILTER_GAUSSIAN = "gaussian";
-    private static final String FILTER_LANCZOS = "lanczos";
-    private static final String FILTER_MITCHELL = "mitchell";
-    private static final String FILTER_SINC = "sinc";
-    private static final String FILTER_TRIANGLE = "triangle";
-    private static final String FILTER_BSPLINE = "bspline";
-    private static final String LIGHT_POINT = "point";
-    private static final boolean headless = true; // @TODO(bring back render preview)
-    public static String IMAGE_FILE_TYPE_PNG = ".png";
-    public static String IMAGE_FILE_TYPE_TGA = ".tga";
-    public static String SCENE_FILE_TYPE = ".xml";
-    public static String OUTPUT_IMAGE_FILE_TYPE = IMAGE_FILE_TYPE_PNG;
-    public static boolean preview = true;
-    public static boolean floor = false;
-    public static boolean auto_dispose_frame = false;
-    public static boolean start_in_extra_thread = false;
-    public static PVector floor_up = null;
-    public static float RENDER_VIEWPORT_SCALE = 1;
-    public static Color BACKGROUND_COLOR = new Color(0.5f);
-    public static int SAMPLES = 128;
-    public static int AA_MIN = 1;
-    public static int AA_MAX = 2;
-    static int mShaderID = 0;
+    private static final String  SHADER_AMBIENT_OCCLUSION  = "ambient_occlusion";
+    private static final String  GI_PATH                   = "path";
+    private static final String  GI_FAKE                   = "fake";
+    private static final String  SHADER_PHONG              = "phong";
+    private static final String  SHADER_NAME               = "my_shader";
+    private static final String  SHADER_TEXTURED_PHONG     = "textured_phong";
+    private static final PVector _myFloor                  = new PVector();
+    private static final float   MAX_DIST                  = 600f;
+    private static final String  COLORSPACE_SRGB_NONLINEAR = "sRGB nonlinear";
+    private static final String  GI_INSTANT_GI             = "igi";
+    private static final String  GI_IRRADIANCE_CACHE       = "irr-cache";
+    private static final String  LIGHT_SUNSKY              = "sunsky";
+    private static final String  FILTER_BLACKMAN_HARRIS    = "blackman-harris";
+    private static final String  FILTER_BOX                = "box";
+    private static final String  FILTER_CATMULL_ROM        = "catmull-rom";
+    private static final String  FILTER_GAUSSIAN           = "gaussian";
+    private static final String  FILTER_LANCZOS            = "lanczos";
+    private static final String  FILTER_MITCHELL           = "mitchell";
+    private static final String  FILTER_SINC               = "sinc";
+    private static final String  FILTER_TRIANGLE           = "triangle";
+    private static final String  FILTER_BSPLINE            = "bspline";
+    private static final String  LIGHT_POINT               = "point";
+    private static final boolean headless                  = true; // @TODO(bring back render preview)
+    public static        String  IMAGE_FILE_TYPE_PNG       = ".png";
+    public static        String  IMAGE_FILE_TYPE_TGA       = ".tga";
+    public static        String  SCENE_FILE_TYPE           = ".xml";
+    public static        String  OUTPUT_IMAGE_FILE_TYPE    = IMAGE_FILE_TYPE_PNG;
+    public static        boolean preview                   = true;
+    public static        boolean floor                     = false;
+    public static        boolean auto_dispose_frame        = false;
+    public static        boolean start_in_extra_thread     = false;
+    public static        PVector floor_up                  = null;
+    public static        float   RENDER_VIEWPORT_SCALE     = 1;
+    public static        Color   BACKGROUND_COLOR          = new Color(0.5f);
+    public static        int     SAMPLES                   = 128;
+    public static        int     AA_MIN                    = 1;
+    public static        int     AA_MAX                    = 2;
+    static               int     mShaderID                 = 0;
 
     static {
         PluginRegistry.shaderPlugins.registerPlugin("my_test_shader", MyCustomShader.class);
@@ -90,9 +91,9 @@ public class RendererSunflow extends RendererMesh {
     }
 
     private final SunflowAPI mSunflow;
-    private final String mColorSpace = COLORSPACE_SRGB_NONLINEAR;
-    private Display _myDisplay;
-    private int mGeometryID = 0;
+    private final String     mColorSpace = COLORSPACE_SRGB_NONLINEAR;
+    private       Display    _myDisplay;
+    private       int        mGeometryID = 0;
 
     //        public static void render(String theFilePath) {
     //            RendererSunflow myRenderer = new RendererSunflow();
@@ -204,16 +205,16 @@ public class RendererSunflow extends RendererMesh {
     }
 
     public void setupCamera() {
-        float mFOVY = 53.0f;
-        final float myAspect = (float) width / (float) height;
-        String mCameraName = "my_camera";
+        float       mFOVY       = 53.0f;
+        final float myAspect    = (float) width / (float) height;
+        String      mCameraName = "my_camera";
 
         final boolean mMyCameraSetup = false;
         if (mMyCameraSetup) {
             System.out.println("@TODO setupCamera / transform matrix");
-            Point3 eye = new Point3(0, 0, 500);
-            Point3 target = new Point3(0, 0, 0);
-            Vector3 up = new Vector3(0, 1, 0);
+            Point3  eye    = new Point3(0, 0, 500);
+            Point3  target = new Point3(0, 0, 0);
+            Vector3 up     = new Vector3(0, 1, 0);
             mSunflow.parameter("transform", Matrix4.lookAt(eye, target, up));
             mSunflow.parameter("fov", mFOVY);
             mSunflow.parameter("aspect", myAspect);
@@ -274,7 +275,9 @@ public class RendererSunflow extends RendererMesh {
 
         mSunflow.parameter("power", power);
         mSunflow.parameter("samples", samples);
-        if (texture != null) { mSunflow.parameter("texture", texture); }
+        if (texture != null) {
+            mSunflow.parameter("texture", texture);
+        }
 
         //		set shader
         if (texture != null) {
@@ -463,10 +466,10 @@ public class RendererSunflow extends RendererMesh {
             System.err.println("### vertex + normals list does not align!");
         }
         final float[] pVertices = new float[pVerticesList.size()];
-        final float[] pNormals = new float[pNormalsList.size()];
+        final float[] pNormals  = new float[pNormalsList.size()];
         for (int i = 0; i < pVerticesList.size(); i++) {
             pVertices[i] = pVerticesList.get(i);
-            pNormals[i] = pNormalsList.get(i);
+            pNormals[i]  = pNormalsList.get(i);
         }
         /*
          * // create geometry @ SCParser
@@ -771,8 +774,8 @@ public class RendererSunflow extends RendererMesh {
 
         public MyFrameDisplay(String filename, RendererSunflow pRenderer) {
             this.filename = filename;
-            mRenderer = pRenderer;
-            frame = null;
+            mRenderer     = pRenderer;
+            frame         = null;
         }
 
         public void stop() {
@@ -784,7 +787,7 @@ public class RendererSunflow extends RendererMesh {
                 frame = new RenderFrame(this);
                 frame.imagePanel.imageBegin(w, h, bucketSize);
                 Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
-                boolean needFit = false;
+                boolean   needFit   = false;
                 if (w >= (screenRes.getWidth() - 200) || h >= (screenRes.getHeight() - 200)) {
                     frame.imagePanel.setPreferredSize(new Dimension((int) screenRes.getWidth() - 200,
                                                                     (int) screenRes.getHeight() - 200));

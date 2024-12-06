@@ -1,6 +1,6 @@
 import gewebe.*; 
 import org.sunflow.*; 
-ArcBall mArcBall;
+ArcBall   mArcBall;
 PGraphics mDisplayContent;
 LEDisplay mLEDisplay;
 void settings() {

@@ -27,7 +27,7 @@ public class SketchVectorFontAsMesh extends PApplet {
     public void draw() {
         mPathCreator.outline_flatness((float) mouseX / (float) width * 10);
         ArrayList<PVector> mVertices = mPathCreator.vertices("01.01.1970");
-        Mesh mMesh = MeshUtil.mesh(mVertices);
+        Mesh               mMesh     = MeshUtil.mesh(mVertices);
 
         background(50);
         if (mousePressed) {

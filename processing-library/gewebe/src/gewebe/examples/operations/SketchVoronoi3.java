@@ -8,16 +8,16 @@ import quickhull3d.QuickHull3D;
 
 public class SketchVoronoi3 extends PApplet {
 
-    private final static int GRID_SIZE = 4;
-    private final static float GRID_SPACE = 50;
-    private final Voronoi mQvoronoi = new Voronoi();
-    private final PVector[] mGridPoints = new PVector[GRID_SIZE * GRID_SIZE * GRID_SIZE];
-    private final PVector mAcceptableRegion = new PVector(GRID_SIZE * GRID_SPACE * 1.5f,
-                                                          GRID_SIZE * GRID_SPACE * 1.5f,
-                                                          GRID_SIZE * GRID_SPACE * 1.5f);
+    private final static int       GRID_SIZE         = 4;
+    private final static float     GRID_SPACE        = 50;
+    private final        Voronoi   mQvoronoi         = new Voronoi();
+    private final        PVector[] mGridPoints       = new PVector[GRID_SIZE * GRID_SIZE * GRID_SIZE];
+    private final        PVector   mAcceptableRegion = new PVector(GRID_SIZE * GRID_SPACE * 1.5f,
+                                                                   GRID_SIZE * GRID_SPACE * 1.5f,
+                                                                   GRID_SIZE * GRID_SPACE * 1.5f);
 
     private PVector[][] mRegions;
-    private int mCurrentRegion;
+    private int         mCurrentRegion;
 
     public void settings() {
         size(1024, 768, P3D);
@@ -126,9 +126,9 @@ public class SketchVoronoi3 extends PApplet {
         for (int[] mIndices : mFaces) {
             for (int i : mIndices) {
                 Point3d p = vertices[i];
-                float x = (float) p.x;
-                float y = (float) p.y;
-                float z = (float) p.z;
+                float   x = (float) p.x;
+                float   y = (float) p.y;
+                float   z = (float) p.z;
                 vertex(x, y, z);
             }
         }

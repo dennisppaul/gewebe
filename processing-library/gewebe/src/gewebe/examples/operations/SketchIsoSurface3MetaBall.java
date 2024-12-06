@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class SketchIsoSurface3MetaBall extends PApplet {
 
-    private static final int MAXIMUM_META_BALLS = 200;
-    private ArcBall mArcBall;
-    private MetaBallManager mMetaBallManager;
+    private static final int             MAXIMUM_META_BALLS = 200;
+    private              ArcBall         mArcBall;
+    private              MetaBallManager mMetaBallManager;
 
     public void settings() {
         size(1024, 768, P3D);
@@ -85,10 +85,10 @@ public class SketchIsoSurface3MetaBall extends PApplet {
         private final PVector velocity;
 
         public MovingMetaBall() {
-            super(
-            new PVector(random(width / -3.0f, width / 3.0f), random(height / -3.0f, height / 3.0f), height / -2.0f),
-            random(1.5f, 3), random(150, 300));
-            velocity = PVector.random3D();
+            super(new PVector(random(width / -3.0f, width / 3.0f),
+                              random(height / -3.0f, height / 3.0f),
+                              height / -2.0f), random(1.5f, 3), random(150, 300));
+            velocity   = PVector.random3D();
             velocity.z = abs(velocity.z);
             velocity.mult(random(50, 100));
         }

@@ -4,7 +4,7 @@ import org.sunflow.*;
  * this example demonstrates how to arrange characters along a given path and return the result as a collection of
  * triangles.
  */
-int mNumberOfTriangles = 0;
+int        mNumberOfTriangles = 0;
 VectorFont mPathCreator;
 void settings() {
     size(1024, 768, P3D);
@@ -19,7 +19,7 @@ void draw() {
     background(50);
     /* adjust flatness ( ie resolutions of curves ) */
     final float mOutlineFlatness = abs((float) mouseX / (float) width) * 10 + 0.1f;
-    final float mPathFlatness = abs((float) mouseY / (float) height) * 5 + 0.1f;
+    final float mPathFlatness    = abs((float) mouseY / (float) height) * 5 + 0.1f;
     mPathCreator.outline_flatness(mOutlineFlatness);
     mPathCreator.path_flatness(mPathFlatness);
     /* create path */
@@ -29,7 +29,7 @@ void draw() {
         mPath.add(new PVector(x, y));
     }
     /* create outlines */
-    String mString = "FLATNESS: " + round(mOutlineFlatness) + " = TRIANGLES: " + nf(mNumberOfTriangles, 4);
+    String                   mString    = "FLATNESS: " + round(mOutlineFlatness) + " = TRIANGLES: " + nf(mNumberOfTriangles, 4);
     final ArrayList<PVector> mTriangles = mPathCreator.vertices(mString, mPath);
     mNumberOfTriangles = mTriangles.size();
     /* toggle fill and wireframe */

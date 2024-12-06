@@ -1,9 +1,9 @@
 import gewebe.*; 
 import org.sunflow.*; 
-final int mSquareSizeX = 8;
-final int mSquareSizeY = 8;
-float[][] mEnergyGrid;
-float mIsoValue = 32.0f;
+final   int          mSquareSizeX = 8;
+final   int          mSquareSizeY = 8;
+float[][]    mEnergyGrid;
+float        mIsoValue    = 32.0f;
 MetaCircle[] mMetaCircles;
 void settings() {
     size(1024, 768, P3D);

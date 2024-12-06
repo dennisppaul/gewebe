@@ -178,6 +178,6 @@ public class CGALAlphaShape3 {
     public static void main(String[] args) {
         CGALAlphaShape3 mCGALAlphaShape3 = new CGALAlphaShape3();
         System.out.println(
-        CGALAlphaShape3.class.getSimpleName() + " :: version: " + mCGALAlphaShape3.version());
+                CGALAlphaShape3.class.getSimpleName() + " :: version: " + mCGALAlphaShape3.version());
     }
 }

@@ -4,7 +4,7 @@ import org.sunflow.*;
  * this example shows how to draw on @{@link gewebe.TV} *screens* and arrange them in a 3D space. use arrow keys to
  * navigate space.
  */
-MyTV mScreen;
+MyTV  mScreen;
 float mCameraPositionAngle;
 float mCameraPositionRadius;
 void settings() {
@@ -12,8 +12,8 @@ void settings() {
 }
 void setup() {
     imageMode(CENTER);
-    mScreen = new MyTV(this);
-    mCameraPositionAngle = 0;
+    mScreen               = new MyTV(this);
+    mCameraPositionAngle  = 0;
     mCameraPositionRadius = width;
 }
 void draw() {

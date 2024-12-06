@@ -93,7 +93,7 @@ public class DelaunayTriangulation {
 
         boolean[] complete;
         final int nv = pVertices.size();
-        boolean inside;
+        boolean   inside;
 
         if (nv < 3) {
             return null;
@@ -143,8 +143,8 @@ public class DelaunayTriangulation {
         final float dy = ymax - ymin;
         //        final float dz = zmax - zmin;
         final float dMax = Math.max(dx, dy);
-        float xMid = (xmax + xmin) / 2.0f;
-        float yMid = (ymax + ymin) / 2.0f;
+        float       xMid = (xmax + xmin) / 2.0f;
+        float       yMid = (ymax + ymin) / 2.0f;
         //        float zmid = (zmax + zmin) / 2.0f;
 
         /*
@@ -170,8 +170,8 @@ public class DelaunayTriangulation {
          */
         for (int i = 0; i < nv; i++) {
 
-            final float xp = pVertices.get(i).x;
-            final float yp = pVertices.get(i).y;
+            final float                     xp    = pVertices.get(i).x;
+            final float                     yp    = pVertices.get(i).y;
             ArrayList<DelaunayTriangleEdge> edges = new ArrayList<>();
 
             /*
@@ -184,20 +184,20 @@ public class DelaunayTriangulation {
             for (int j = 0; j < mDelaunayTriangles.size(); j++) {
                 final float x1, y1, x2, y2, x3, y3, xc,
 //                        yc,
-                r;
+                        r;
 
                 if (complete[j]) {
                     continue;
                 }
 
-                x1 = pVertices.get(mDelaunayTriangles.get(j).p[0]).x;
-                y1 = pVertices.get(mDelaunayTriangles.get(j).p[0]).y;
-                x2 = pVertices.get(mDelaunayTriangles.get(j).p[1]).x;
-                y2 = pVertices.get(mDelaunayTriangles.get(j).p[1]).y;
-                x3 = pVertices.get(mDelaunayTriangles.get(j).p[2]).x;
-                y3 = pVertices.get(mDelaunayTriangles.get(j).p[2]).y;
+                x1     = pVertices.get(mDelaunayTriangles.get(j).p[0]).x;
+                y1     = pVertices.get(mDelaunayTriangles.get(j).p[0]).y;
+                x2     = pVertices.get(mDelaunayTriangles.get(j).p[1]).x;
+                y2     = pVertices.get(mDelaunayTriangles.get(j).p[1]).y;
+                x3     = pVertices.get(mDelaunayTriangles.get(j).p[2]).x;
+                y3     = pVertices.get(mDelaunayTriangles.get(j).p[2]).y;
                 inside = getCircumCircle(xp, yp, x1, y1, x2, y2, x3, y3, _myCircle);
-                xc = _myCircle.x;
+                xc     = _myCircle.x;
 //                yc = _myCircle.y;
                 r = _myCircle.z;
                 if (xc + r < xp) {
@@ -220,7 +220,7 @@ public class DelaunayTriangulation {
                     mDelaunayTriangles.get(j).p[0] = mDelaunayTriangles.get(mDelaunayTriangles.size() - 1).p[0];
                     mDelaunayTriangles.get(j).p[1] = mDelaunayTriangles.get(mDelaunayTriangles.size() - 1).p[1];
                     mDelaunayTriangles.get(j).p[2] = mDelaunayTriangles.get(mDelaunayTriangles.size() - 1).p[2];
-                    complete[j] = complete[mDelaunayTriangles.size() - 1];
+                    complete[j]                    = complete[mDelaunayTriangles.size() - 1];
                     mDelaunayTriangles.remove(mDelaunayTriangles.size() - 1);
                     j--;
                 }
@@ -262,9 +262,9 @@ public class DelaunayTriangulation {
                     return null;
                 }
                 DelaunayTriangle myNewTriangle = new DelaunayTriangle();
-                myNewTriangle.p[0] = edge.p[0];
-                myNewTriangle.p[1] = edge.p[1];
-                myNewTriangle.p[2] = i;
+                myNewTriangle.p[0]                  = edge.p[0];
+                myNewTriangle.p[1]                  = edge.p[1];
+                myNewTriangle.p[2]                  = i;
                 complete[mDelaunayTriangles.size()] = false;
                 mDelaunayTriangles.add(myNewTriangle);
             }
@@ -276,7 +276,7 @@ public class DelaunayTriangulation {
          */
         for (int i = 0; i < mDelaunayTriangles.size(); i++) {
             if (mDelaunayTriangles.get(i).p[0] >= nv || mDelaunayTriangles.get(i).p[1] >= nv || mDelaunayTriangles.get(
-            i).p[2] >= nv) {
+                    i).p[2] >= nv) {
                 mDelaunayTriangles.set(i, mDelaunayTriangles.get(mDelaunayTriangles.size() - 1));
                 mDelaunayTriangles.remove(mDelaunayTriangles.size() - 1);
                 i--;
@@ -298,9 +298,9 @@ public class DelaunayTriangulation {
 
     static PVector getCenter(final ArrayList<PVector> theVertices, final DelaunayTriangle theTriangle) {
         final PVector myCenter = new PVector();
-        final PVector v0 = theVertices.get(theTriangle.p[0]);
-        final PVector v1 = theVertices.get(theTriangle.p[1]);
-        final PVector v2 = theVertices.get(theTriangle.p[2]);
+        final PVector v0       = theVertices.get(theTriangle.p[0]);
+        final PVector v1       = theVertices.get(theTriangle.p[1]);
+        final PVector v2       = theVertices.get(theTriangle.p[2]);
         final PVector myNormal = new PVector(0, 0, 1);
 
         final PVector pA = PVector.sub(new PVector(v2.x, v2.y), new PVector(v0.x, v0.y));
@@ -349,35 +349,35 @@ public class DelaunayTriangulation {
         }
 
         if (Math.abs(y2 - y1) < PApplet.EPSILON) {
-            m2 = -(x3 - x2) / (y3 - y2);
+            m2  = -(x3 - x2) / (y3 - y2);
             mx2 = (x2 + x3) / 2.0f;
             my2 = (y2 + y3) / 2.0f;
-            xc = (x2 + x1) / 2.0f;
-            yc = m2 * (xc - mx2) + my2;
+            xc  = (x2 + x1) / 2.0f;
+            yc  = m2 * (xc - mx2) + my2;
         } else if (Math.abs(y3 - y2) < PApplet.EPSILON) {
-            m1 = -(x2 - x1) / (y2 - y1);
+            m1  = -(x2 - x1) / (y2 - y1);
             mx1 = (x1 + x2) / 2.0f;
             my1 = (y1 + y2) / 2.0f;
-            xc = (x3 + x2) / 2.0f;
-            yc = m1 * (xc - mx1) + my1;
+            xc  = (x3 + x2) / 2.0f;
+            yc  = m1 * (xc - mx1) + my1;
         } else {
-            m1 = -(x2 - x1) / (y2 - y1);
-            m2 = -(x3 - x2) / (y3 - y2);
+            m1  = -(x2 - x1) / (y2 - y1);
+            m2  = -(x3 - x2) / (y3 - y2);
             mx1 = (x1 + x2) / 2.0f;
             mx2 = (x2 + x3) / 2.0f;
             my1 = (y1 + y2) / 2.0f;
             my2 = (y2 + y3) / 2.0f;
-            xc = (m1 * mx1 - m2 * mx2 + my2 - my1) / (m1 - m2);
-            yc = m1 * (xc - mx1) + my1;
+            xc  = (m1 * mx1 - m2 * mx2 + my2 - my1) / (m1 - m2);
+            yc  = m1 * (xc - mx1) + my1;
         }
 
-        dx = x2 - xc;
-        dy = y2 - yc;
+        dx   = x2 - xc;
+        dy   = y2 - yc;
         rsqr = dx * dx + dy * dy;
-        r = (float) Math.sqrt(rsqr);
+        r    = (float) Math.sqrt(rsqr);
 
-        dx = xp - xc;
-        dy = yp - yc;
+        dx    = xp - xc;
+        dy    = yp - yc;
         drsqr = dx * dx + dy * dy;
 
         circle.x = xc;
@@ -412,8 +412,8 @@ public class DelaunayTriangulation {
                     return false;
                 } else {
                     float numer = d1343 * d4321 - d1321 * d4343;
-                    float mua = numer / denom;
-                    float mub = (d1343 + d4321 * mua) / d4343;
+                    float mua   = numer / denom;
+                    float mub   = (d1343 + d4321 * mua) / d4343;
                     if (pPa == null) {
                         pPa = new PVector();
                     }

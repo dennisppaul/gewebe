@@ -35,14 +35,14 @@ public class SketchConvertLineToTriangles extends PApplet {
     }
 
     private void drawSpiral() {
-        float mRadius = 200;
+        float       mRadius    = 200;
         final float mLineWidth = 8;
-        final int mStep = 12;
-        final int mHeightInc = 9;
+        final int   mStep      = 12;
+        final int   mHeightInc = 9;
 
         ArrayList<PVector> mVertices = new ArrayList<>();
         for (int i = -360 * 3; i < 360 * 3; i += mStep) {
-            float r = radians(i);
+            float   r = radians(i);
             PVector p = new PVector(sin(r) * mRadius, cos(r) * mRadius, mHeightInc * i / (float) mStep);
             mVertices.add(p);
         }

@@ -7,7 +7,7 @@ import processing.core.PGraphics;
 
 public class SketchLEDisplayFlat extends PApplet {
 
-    private ArcBall mArcBall;
+    private ArcBall   mArcBall;
     private PGraphics mDisplayContent;
     private LEDisplay mLEDisplay;
 

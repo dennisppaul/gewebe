@@ -3,16 +3,16 @@ import org.sunflow.*;
 /*
  * this example demonstrates how to cut a slice out of a mesh.
  */
-ArcBall mArcBall;
+ArcBall             mArcBall;
 ArrayList<Triangle> mTriangles;
 void settings() {
     size(1024, 768, P3D);
 }
 void setup() {
     ModelData mModelData = ModelLoaderOBJ.parseModelData(OBJMan.DATA);
-    Mesh mModelMesh = mModelData.mesh();
+    Mesh      mModelMesh = mModelData.mesh();
     mTriangles = mModelMesh.triangles();
-    mArcBall = new ArcBall(this, true);
+    mArcBall   = new ArcBall(this, true);
 }
 void draw() {
     background(50);
@@ -32,10 +32,10 @@ void draw() {
     }
     endShape();
     /* get slice */
-    final float mTomographRadius = 250;
-    final float mHeight = 525.0f - 550.0f * mouseY / (float) height;
-    final float mTomographScanPoints = 72;
-    ArrayList<PVector> mOutline = scanSlice(mTriangles, mHeight, mTomographScanPoints, mTomographRadius);
+    final float        mTomographRadius     = 250;
+    final float        mHeight              = 525.0f - 550.0f * mouseY / (float) height;
+    final float        mTomographScanPoints = 72;
+    ArrayList<PVector> mOutline             = scanSlice(mTriangles, mHeight, mTomographScanPoints, mTomographRadius);
     /* draw slice onto mesh */
     stroke(255, 127, 0);
     noFill();
@@ -61,9 +61,9 @@ ArrayList<PVector> scanSlice(ArrayList<Triangle> pTriangles,
                                      float pRadius) {
     final ArrayList<PVector> mOutline = new ArrayList();
     for (float r = 0; r < TWO_PI; r += TWO_PI / pScanPoints) {
-        PVector p0 = new PVector(sin(r) * pRadius, pHeight, cos(r) * pRadius);
-        PVector p1 = new PVector(sin(r + PI) * pRadius, pHeight, cos(r + PI) * pRadius);
-        PVector mResult = new PVector();
+        PVector p0       = new PVector(sin(r) * pRadius, pHeight, cos(r) * pRadius);
+        PVector p1       = new PVector(sin(r + PI) * pRadius, pHeight, cos(r + PI) * pRadius);
+        PVector mResult  = new PVector();
         boolean mSuccess = findIntersection(pTriangles, p0, p1, mResult);
         if (mSuccess) {
             mOutline.add(mResult);
@@ -77,7 +77,7 @@ ArrayList<PVector> scanSlice(ArrayList<Triangle> pTriangles,
     return MeshUtil.giftWrap(mOutline2D);
 }
 boolean findIntersection(ArrayList<Triangle> pTriangles, PVector p0, PVector p1, PVector pResult) {
-    final PVector pRayOrigin = p1;
+    final PVector pRayOrigin    = p1;
     final PVector pRayDirection = PVector.sub(p1, p0);
     for (Triangle t : pTriangles) {
         final PVector mResult = new PVector();

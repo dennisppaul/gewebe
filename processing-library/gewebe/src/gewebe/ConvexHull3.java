@@ -34,7 +34,7 @@ public class ConvexHull3 {
     }
 
     public static float[] hull_vertices(PVector[] pVertices) {
-        final QuickHull3D mHull = new QuickHull3D();
+        final QuickHull3D      mHull       = new QuickHull3D();
         final ArrayList<Float> mVertexData = new ArrayList<>();
 
         final Point3d[] mVertices = new Point3d[pVertices.length];

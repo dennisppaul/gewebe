@@ -25,19 +25,8 @@ import processing.data.XML;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.attribute.FileAttribute;
-import java.nio.file.attribute.PosixFilePermission;
-import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
-import java.util.Map;
 
 import static gewebe.Gewebe.get_os_name;
 
@@ -50,58 +39,58 @@ public class RendererCycles extends RendererMesh {
      * Rendering](https://www.cycles-renderer.org/development/)
      */
 
-    private static final String XML_NODE_CYCLES = "cycles";
-    private static final String XML_NODE_CAMERA = "camera";
-    private static final String XML_NODE_BACKGROUND = "background";
-    private static final String XML_NODE_MESH = "mesh";
-    private static final String XML_NODE_OBJECT = "state";
-    private static final String XML_NODE_CONNECT = "connect";
-    private static final String XML_NODE_DIFFUSE = "diffuse_bsdf";
-    private static final String XML_NODE_TRANSFORM = "transform";
-    private static final String XML_ATTR_WIDTH = "width";
-    private static final String XML_ATTR_HEIGHT = "height";
-    private static final String XML_ATTR_TYPE = "type";
-    private static final String XML_ATTR_MATRIX = "matrix";
-    private static final String XML_ATTR_NAME = "name";
-    private static final String XML_ATTR_POINTS = "P";
-    private static final String XML_ATTR_NVERTS = "nverts";
-    private static final String XML_ATTR_VERTS = "verts";
-    private static final String XML_ATTR_COLOR = "color";
-    private static final String XML_ATTR_FROM = "from";
-    private static final String XML_ATTR_TO = "to";
-    private static final String XML_UNI_SHADER = "shader";
-    private static final String VALUE_FROM_DIFFUSE = "diffuse bsdf";
-    private static final String VALUE_OUTPUT_SURFACE = "output surface";
-    private static final String SHADER_TYPE_DIFFUSE = "diffuse";
-    private static final char DELIMITER = ' ';
-    private static final String SHADER_NAME = "s_";
-    private static final String OPTION_SAMPLES = "--samples";
-    private static final String OPTION_BACKGROUND = "--background";
-    private static final String OPTION_OUTPUT = "--output";
-    private static final String OPTION_WIDTH = "--width";
-    private static final String OPTION_HEIGHT = "--height";
-    private static final String CYCLES_DEFAULT_LOCATION = "/cycles/cycles." + get_os_name() + "/";
-    private static final String CYCLES_DEFAULT_EXECUTABLE_NAME = "cycles" + getExecSuffix();
-    public static float RENDER_VIEWPORT_SCALE = 1.0f;
-    public static boolean DEBUG_PRINT_CYCLES_BINARY_LOCATION = true;
-    public static boolean DEBUG_PRINT_CAMERA_MATRIX = false;
-    public static String IMAGE_FILE_TYPE_PNG = ".png";
-    public static String SCENE_FILE_TYPE = ".xml";
-    public static String IMAGE_FILE_TYPE_JPG = ".jpg";
-    public static String IMAGE_FILE_TYPE_TGA = ".tga";
-    public static String OUTPUT_IMAGE_FILE_TYPE = IMAGE_FILE_TYPE_PNG;
-    public static String EXECUTABLE_PATH = null;
-    public static int NUMBER_OF_SAMPLES = 10;
-    public static String CAMERA_TYPE_PERSPECTIVE = "perspective";
-    public static String CAMERA_TYPE = CAMERA_TYPE_PERSPECTIVE;
-    public static Color BACKGROUND_COLOR = new Color(0.0f);
-    public static boolean KEEP_XML_SCENE_FILE = true;
-    public static boolean RENDER_IMAGE = true;
-    public static boolean PARSE_COLORS_AS_CUSTOM_CYCLES_SHADERS = false;
-    private final ArrayList<CyclesShader> mShaders = new ArrayList<>();
-    private XML mXML;
-    private final String mExecPath;
-    private int mShaderNameID = 0;
+    private static final String                  XML_NODE_CYCLES                       = "cycles";
+    private static final String                  XML_NODE_CAMERA                       = "camera";
+    private static final String                  XML_NODE_BACKGROUND                   = "background";
+    private static final String                  XML_NODE_MESH                         = "mesh";
+    private static final String                  XML_NODE_OBJECT                       = "state";
+    private static final String                  XML_NODE_CONNECT                      = "connect";
+    private static final String                  XML_NODE_DIFFUSE                      = "diffuse_bsdf";
+    private static final String                  XML_NODE_TRANSFORM                    = "transform";
+    private static final String                  XML_ATTR_WIDTH                        = "width";
+    private static final String                  XML_ATTR_HEIGHT                       = "height";
+    private static final String                  XML_ATTR_TYPE                         = "type";
+    private static final String                  XML_ATTR_MATRIX                       = "matrix";
+    private static final String                  XML_ATTR_NAME                         = "name";
+    private static final String                  XML_ATTR_POINTS                       = "P";
+    private static final String                  XML_ATTR_NVERTS                       = "nverts";
+    private static final String                  XML_ATTR_VERTS                        = "verts";
+    private static final String                  XML_ATTR_COLOR                        = "color";
+    private static final String                  XML_ATTR_FROM                         = "from";
+    private static final String                  XML_ATTR_TO                           = "to";
+    private static final String                  XML_UNI_SHADER                        = "shader";
+    private static final String                  VALUE_FROM_DIFFUSE                    = "diffuse bsdf";
+    private static final String                  VALUE_OUTPUT_SURFACE                  = "output surface";
+    private static final String                  SHADER_TYPE_DIFFUSE                   = "diffuse";
+    private static final char                    DELIMITER                             = ' ';
+    private static final String                  SHADER_NAME                           = "s_";
+    private static final String                  OPTION_SAMPLES                        = "--samples";
+    private static final String                  OPTION_BACKGROUND                     = "--background";
+    private static final String                  OPTION_OUTPUT                         = "--output";
+    private static final String                  OPTION_WIDTH                          = "--width";
+    private static final String                  OPTION_HEIGHT                         = "--height";
+    private static final String                  CYCLES_DEFAULT_LOCATION               = "/cycles/cycles." + get_os_name() + "/";
+    private static final String                  CYCLES_DEFAULT_EXECUTABLE_NAME        = "cycles" + getExecSuffix();
+    public static        float                   RENDER_VIEWPORT_SCALE                 = 1.0f;
+    public static        boolean                 DEBUG_PRINT_CYCLES_BINARY_LOCATION    = true;
+    public static        boolean                 DEBUG_PRINT_CAMERA_MATRIX             = false;
+    public static        String                  IMAGE_FILE_TYPE_PNG                   = ".png";
+    public static        String                  SCENE_FILE_TYPE                       = ".xml";
+    public static        String                  IMAGE_FILE_TYPE_JPG                   = ".jpg";
+    public static        String                  IMAGE_FILE_TYPE_TGA                   = ".tga";
+    public static        String                  OUTPUT_IMAGE_FILE_TYPE                = IMAGE_FILE_TYPE_PNG;
+    public static        String                  EXECUTABLE_PATH                       = null;
+    public static        int                     NUMBER_OF_SAMPLES                     = 10;
+    public static        String                  CAMERA_TYPE_PERSPECTIVE               = "perspective";
+    public static        String                  CAMERA_TYPE                           = CAMERA_TYPE_PERSPECTIVE;
+    public static        Color                   BACKGROUND_COLOR                      = new Color(0.0f);
+    public static        boolean                 KEEP_XML_SCENE_FILE                   = true;
+    public static        boolean                 RENDER_IMAGE                          = true;
+    public static        boolean                 PARSE_COLORS_AS_CUSTOM_CYCLES_SHADERS = false;
+    private final        ArrayList<CyclesShader> mShaders                              = new ArrayList<>();
+    private              XML                     mXML;
+    private final        String                  mExecPath;
+    private              int                     mShaderNameID                         = 0;
 
     public RendererCycles() {
         if (EXECUTABLE_PATH == null) {
@@ -125,7 +114,7 @@ public class RendererCycles extends RendererMesh {
 //                    Set<PosixFilePermission> ownerWritable = PosixFilePermissions.fromString("rwxr-xr-x");
 //                    FileAttribute<?> permissions = PosixFilePermissions.asFileAttribute(ownerWritable);
                     String mFileName = tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME);
-                    File mFile = new File(mFileName);
+                    File   mFile     = new File(mFileName);
                     mFile.setExecutable(true);
 //                    Files.createFile(path, permissions);
                 } else {
@@ -152,7 +141,7 @@ public class RendererCycles extends RendererMesh {
     }
 
     public void registerShader(int pColorID, XML pPayload) {
-        CyclesShader m = new CyclesShader(pColorID, pPayload);
+        CyclesShader m      = new CyclesShader(pColorID, pPayload);
         CyclesShader mQuery = findShader(m);
         if (mQuery == null) {
             mShaders.add(m);
@@ -162,7 +151,6 @@ public class RendererCycles extends RendererMesh {
             console("existing shader ... : " + mQuery);
         }
     }
-
 
 
     protected void beginFrame() {
@@ -243,8 +231,8 @@ public class RendererCycles extends RendererMesh {
         //        if (!(g instanceof PGraphics3D)) {
         //            error("camera requires a `PGraphics3D` context to function");
         //        }
-        int mWidth = width;
-        int mHeight = height;
+        int     mWidth        = width;
+        int     mHeight       = height;
         float[] mCameraMatrix = new float[16];
         getMatrix().get(mCameraMatrix);
         mCameraMatrix[14] = height;// TODO find out why this is necessary / still off 105%
@@ -290,7 +278,7 @@ public class RendererCycles extends RendererMesh {
 
     private void buildBackground(XML pXML) {
         final String BACKGROUND_NAME = "bg";
-        XML mBackgroundNode = new XML(XML_NODE_BACKGROUND);
+        XML          mBackgroundNode = new XML(XML_NODE_BACKGROUND);
         {
             XML mBackgroundPropertyNode = new XML(XML_NODE_BACKGROUND);
             mBackgroundPropertyNode.setString(XML_ATTR_NAME, BACKGROUND_NAME);
@@ -324,7 +312,7 @@ public class RendererCycles extends RendererMesh {
 
     private String buildShaderFromXML(XML pXML, ShaderTriangleBucket pBucket) {
         final String DEFAULT_SHADER_NAME = "default_shader";
-        CyclesShader mShader = findShader(pBucket.shaderID);
+        CyclesShader mShader             = findShader(pBucket.shaderID);
         if (mShader != null) {
             pXML.addChild(mShader.payload);
             final String mShaderName = mShader.payload.getString(XML_ATTR_NAME);
@@ -349,9 +337,9 @@ public class RendererCycles extends RendererMesh {
     }
 
     private XML buildMesh(float[] pTriangleList) {
-        StringBuilder mPoints = new StringBuilder();
+        StringBuilder mPoints           = new StringBuilder();
         StringBuilder mNumberOfVertices = new StringBuilder();
-        StringBuilder mVertexList = new StringBuilder();
+        StringBuilder mVertexList       = new StringBuilder();
 
         for (int i = 0; i < pTriangleList.length; i += 9) {
             for (int j = 0; j < 3; j++) {
@@ -385,7 +373,7 @@ public class RendererCycles extends RendererMesh {
 
     private void compileRenderCLICommands(String pXMLPath) {
         final String mOptionSamplesValue = String.valueOf(NUMBER_OF_SAMPLES);
-        final String mOptionOutputValue = path + OUTPUT_IMAGE_FILE_TYPE;
+        final String mOptionOutputValue  = path + OUTPUT_IMAGE_FILE_TYPE;
         final String[] mCommandString = new String[]{mExecPath,
                                                      OPTION_SAMPLES,
                                                      mOptionSamplesValue,
@@ -397,7 +385,7 @@ public class RendererCycles extends RendererMesh {
                                                      OPTION_OUTPUT,
                                                      mOptionOutputValue,
                                                      pXMLPath};
-        String mDYLIBLocation = mExecPath.substring(0, mExecPath.length()-CYCLES_DEFAULT_EXECUTABLE_NAME.length());
+        String mDYLIBLocation = mExecPath.substring(0, mExecPath.length() - CYCLES_DEFAULT_EXECUTABLE_NAME.length());
         launchRenderProcess(mCommandString, mDYLIBLocation);
     }
 
@@ -419,8 +407,8 @@ public class RendererCycles extends RendererMesh {
     }
 
     public static XML createShaderDiffuse(String pShaderName, float r, float g, float b) {
-        final float mRoughness = 0.0f;
-        XML mShaderNode = new XML(XML_UNI_SHADER);
+        final float mRoughness  = 0.0f;
+        XML         mShaderNode = new XML(XML_UNI_SHADER);
         mShaderNode.setString(XML_ATTR_NAME, pShaderName);
 
         XML mDiffuseNode = new XML(XML_NODE_DIFFUSE);
@@ -448,7 +436,6 @@ public class RendererCycles extends RendererMesh {
     }
 
 
-
     private static void die(String mExecPath) {
         System.err.println("### could not find cycles executable at `" + mExecPath + "`.");
         System.err.println("### try one of the following approaches: ");
@@ -462,8 +449,8 @@ public class RendererCycles extends RendererMesh {
     }
 
     private static String tryToFindFileInJavaLibraryPath(String mExecName) {
-        final String mDelimiter = get_os_name().equalsIgnoreCase("windows") ? ";" : ":";
-        String[] mJavaLibraryPath = System.getProperty("java.library.path").split(mDelimiter);
+        final String mDelimiter       = get_os_name().equalsIgnoreCase("windows") ? ";" : ":";
+        String[]     mJavaLibraryPath = System.getProperty("java.library.path").split(mDelimiter);
         for (String mPath : mJavaLibraryPath) {
             final String mExecAbsolutePath = mPath + CYCLES_DEFAULT_LOCATION + mExecName;
             if (Gewebe.file_exists(mExecAbsolutePath)) {
@@ -479,7 +466,7 @@ public class RendererCycles extends RendererMesh {
         public final XML payload;
 
         CyclesShader(int pID, XML pPayload) {
-            ID = pID;
+            ID      = pID;
             payload = pPayload;
         }
 
@@ -496,7 +483,7 @@ public class RendererCycles extends RendererMesh {
     public static void main(String[] args) {
         System.out.println("### found (exec) : " + tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME));
         System.out.println(
-        "### found (zip)  : " + tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME + ".zip"));
+                "### found (zip)  : " + tryToFindFileInJavaLibraryPath(CYCLES_DEFAULT_EXECUTABLE_NAME + ".zip"));
 
         new RendererCycles();
     }

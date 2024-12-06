@@ -7,8 +7,8 @@ import org.sunflow.*;
  * note that this sketch currently only runs on macOS.
  */
 CGALAlphaShape3 mCGAL;
-Mesh mMesh;
-float[] mPoints3;
+Mesh            mMesh;
+float[]         mPoints3;
 void settings() {
     size(1024, 768, P3D);
 }

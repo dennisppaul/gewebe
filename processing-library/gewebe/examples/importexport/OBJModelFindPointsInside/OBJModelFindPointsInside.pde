@@ -5,17 +5,17 @@ import org.sunflow.*;
  */
 static PVector mCenterOfMass;
 PVector mPoint = new PVector();
-ArrayList<PVector> mPoints;
+ArrayList<PVector>  mPoints;
 ArrayList<Triangle> mTriangles;
 void settings() {
     size(1024, 768, P3D);
 }
 void setup() {
     ModelData mModelData = ModelLoaderOBJ.parseModelData(OBJWeirdObject.DATA);
-    Mesh mModelMesh = mModelData.mesh();
-    mTriangles = mModelMesh.triangles();
+    Mesh      mModelMesh = mModelData.mesh();
+    mTriangles    = mModelMesh.triangles();
     mCenterOfMass = mModelMesh.center_of_mass();
-    mPoints = new ArrayList();
+    mPoints       = new ArrayList();
 }
 void draw() {
     background(50);

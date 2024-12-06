@@ -1,16 +1,16 @@
 import gewebe.*; 
 import org.sunflow.*; 
-ArcBall mArcBall;
+ArcBall   mArcBall;
 PGraphics mDisplayContent;
-float mLineMover;
-float[] mModelData;
+float     mLineMover;
+float[]   mModelData;
 void settings() {
     size(1024, 768, P3D);
 }
 void setup() {
     mArcBall = new ArcBall(this, true);
     mDisplayContent = createGraphics(100, 20);
-    mModelData = createModelData();
+    mModelData      = createModelData();
 }
 void draw() {
     background(50);

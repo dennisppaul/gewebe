@@ -28,7 +28,7 @@ void draw() {
     if (mRecord) {
         RendererSunflow.BACKGROUND_COLOR.set(0.2f);
         RendererSunflow.RENDER_VIEWPORT_SCALE = 2.0f;
-        mOutputFile = "sunflow-" + nf(frameCount, 4);
+        mOutputFile                           = "sunflow-" + nf(frameCount, 4);
         beginRaw(createGraphics(width, height, RendererSunflow.name(), mOutputFile));
     }
     drawScene();

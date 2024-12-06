@@ -19,7 +19,7 @@ public class SketchOBJModelFindPointsInside extends PApplet {
 
     private static PVector mCenterOfMass;
     PVector mPoint = new PVector();
-    private ArrayList<PVector> mPoints;
+    private ArrayList<PVector>  mPoints;
     private ArrayList<Triangle> mTriangles;
 
     public void settings() {
@@ -28,10 +28,10 @@ public class SketchOBJModelFindPointsInside extends PApplet {
 
     public void setup() {
         ModelData mModelData = ModelLoaderOBJ.parseModelData(OBJWeirdObject.DATA);
-        Mesh mModelMesh = mModelData.mesh();
-        mTriangles = mModelMesh.triangles();
+        Mesh      mModelMesh = mModelData.mesh();
+        mTriangles    = mModelMesh.triangles();
         mCenterOfMass = mModelMesh.center_of_mass();
-        mPoints = new ArrayList<>();
+        mPoints       = new ArrayList<>();
     }
 
     public void draw() {

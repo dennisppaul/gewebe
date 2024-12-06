@@ -47,16 +47,16 @@ public class PointSprites {
 
     private PShader fPointSpriteShader;
 
-    private final String VERTEX_SHADER_FILE;
-    private final String FRAGMENT_SHADER_FILE;
-    private static final int VERT_CMP_COUNT = 4; // assumes 4 components (x, y, z, w)
-    private final PVector[] fPoints;
+    private final        String    VERTEX_SHADER_FILE;
+    private final        String    FRAGMENT_SHADER_FILE;
+    private static final int       VERT_CMP_COUNT = 4; // assumes 4 components (x, y, z, w)
+    private final        PVector[] fPoints;
 
-    private float[] fVBOFloatArray;
+    private float[]     fVBOFloatArray;
     private FloatBuffer fVBOFloatBuffer;
-    private int fVBOBufferID;
-    private int fTextureID;
-    private float fPointSize;
+    private int         fVBOBufferID;
+    private int         fTextureID;
+    private float       fPointSize;
 
     public PointSprites(PApplet p,
                         PGL pgl,
@@ -64,10 +64,10 @@ public class PointSprites {
                         String path_to_sprite,
                         String path_to_vertex_shader,
                         String path_to_fragment_shader) {
-        VERTEX_SHADER_FILE = path_to_vertex_shader;
+        VERTEX_SHADER_FILE   = path_to_vertex_shader;
         FRAGMENT_SHADER_FILE = path_to_fragment_shader;
-        fPoints = points;
-        fPointSize = 1.0f;
+        fPoints              = points;
+        fPointSize           = 1.0f;
 
         setupShader(p);
         setupVBO(pgl);
@@ -88,9 +88,9 @@ public class PointSprites {
         pgl.vertexAttribPointer(mPointPositionLoc, VERT_CMP_COUNT, PGL.FLOAT, false, 0, 0);
 
         final int mHeightNearPlaneLoc = pgl.getUniformLocation(fPointSpriteShader.glProgram, "height_near_plane");
-        IntBuffer viewport = GLBuffers.newDirectIntBuffer(4);
+        IntBuffer viewport            = GLBuffers.newDirectIntBuffer(4);
         pgl.getIntegerv(GL_VIEWPORT, viewport);
-        final float mFOVY = PApplet.radians(60); // degrees
+        final float mFOVY            = PApplet.radians(60); // degrees
         final float mHeightNearPlane = PApplet.abs(viewport.get(3) - viewport.get(1)) / (2 * PApplet.tan(0.5f * mFOVY));
         pgl.uniform1f(mHeightNearPlaneLoc, mHeightNearPlane);
 
@@ -119,7 +119,7 @@ public class PointSprites {
     }
 
     private void setupVBO(PGL pgl) {
-        fVBOFloatArray = new float[VERT_CMP_COUNT * fPoints.length];
+        fVBOFloatArray  = new float[VERT_CMP_COUNT * fPoints.length];
         fVBOFloatBuffer = allocateDirectFloatBuffer(fVBOFloatArray.length);
 
         IntBuffer intBuffer = IntBuffer.allocate(1);
@@ -137,7 +137,7 @@ public class PointSprites {
 
             TextureData data = TextureIO.newTextureData(GLProfile.getDefault(), texture, false, TextureIO.PNG);
 
-            int level = 0;
+            int level      = 0;
             int mTextureID = 0;
 
             IntBuffer textureName = GLBuffers.newDirectIntBuffer(1);
@@ -172,7 +172,7 @@ public class PointSprites {
 
     public void update() {
         for (int i = 0; i < fPoints.length; i++) {
-            final int j = i * VERT_CMP_COUNT;
+            final int     j = i * VERT_CMP_COUNT;
             final PVector p = fPoints[i];
             fVBOFloatArray[j + 0] = p.x;
             fVBOFloatArray[j + 1] = p.y;

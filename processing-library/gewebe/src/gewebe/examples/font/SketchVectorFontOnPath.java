@@ -13,7 +13,7 @@ public class SketchVectorFontOnPath extends PApplet {
      * triangles.
      */
 
-    private int mNumberOfTriangles = 0;
+    private int        mNumberOfTriangles = 0;
     private VectorFont mPathCreator;
 
     public void settings() {
@@ -32,7 +32,7 @@ public class SketchVectorFontOnPath extends PApplet {
 
         /* adjust flatness ( ie resolutions of curves ) */
         final float mOutlineFlatness = abs((float) mouseX / (float) width) * 10 + 0.1f;
-        final float mPathFlatness = abs((float) mouseY / (float) height) * 5 + 0.1f;
+        final float mPathFlatness    = abs((float) mouseY / (float) height) * 5 + 0.1f;
         mPathCreator.outline_flatness(mOutlineFlatness);
         mPathCreator.path_flatness(mPathFlatness);
 
@@ -44,7 +44,7 @@ public class SketchVectorFontOnPath extends PApplet {
         }
 
         /* create outlines */
-        String mString = "FLATNESS: " + round(mOutlineFlatness) + " = TRIANGLES: " + nf(mNumberOfTriangles, 4);
+        String                   mString    = "FLATNESS: " + round(mOutlineFlatness) + " = TRIANGLES: " + nf(mNumberOfTriangles, 4);
         final ArrayList<PVector> mTriangles = mPathCreator.vertices(mString, mPath);
         mNumberOfTriangles = mTriangles.size();
 

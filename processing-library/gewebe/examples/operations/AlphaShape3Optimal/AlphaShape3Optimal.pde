@@ -7,9 +7,9 @@ import org.sunflow.*;
  * note that this sketch currently only runs on macOS.
  */
 CGALAlphaShape3 mCGAL;
-int mNumberOfSolidComponents = 1;
-float[] mOptimalAlphaShape;
-float[] mPoints3;
+int             mNumberOfSolidComponents = 1;
+float[]         mOptimalAlphaShape;
+float[]         mPoints3;
 void settings() {
     size(1024, 768, P3D);
 }

@@ -33,7 +33,7 @@ public class SketchExportWithOBJWriter extends PApplet {
         rotateY(frameCount * 0.003f);
 
         float mPadding = 50;
-        float mSize = width * 0.25f;
+        float mSize    = width * 0.25f;
 
         /* lines */
         noFill();

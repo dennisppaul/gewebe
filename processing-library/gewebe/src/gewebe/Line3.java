@@ -37,9 +37,9 @@ public class Line3 {
     }
 
     private static PVector approximateUpVector(PVector p0, PVector p1) {
-        PVector d = PVector.sub(p0, p1).normalize();
-        PVector mUpApprox = new PVector();
-        float mSmallestAngle = Float.MAX_VALUE;
+        PVector d              = PVector.sub(p0, p1).normalize();
+        PVector mUpApprox      = new PVector();
+        float   mSmallestAngle = Float.MAX_VALUE;
         for (PVector mPotentialUpVector : mPotentialUpVectors) {
             float mAngle = abs(PVector.dot(d, mPotentialUpVector));
             if (mAngle < mSmallestAngle) {
@@ -97,26 +97,26 @@ public class Line3 {
             pTriangles = new ArrayList<>();
         }
 
-        final int PRE = 0;
-        final int CENTER = 1;
-        final int POST = 2;
+        final int           PRE           = 0;
+        final int           CENTER        = 1;
+        final int           POST          = 2;
         LineSegmentStruct[] mLineSegments = new LineSegmentStruct[3];
-        mLineSegments[PRE] = new LineSegmentStruct(p0, p1, approximateUpVector(p0, p1));
+        mLineSegments[PRE]    = new LineSegmentStruct(p0, p1, approximateUpVector(p0, p1));
         mLineSegments[CENTER] = new LineSegmentStruct(p1, p2, approximateUpVector(p1, p2));
-        mLineSegments[POST] = new LineSegmentStruct(p2, p3, approximateUpVector(p2, p3));
+        mLineSegments[POST]   = new LineSegmentStruct(p2, p3, approximateUpVector(p2, p3));
 
-        final int PRE_BACK = 0;
-        final int CENTER_FRONT = 1;
-        final int CENTER_BACK = 2;
-        final int POST_FRONT = 3;
+        final int   PRE_BACK      = 0;
+        final int   CENTER_FRONT  = 1;
+        final int   CENTER_BACK   = 2;
+        final int   POST_FRONT    = 3;
         PVector[][] mCapsSegments = new PVector[4][4];
         calculateCap(p1, pSize, mLineSegments[PRE].side, mLineSegments[PRE].up, mCapsSegments[PRE_BACK]);
         calculateCap(p1, pSize, mLineSegments[CENTER].side, mLineSegments[CENTER].up, mCapsSegments[CENTER_FRONT]);
         calculateCap(p2, pSize, mLineSegments[CENTER].side, mLineSegments[CENTER].up, mCapsSegments[CENTER_BACK]);
         calculateCap(p2, pSize, mLineSegments[POST].side, mLineSegments[POST].up, mCapsSegments[POST_FRONT]);
 
-        final int FRONT = 0;
-        final int BACK = 1;
+        final int   FRONT             = 0;
+        final int   BACK              = 1;
         PVector[][] mCapsInterpolated = new PVector[2][4];
         interpolateCaps(mCapsSegments[PRE_BACK], mCapsSegments[CENTER_FRONT], mCapsInterpolated[FRONT]);
         interpolateCaps(mCapsSegments[CENTER_BACK], mCapsSegments[POST_FRONT], mCapsInterpolated[BACK]);
@@ -135,10 +135,10 @@ public class Line3 {
             pTriangles = new ArrayList<>();
         }
 
-        final int PRE_BACK = 0;
+        final int PRE_BACK     = 0;
         final int CENTER_FRONT = 1;
-        final int CENTER_BACK = 2;
-        final int POST_FRONT = 3;
+        final int CENTER_BACK  = 2;
+        final int POST_FRONT   = 3;
         for (int i = 0; i < pVertices.size() - 4; i++) {
             triangles(pVertices.get(i + PRE_BACK),
                       pVertices.get(i + CENTER_FRONT),
@@ -179,7 +179,7 @@ public class Line3 {
         LineSegmentStruct mLineSegment = new LineSegmentStruct(p0, p1, approximateUpVector(p0, p1));
 
         final int FRONT = 0;
-        final int BACK = 1;
+        final int BACK  = 1;
 
         PVector[][] mCaps = new PVector[2][4];
         calculateCap(p0, pSize, mLineSegment.side, mLineSegment.up, mCaps[FRONT]);
@@ -198,16 +198,16 @@ public class Line3 {
 
     private static class LineSegmentStruct {
 
-        static final int FRONT = 0;
-        static final int BACK = 1;
-        final PVector forward;
-        final PVector side;
-        final PVector up;
+        static final int     FRONT = 0;
+        static final int     BACK  = 1;
+        final        PVector forward;
+        final        PVector side;
+        final        PVector up;
 
         private LineSegmentStruct(PVector p0, PVector p1, PVector mUpApprox) {
             forward = PVector.sub(p0, p1).normalize(null);
-            side = PVector.cross(forward, mUpApprox, null).normalize(null);
-            up = PVector.cross(forward, side, null).normalize(null);
+            side    = PVector.cross(forward, mUpApprox, null).normalize(null);
+            up      = PVector.cross(forward, side, null).normalize(null);
         }
     }
 }

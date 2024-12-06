@@ -21,7 +21,7 @@ void draw() {
     rotateX(frameCount * 0.01f);
     rotateY(frameCount * 0.003f);
     float mPadding = 50;
-    float mSize = width * 0.25f;
+    float mSize    = width * 0.25f;
     /* lines */
     noFill();
     stroke(255, 127, 0);

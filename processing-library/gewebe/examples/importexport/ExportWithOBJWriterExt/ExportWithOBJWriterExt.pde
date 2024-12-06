@@ -3,8 +3,8 @@ import org.sunflow.*;
 /*
  * this example demonstrates how to export a mesh as an OBJ file.
  */
-boolean mRecord = false;
-float mSegments = 180;
+boolean mRecord   = false;
+float   mSegments = 180;
 void settings() {
     size(1024, 768, P3D);
 }
@@ -23,11 +23,11 @@ void draw() {
     noFill();
     PVector p1 = new PVector();
     for (int i = 0; i < mSegments; i++) {
-        final float mRatio = TWO_PI * i / mSegments;
-        final float mWeight = 1 + 10 * abs(sin(mRatio / 2));
+        final float mRatio       = TWO_PI * i / mSegments;
+        final float mWeight      = 1 + 10 * abs(sin(mRatio / 2));
         final float mInclination = mRatio * 0.5f;
-        final float mAzimut = mRatio * 10.0f;
-        final float mRadius = width * 0.25f;
+        final float mAzimut      = mRatio * 10.0f;
+        final float mRadius      = width * 0.25f;
         strokeWeight(mWeight);
         PVector p0 = sphere_coord(mAzimut, mInclination, mRadius);
         if (i % 2 == 1) {
@@ -40,11 +40,11 @@ void draw() {
     fill(255);
     beginShape(TRIANGLES);
     for (int i = 0; i < mSegments; i++) {
-        final float mRatio = TWO_PI * i / mSegments;
+        final float mRatio       = TWO_PI * i / mSegments;
         final float mInclination = mRatio * 0.5f;
-        final float mAzimut = mRatio * 10.0f;
-        final float mRadius = width * 0.2f;
-        final float mOffset = map(mouseX, 0, width, 0.02f, 1.0f);
+        final float mAzimut      = mRatio * 10.0f;
+        final float mRadius      = width * 0.2f;
+        final float mOffset      = map(mouseX, 0, width, 0.02f, 1.0f);
         vertex(sphere_coord(mAzimut, mInclination, mRadius));
         vertex(sphere_coord(mAzimut + mOffset, mInclination, mRadius));
         vertex(sphere_coord(mAzimut, mInclination + mOffset, mRadius));
